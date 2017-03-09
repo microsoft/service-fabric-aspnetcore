@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="..\..\properties\service_fabric_nuproj.props" />
+    
+    <PropertyGroup>
+      <Id>Microsoft.ServiceFabric.AspNetCore.Kestrel</Id>
+      <Title>Microsoft.ServiceFabric.AspNetCore.Kestrel</Title>
+      <Description>This package provides AspNetCore Kestrel based communication listener for Service Fabric microservices.</Description>
+      <Summary>This package provides AspNetCore Kestrel based communication listener for Service Fabric microservices.</Summary>
+      <Tags>ServiceFabric Microsoft Azure Fabric</Tags>
+    </PropertyGroup>
+
+    <Import Project="$(NuProjPath)\NuProj.props" />
+    <Import Project="$(NuProjPath)\NuProj.targets" />
+
+    <ItemGroup>
+      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
+        <TargetPath>lib\net45</TargetPath>
+      </File>
+      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
+        <TargetPath>lib\net45</TargetPath>
+      </File>
+      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net45</TargetPath>
+      </File>
+      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net45</TargetPath>
+      </File>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Dependency Include="Microsoft.ServiceFabric.Services">
+        <Version>[$(FabricSdkNuGetPackageVersionOfficial)]</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Hosting.Abstractions">
+        <Version>1.0.0</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Hosting">
+        <Version>1.0.0</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Hosting.Server.Abstractions">
+        <Version>1.0.0</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Http.Abstractions">
+        <Version>1.0.0</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Http.Features">
+        <Version>1.0.0</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+        <Version>1.0.0</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.Extensions.DependencyInjection">
+        <Version>1.0.0</Version>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Server.Kestrel">
+        <Version>1.0.0</Version>
+      </Dependency>
+    </ItemGroup>
+  </Project>
