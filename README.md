@@ -9,6 +9,8 @@ This repo builds the following packages:
  - Microsoft.ServiceFabric.Services.AspNetCore.Kestrel
  - Microsoft.ServiceFabric.Services.AspNetCore.WebListener
 
+These packages are documented [here](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-communication-aspnetcore).
+
 ## Getting Started
 
 ### Prerequesites
@@ -40,6 +42,8 @@ For details on contributing to Service Fabric projects, please refer to [Contrib
 
 ## Documentation
 Service Fabric has a rich set of conceptual and reference documentation available at [https://docs.microsoft.com/azure/service-fabric](https://docs.microsoft.com/azure/service-fabric). 
+
+The ASP.NET Core integration packages are documented at [https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-communication-aspnetcore](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-communication-aspnetcore).
 
 ## Samples
 For Service Fabric sample code, check out the [Azure Code Sample gallery](https://azure.microsoft.com/en-us/resources/samples/?service=service-fabric) or go straight to [Azure-Samples on GitHub](https://github.com/Azure-Samples?q=service-fabric).
