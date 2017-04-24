@@ -85,6 +85,16 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                     return;
                 }
 
+                context.Response.OnStarting(() =>
+                {
+                    if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+                    {
+                        context.Response.Headers["X-ServiceFabric"] = "ResourceNotFound";
+                    }
+                    //TODO: When upgraded to .NET Standard 2.0 replace with Task.CompletedTask to avoid unnecessary allocation
+                    return Task.FromResult<object>(null);
+                });
+
                 // All good, change Path, PathBase and call next middleware in the pipeline
                 var originalPath = context.Request.Path;
                 var originalPathBase = context.Request.PathBase;
