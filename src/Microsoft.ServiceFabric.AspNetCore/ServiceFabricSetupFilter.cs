@@ -11,10 +11,12 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     internal class ServiceFabricSetupFilter : IStartupFilter
     {
         private readonly string urlSuffix;
+        private readonly ServiceFabricIntegrationOptions options;
 
-        internal ServiceFabricSetupFilter(string urlSuffix)
+        internal ServiceFabricSetupFilter(string urlSuffix, ServiceFabricIntegrationOptions options)
         {
             this.urlSuffix = urlSuffix;
+            this.options = options;
         }
 
         public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
@@ -22,6 +24,10 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             return app =>
             {
                 app.UseServiceFabricMiddleware(this.urlSuffix);
+                if (options.HasFlag(ServiceFabricIntegrationOptions.UseReverseProxyIntegration))
+                {
+                    app.UseServiceFabricReverseProxyIntegrationMiddleware();
+                }
                 next(app);
             };
         }
