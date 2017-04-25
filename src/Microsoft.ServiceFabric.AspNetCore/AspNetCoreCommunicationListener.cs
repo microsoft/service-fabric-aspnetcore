@@ -2,19 +2,19 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
-using System;
-using System.Fabric;
-using System.Fabric.Description;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.ServiceFabric.Services.Communication.Runtime;
-
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
+    using System;
+    using System.Fabric;
+    using System.Fabric.Description;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Hosting.Server.Features;
+    using Microsoft.ServiceFabric.Services.Communication.Runtime;
+
     /// <summary>
     /// Base class for creating AspNetCore based communication listener for Service Fabric stateless or stateful service.
     /// </summary>

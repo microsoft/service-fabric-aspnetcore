@@ -2,21 +2,21 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
+    using System;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+
     internal class ServiceFabricSetupFilter : IStartupFilter
     {
         private readonly string urlSuffix;
-        private readonly bool enableReverseProxyIntegration;
+        private readonly ServiceFabricIntegrationOptions options;
 
-        internal ServiceFabricSetupFilter(string urlSuffix, bool enableReverseProxyIntegration)
+        internal ServiceFabricSetupFilter(string urlSuffix, ServiceFabricIntegrationOptions options)
         {
             this.urlSuffix = urlSuffix;
-            this.enableReverseProxyIntegration = enableReverseProxyIntegration;
+            this.options = options;
         }
 
         public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
@@ -24,7 +24,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             return app =>
             {
                 app.UseServiceFabricMiddleware(this.urlSuffix);
-                if (enableReverseProxyIntegration)
+                if (options.HasFlag(ServiceFabricIntegrationOptions.UseReverseProxyIntegration))
                 {
                     app.UseServiceFabricReverseProxyIntegrationMiddleware();
                 }

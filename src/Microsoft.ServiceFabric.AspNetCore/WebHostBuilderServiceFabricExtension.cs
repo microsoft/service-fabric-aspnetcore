@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
-using System;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
+    using System;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.DependencyInjection;
+
     /// <summary>
     /// Class containing Service Fabric related extension methods for Microsoft.AspNetCore.Hosting.IWebHostBuilder
     /// </summary>
@@ -49,7 +49,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             hostBuilder.ConfigureServices(services =>
             {
                 // Configure MiddleWare
-                services.AddSingleton<IStartupFilter>(new ServiceFabricSetupFilter(listener.UrlSuffix, options.HasFlag(ServiceFabricIntegrationOptions.UseReverseProxyIntegration)));
+                services.AddSingleton<IStartupFilter>(new ServiceFabricSetupFilter(listener.UrlSuffix, options));
             });
 
             return hostBuilder;
