@@ -2,14 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
+using System;
+
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Integration options for <see cref="WebHostBuilderServiceFabricExtension.UseServiceFabricIntegration"/> method when used with Microsoft.AspNetCore.Hosting.IWebHostBuilder.
     /// </summary>
@@ -25,6 +21,11 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// This option will configure the <see cref="AspNetCoreCommunicationListener"/> to add a url suffix containing <see cref="System.Fabric.ServiceContext.PartitionId"/> and <see cref="System.Fabric.ServiceContext.ReplicaOrInstanceId"/>
         /// to url when providing the url to Service Fabric Runtime from its <see cref="Microsoft.ServiceFabric.Services.Communication.Runtime.ICommunicationListener.OpenAsync"/> method.
         /// </summary>
-        UseUniqueServiceUrl = 0x01
+        UseUniqueServiceUrl = 0x01,
+
+        /// <summary>
+        /// This option will enable the Service Fabric Reverse Proxy integration middleware.
+        /// </summary>
+        UseReverseProxyIntegration = 0x02
     }
 }

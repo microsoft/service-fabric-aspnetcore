@@ -105,6 +105,7 @@
     <Compile Include="Friend.cs" />
     <Compile Include="ServiceFabricIntegrationOptions.cs" />
     <Compile Include="ServiceFabricMiddleware.cs" />
+    <Compile Include="ServiceFabricReverseProxyIntegrationMiddleware.cs" />
     <Compile Include="ServiceFabricSetupFilter.cs" />
     <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>

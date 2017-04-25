@@ -2,13 +2,13 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
-    using System;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Builder;
-
     /// <summary>
     /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or WebListener.
     /// This middleware examines the Microsoft.AspNetCore.Http.HttpRequest.Path in request to determine if the request is intended for this replica.
@@ -85,16 +85,6 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                     return;
                 }
 
-                context.Response.OnStarting(() =>
-                {
-                    if (context.Response.StatusCode == StatusCodes.Status404NotFound)
-                    {
-                        context.Response.Headers["X-ServiceFabric"] = "ResourceNotFound";
-                    }
-                    //TODO: When upgraded to .NET Standard 2.0 replace with Task.CompletedTask to avoid unnecessary allocation
-                    return Task.FromResult<object>(null);
-                });
-
                 // All good, change Path, PathBase and call next middleware in the pipeline
                 var originalPath = context.Request.Path;
                 var originalPathBase = context.Request.PathBase;
@@ -121,7 +111,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     public static class ServiceFabricMiddlewareExtensions
     {
         /// <summary>
-        /// Extension method to use ServiceFabricKestrelMiddleware for Service Fabric stateful or stateless service
+        /// Extension method to use ServiceFabricMiddleware for Service Fabric stateful or stateless service
         /// using Kestrel or WebListener as WebServer.
         /// </summary>
         /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder</param>        
