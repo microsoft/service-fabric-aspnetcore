@@ -5,7 +5,7 @@
   <Import Project="$(MSBuildThisFileDirectory)service_fabric_managed_common.props" />
 
   <PropertyGroup>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
 
   <!-- Add Properties specific to Test Product Code Projects here. --> 
