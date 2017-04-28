@@ -17,7 +17,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         
         /// <summary>
         /// Configures the Service to use ServiceFabricMiddleware and tells the listener that middleware is configured for the service so that it can 
-        /// suffix PartitionId and ReplicOrInstanceId to url before providing it to Service Fabric Runtime.
+        /// suffix PartitionId and ReplicaOrInstanceId to url before providing it to Service Fabric Runtime.
         /// </summary>
         /// <param name="hostBuilder">The Microsoft.AspNetCore.Hosting.IWebHostBuilder to configure.</param>
         /// <param name="listener">The <see cref="AspNetCoreCommunicationListener"/> to configure.</param>
