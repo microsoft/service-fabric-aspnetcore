@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ServiceFabric.AspNetCore.WebListener", "Microsoft.ServiceFabric.AspNetCore.WebListener.csproj", "{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ServiceFabric.AspNetCore.HttpSysServer", "Microsoft.ServiceFabric.AspNetCore.HttpSysServer.csproj", "{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ServiceFabric.AspNetCore", "..\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj", "{A45918E1-6345-432E-AD6D-47DEEFB35661}"
 EndProject
