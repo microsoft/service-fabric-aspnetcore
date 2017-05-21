@@ -10,11 +10,11 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
-    /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or WebListener.
+    /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or HttpSysServer.
     /// This middleware examines the Microsoft.AspNetCore.Http.HttpRequest.Path in request to determine if the request is intended for this replica.
     /// </summary>
     /// <remarks>
-    /// This middleware when used with Kestrel and WebListener based Service Fabric Communication Listeners allows handling of scenarios when
+    /// This middleware when used with Kestrel and HttpSysServer based Service Fabric Communication Listeners allows handling of scenarios when
     /// the Replica1 listening on Node1 and por11 has moved and another Replica2 is opened on Node1 got Port1. 
     /// A client which has resolved Replica1 before it moved, will send the request to Node1:Port1. Using this middleware 
     /// Replica2 can reject calls which were meant for Replica1 by examining the Path in incoming request.
@@ -106,13 +106,13 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 
     /// <summary>
     /// Extension class to use ServiceFabricKestrelMiddleware for Service Fabric stateful or stateless service
-    /// using Kestrel or WebListener as WebServer.
+    /// using Kestrel or HttpSysServer as WebServer.
     /// </summary>
     public static class ServiceFabricMiddlewareExtensions
     {
         /// <summary>
         /// Extension method to use ServiceFabricMiddleware for Service Fabric stateful or stateless service
-        /// using Kestrel or WebListener as WebServer.
+        /// using Kestrel or HttpSysServer as WebServer.
         /// </summary>
         /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder</param>        
         /// <param name="urlSuffix"></param>

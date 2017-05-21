@@ -10,7 +10,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
-    /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or WebListener.
+    /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or HttpSysServer.
     /// This middleware automatically adds X-ServiceFabric ResourceNotFound header, required by the Service Fabric Reverse Proxy, when 404 status code is returned
     /// </summary>
     public class ServiceFabricReverseProxyIntegrationMiddleware
@@ -62,13 +62,13 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 
     /// <summary>
     /// Extension class to use ServiceFabricReverseProxyIntegrationMiddleware for Service Fabric stateful or stateless service
-    /// using Kestrel or WebListener as WebServer.
+    /// using Kestrel or HttpSysServer as WebServer.
     /// </summary>
     public static class ServiceFabricReverseProxyIntegrationMiddlewareExtensions
     {
         /// <summary>
         /// Extension method to use ServiceFabricReverseProxyIntegrationMiddleware for Service Fabric stateful or stateless service
-        /// using Kestrel or WebListener as WebServer.
+        /// using Kestrel or HttpSysServer as WebServer.
         /// </summary>
         /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder</param>        
         /// <returns>Microsoft.AspNetCore.Builder.IApplicationBuilder</returns>

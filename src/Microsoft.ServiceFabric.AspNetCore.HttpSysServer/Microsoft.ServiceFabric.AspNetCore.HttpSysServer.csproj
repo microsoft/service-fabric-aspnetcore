@@ -5,7 +5,7 @@
   <PropertyGroup>
     <ProjectGuid>{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}</ProjectGuid>
     <RootNamespace>Microsoft.ServiceFabric.Services.Communication.AspNetCore</RootNamespace>
-    <AssemblyName>Microsoft.ServiceFabric.AspNetCore.WebListener</AssemblyName>
+    <AssemblyName>Microsoft.ServiceFabric.AspNetCore.HttpSysServer</AssemblyName>
     <OutputType>Library</OutputType>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <AssemblyClsCompliant>false</AssemblyClsCompliant>
@@ -92,7 +92,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WebListenerCommunicationListener.cs" />
+    <Compile Include="HttpSysServerCommunicationListener.cs" />
     <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

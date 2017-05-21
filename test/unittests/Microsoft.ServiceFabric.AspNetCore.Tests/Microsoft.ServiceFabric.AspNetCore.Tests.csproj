@@ -138,7 +138,7 @@
     <Compile Include="ServiceFabricMiddlewareTests.cs" />
     <Compile Include="TestMocksRepository.cs" />
     <Compile Include="WebHostBuilderServiceFabricExtensionTests.cs" />
-    <Compile Include="WebListenerCommunicationListenerTests.cs" />
+    <Compile Include="HttpSysServerCommunicationListenerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -148,9 +148,9 @@
       <Project>{b80b46c9-759a-4c5b-8618-c7a45395d9a2}</Project>
       <Name>Microsoft.ServiceFabric.AspNetCore.Kestrel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.csproj">
+    <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.HttpSysServer\Microsoft.ServiceFabric.AspNetCore.HttpSysServer.csproj">
       <Project>{4b0c49a1-c3c1-4cd7-bd3f-b6ac6b5fd210}</Project>
-      <Name>Microsoft.ServiceFabric.AspNetCore.WebListener</Name>
+      <Name>Microsoft.ServiceFabric.AspNetCore.HttpSysServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj">
       <Project>{a45918e1-6345-432e-ad6d-47deefb35661}</Project>
