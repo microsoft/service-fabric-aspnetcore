@@ -50,7 +50,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </summary>
         /// <param name="context">Context.</param>
         /// <returns>Task for the execution by next middleware in pipeline.</returns>
-        public async Task Invoke(HttpContext context)
+        public Task Invoke(HttpContext context)
         {
             if (context == null)
             {
@@ -60,7 +60,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             if (this.urlSuffix.Equals(string.Empty))
             {
                 // when urlSuffix is empty string, just call the next middleware in pipeline.
-                await this.next(context);
+                return this.next(context);
             }
             else
             {
@@ -82,24 +82,15 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 if (!context.Request.Path.StartsWithSegments(urlSuffix, out matchedPath, out remainingPath))
                 {
                     context.Response.StatusCode = StatusCodes.Status410Gone;
-                    return;
+                    //TODO: When upgraded to .NET Standard 2.0 replace with Task.CompletedTask to avoid unnecessary allocation
+                    return Task.FromResult<object>(null);
                 }
 
                 // All good, change Path, PathBase and call next middleware in the pipeline
-                var originalPath = context.Request.Path;
-                var originalPathBase = context.Request.PathBase;
                 context.Request.Path = remainingPath;
-                context.Request.PathBase = originalPathBase.Add(matchedPath);
-
-                try
-                {
-                    await this.next(context);
-                }
-                finally
-                {
-                    context.Request.Path = originalPath;
-                    context.Request.PathBase = originalPathBase;
-                }
+                context.Request.PathBase = context.Request.PathBase.Add(matchedPath);
+                
+                return this.next(context);
             }
         }
     }
