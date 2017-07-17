@@ -8,7 +8,6 @@
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.WebListener</AssemblyName>
     <OutputType>Library</OutputType>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AssemblyClsCompliant>false</AssemblyClsCompliant>
   </PropertyGroup>
   <ItemGroup>
