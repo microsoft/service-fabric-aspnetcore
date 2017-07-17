@@ -20,38 +20,10 @@
       <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
         <TargetPath>lib\net45</TargetPath>
       </File>
-      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.dll">
-        <TargetPath>lib\net45</TargetPath>
-      </File>
-      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.xml">
-        <TargetPath>lib\net45</TargetPath>
-      </File>
     </ItemGroup>
-    
     <ItemGroup>
-      <Dependency Include="Microsoft.ServiceFabric.Services">
-        <Version>[$(FabricSdkNuGetPackageVersionOfficial)]</Version>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Hosting.Abstractions">
-        <Version>1.0.0</Version>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Hosting">
-        <Version>1.0.0</Version>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Hosting.Server.Abstractions">
-        <Version>1.0.0</Version>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Http.Abstractions">
-        <Version>1.0.0</Version>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Http.Features">
-        <Version>1.0.0</Version>
-      </Dependency>
-      <Dependency Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-        <Version>1.0.0</Version>
-      </Dependency>
-      <Dependency Include="Microsoft.Extensions.DependencyInjection">
-        <Version>1.0.0</Version>
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(FabricSdkNuGetPackageVersionOSS)]</Version>
       </Dependency>
       <Dependency Include="Microsoft.AspNetCore.Server.Kestrel">
         <Version>1.0.0</Version>

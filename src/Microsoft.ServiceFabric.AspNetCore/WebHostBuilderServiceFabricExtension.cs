@@ -5,7 +5,6 @@
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
     using System;
-    using System.Fabric;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -15,10 +14,10 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     public static class WebHostBuilderServiceFabricExtension
     {
         private static readonly string SettingName = "UseServiceFabricIntegration";
-        
+
         /// <summary>
         /// Configures the Service to use ServiceFabricMiddleware and tells the listener that middleware is configured for the service so that it can 
-        /// suffix PartitionId and ReplicOrInstanceId to url before providing it to Service Fabric Runtime.
+        /// suffix PartitionId and ReplicaOrInstanceId  to url before providing it to Service Fabric Runtime.
         /// </summary>
         /// <param name="hostBuilder">The Microsoft.AspNetCore.Hosting.IWebHostBuilder to configure.</param>
         /// <param name="listener">The <see cref="AspNetCoreCommunicationListener"/> to configure.</param>
@@ -41,7 +40,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             hostBuilder.UseSetting(SettingName, true.ToString());
 
             // Configure listener to use PartitionId and ReplicaId as urlSuffix only when specified in options.
-            if (options.Equals(ServiceFabricIntegrationOptions.UseUniqueServiceUrl))
+            if (options.HasFlag(ServiceFabricIntegrationOptions.UseUniqueServiceUrl))
             {
                 // notify listener to use urlSuffix when giving url to Service Fabric Runtime from OpenAsync()
                 listener.ConfigureToUseUniqueServiceUrl();
@@ -50,7 +49,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             hostBuilder.ConfigureServices(services =>
             {
                 // Configure MiddleWare
-                services.AddSingleton<IStartupFilter>(new ServiceFabricSetupFilter(listener.UrlSuffix));
+                services.AddSingleton<IStartupFilter>(new ServiceFabricSetupFilter(listener.UrlSuffix, options));
             });
 
             return hostBuilder;
