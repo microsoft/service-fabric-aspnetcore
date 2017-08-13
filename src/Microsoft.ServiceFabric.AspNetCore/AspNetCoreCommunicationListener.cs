@@ -148,9 +148,25 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 
             this.webHost.Start();
 
-            var url = this.webHost.ServerFeatures.Get<IServerAddressesFeature>().Addresses
-                    .Select(a => a.Replace("://+", "://" + this.serviceContext.NodeContext.IPAddressOrFQDN)).FirstOrDefault();
+            // AspNetCore 1.x returns http://+:port
+            // AspNetCore 2.0 returns http://[::]:port
+            var url = this.webHost.ServerFeatures.Get<IServerAddressesFeature>().Addresses.FirstOrDefault();
 
+            if (url == null)
+            {
+                throw new InvalidOperationException(SR.ErrorNoUrlFromAspNetCore);
+            }
+
+            var publishAddress = this.serviceContext.PublishAddress;
+
+            if (url.Contains("://+:"))
+            {
+                url = url.Replace("://+:", $"://{publishAddress}:");
+            }
+            else if(url.Contains("://[::]:"))
+            {
+                url = url.Replace("://[::]:", $"://{publishAddress}:");
+            }
 
             // When returning url to naming service, add UrlSuffix to it.
             // This UrlSuffix will be used by middleware to:

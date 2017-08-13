@@ -70,6 +70,15 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;No Url returned from AspNetCore IServerAddressesFeature..
+        /// </summary>
+        internal static string ErrorNoUrlFromAspNetCore {
+            get {
+                return ResourceManager.GetString("ErrorNoUrlFromAspNetCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IWebHost returned from build delegate is null..
         /// </summary>
         internal static string WebHostNullExceptionMessage {

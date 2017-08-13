@@ -14,10 +14,10 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     public static class WebHostBuilderServiceFabricExtension
     {
         private static readonly string SettingName = "UseServiceFabricIntegration";
-        
+
         /// <summary>
         /// Configures the Service to use ServiceFabricMiddleware and tells the listener that middleware is configured for the service so that it can 
-        /// suffix PartitionId and ReplicaOrInstanceId to url before providing it to Service Fabric Runtime.
+        /// suffix PartitionId and ReplicaOrInstanceId  to url before providing it to Service Fabric Runtime.
         /// </summary>
         /// <param name="hostBuilder">The Microsoft.AspNetCore.Hosting.IWebHostBuilder to configure.</param>
         /// <param name="listener">The <see cref="AspNetCoreCommunicationListener"/> to configure.</param>
