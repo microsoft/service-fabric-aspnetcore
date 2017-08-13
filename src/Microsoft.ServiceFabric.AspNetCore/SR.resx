@@ -120,6 +120,9 @@
   <data name="EndpointNameNotFoundExceptionMessage" xml:space="preserve">
     <value>{0} not found in Service Manifest.</value>
   </data>
+  <data name="ErrorNoUrlFromAspNetCore" xml:space="preserve">
+    <value>"No Url returned from AspNetCore IServerAddressesFeature.</value>
+  </data>
   <data name="WebHostNullExceptionMessage" xml:space="preserve">
     <value>IWebHost returned from build delegate is null.</value>
   </data>

@@ -19,7 +19,8 @@
                      test\unittests\Microsoft.ServiceFabric.AspNetCore.Tests\Microsoft.ServiceFabric.AspNetCore.Tests.csproj;"/>
 
     <!-- List of .nuproj to build to generate nuget packages -->
-    <NuprojsToBuild Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.nuproj;
+    <NuprojsToBuild Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\Microsoft.ServiceFabric.AspNetCore.Abstractions.nuproj;
+                    nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.nuproj;
                      nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.nuproj"/>
 
     <!-- List of packages.config to restore nuget packages -->
@@ -65,6 +66,7 @@
     <ItemGroup>
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*.nupkg"/>
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.WebListener.*.nupkg"/>
+      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Abstractions.*.nupkg"/>
     </ItemGroup>
     <Copy SourceFiles="@(Nupkgs)" DestinationFiles="@(Nupkgs->'$(NugetPackageDropFolder)\%(Destination)\%(Filename)%(Extension)')" />
   </Target>

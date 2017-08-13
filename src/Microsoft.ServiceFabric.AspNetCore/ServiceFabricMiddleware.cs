@@ -6,8 +6,8 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
     using System;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or WebListener.
@@ -111,7 +111,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     public static class ServiceFabricMiddlewareExtensions
     {
         /// <summary>
-        /// Extension method to use ServiceFabricKestrelMiddleware for Service Fabric stateful or stateless service
+        /// Extension method to use ServiceFabricMiddleware for Service Fabric stateful or stateless service
         /// using Kestrel or WebListener as WebServer.
         /// </summary>
         /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder</param>        
