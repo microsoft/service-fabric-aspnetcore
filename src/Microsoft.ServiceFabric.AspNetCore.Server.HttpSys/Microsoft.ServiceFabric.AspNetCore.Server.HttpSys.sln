@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Server", "..\Microsoft.ServiceFabric.AspNetCore.Server\Microsoft.ServiceFabric.AspNetCore.Server.csproj", "{1B2CEE46-5544-4224-8825-23F24169BFAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Server.HttpSys", "Microsoft.ServiceFabric.AspNetCore.Server.HttpSys.csproj", "{A219518A-61DF-47B2-A1CA-2853F3842580}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B2CEE46-5544-4224-8825-23F24169BFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B2CEE46-5544-4224-8825-23F24169BFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B2CEE46-5544-4224-8825-23F24169BFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B2CEE46-5544-4224-8825-23F24169BFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A219518A-61DF-47B2-A1CA-2853F3842580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A219518A-61DF-47B2-A1CA-2853F3842580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A219518A-61DF-47B2-A1CA-2853F3842580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A219518A-61DF-47B2-A1CA-2853F3842580}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A633AFE1-F245-472C-A02E-E7C47FD3D1B4}
+	EndGlobalSection
+EndGlobal

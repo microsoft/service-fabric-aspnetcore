@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net452;net46;net461;</TargetFrameworks>
+    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.ServiceFabric.AspNetCore.Server\Microsoft.ServiceFabric.AspNetCore.Server.csproj" />
+  </ItemGroup>
+
+</Project>
