@@ -8,6 +8,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using System.Fabric;
     using System.Globalization;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.ServiceFabric.AspNetCore.Server.HttpSys;
 
     /// <summary>
     /// An AspNetCore HttpSys based communication listener for Service Fabric stateless or stateful service.

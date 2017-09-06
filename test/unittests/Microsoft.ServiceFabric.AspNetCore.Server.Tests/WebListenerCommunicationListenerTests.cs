@@ -6,12 +6,12 @@
 namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
-
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
     using FluentAssertions;
-    using Xunit;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     
-    #if !NET461
+    #if NET452
+    [TestClass]
     public class WebListenerCommunicationListenerTests : AspNetCoreCommunicationListenerTests
     {
         /// <summary>
@@ -26,7 +26,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId
         /// 
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyWithUseUniqueServiceUrlOption()
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
@@ -42,7 +42,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port
         /// 
         /// </summary>        
-        [Fact]
+        [TestMethod]
         public void VerifyWithoutUseUniqueServiceUrlOption()
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
@@ -54,7 +54,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify Listener Open and Close.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyListenerOpenClose()
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
@@ -67,7 +67,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// InvalidOperationException is thrown when Endpoint is not found in service manifest.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ExceptionForEndpointNotFound()
         {
             this.Listener = new WebListenerCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => BuildFunc(uri, listen));
@@ -77,7 +77,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// ArgumentException is thrown when endpointName is null or empty string.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyExceptionForNullOrEmptyEndpointName()
         {
             Action action =

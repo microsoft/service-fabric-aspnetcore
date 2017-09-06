@@ -16,6 +16,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using Microsoft.AspNetCore.Hosting.Server.Features;
     
     using Microsoft.ServiceFabric.Services.Communication.Runtime;
+    using Microsoft.ServiceFabric.AspNetCore.Server;
 
     /// <summary>
     /// Base class for creating AspNetCore based communication listener for Service Fabric stateless or stateful service.

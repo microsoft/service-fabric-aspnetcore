@@ -10,14 +10,17 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Hosting.Server.Features;
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.Extensions.DependencyInjection;
+    
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using FluentAssertions;
     using Moq;
-    using Xunit;
 
     public class WebHostBuilderServiceFabricExtensionTests
     {
@@ -61,7 +64,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify WebHostBuilderExtension for ServiceFabricIntegrationOptions.None
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyWithServiceFabricIntegrationOptions_None()
         {
             this.builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.None);
@@ -77,24 +80,33 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify WebHostBuilderExtension for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyWithServiceFabricIntegrationOptions_UseUniqueServiceUrl()
         {
             // ServiceFabricIntegrationOptions.None doesn't adds middleware and doesn't configures listener to use UrlSuffix.
             this.builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.UseUniqueServiceUrl);
-            this.servicesConfigured.Should().BeTrue("services are configured.");
-            listener.UrlSuffix.Should().NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
+            this.servicesConfigured
+                .Should()
+                .BeTrue("services are configured.");
+            listener.UrlSuffix
+                .Should()
+                .NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
 
             // Call the UseServiceFabricIntegration() again and verify that its dual invocation, doesn't have adverse affect.
             this.builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.UseUniqueServiceUrl);
-            this.servicesConfigured.Should().BeTrue("services are configured.");
-            listener.UrlSuffix.Should().NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
+            this.servicesConfigured
+                .Should()
+                .BeTrue("services are configured.");
+            listener.UrlSuffix
+                .Should()
+                .NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
         }
 
         private IWebHost BuildFunc(string url, AspNetCoreCommunicationListener listener)
         {
             var mockServerAddressFeature = new Mock<IServerAddressesFeature>();
             mockServerAddressFeature.Setup(y => y.Addresses).Returns(new string[] { url });
+            
             var featureColelction = new FeatureCollection();
             featureColelction.Set(mockServerAddressFeature.Object);
 

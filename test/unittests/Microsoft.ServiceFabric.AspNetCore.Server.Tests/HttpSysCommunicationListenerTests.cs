@@ -2,36 +2,37 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
     using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+
+#if NET461
     [TestClass]
-    public class KestrelCommunicationListenerTests : AspNetCoreCommunicationListenerTests
+    public class HttpSysCommunicationListenerTests : AspNetCoreCommunicationListenerTests
     {
+        /// <summary>
+        /// Tests Url for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
         /// 1. When no endpointRef is provided:
         ///   a. url given to Func to create IWebHost should be http://+:0
         ///   b. url returned from OpenAsync should be http://IPAddressOrFQDN:0/PartitionId/ReplicaId
         ///   
         ///   
-
-        /// <summary>
-        /// Tests Url for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
-        /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
+        /// 2. When endpointRef is provided (protocol and port comes from endpoint.) :
         ///   a. url given to Func to create IWebHost should be protocol://+:port. 
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId
         /// 
         /// </summary>
         [TestMethod]
         public void VerifyWithUseUniqueServiceUrlOption()
-        {            
+        {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(GetTestEndpoint());
-            this.Listener = new KestrelCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
+            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
             this.UseUniqueServiceUrlOptionVerifier();
         }
 
@@ -47,7 +48,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(GetTestEndpoint());
-            this.Listener = new KestrelCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
+            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
             this.WithoutUseUniqueServiceUrlOptionVerifier();
         }
 
@@ -59,36 +60,39 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(GetTestEndpoint());
-            this.Listener = new KestrelCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
+            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
 
             this.ListenerOpenCloseVerifier();
         }
 
         /// <summary>
-        /// InvalidOperationEXception is thrown when Endpoint is not found in service manifest.
+        /// InvalidOperationException is thrown when Endpoint is not found in service manifest.
         /// </summary>
         [TestMethod]
         public void ExceptionForEndpointNotFound()
         {
-            this.Listener = new KestrelCommunicationListener(
-                TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => BuildFunc(uri, listen)
-            );
-
+            this.Listener = new HttpSysCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => BuildFunc(uri, listen));
             this.ExceptionForEndpointNotFoundVerifier();
         }
 
         /// <summary>
-        /// ArgumentException is thrown when endpointName is empty string.
+        /// ArgumentException is thrown when endpointName is null or empty string.
         /// </summary>
         [TestMethod]
-        public void VerifyExceptionForEmptyEndpointName()
+        public void VerifyExceptionForNullOrEmptyEndpointName()
         {
             Action action =
                 () =>
-                    new KestrelCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), string.Empty,
-                        (uri, listen) => BuildFunc(uri, listen));
+                    new HttpSysCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), null,
+                        BuildFunc);
+            action.ShouldThrow<ArgumentException>();
 
+            action =
+                () =>
+                    new HttpSysCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(),
+                        string.Empty, BuildFunc);
             action.ShouldThrow<ArgumentException>();
         }
     }
+#endif
 }

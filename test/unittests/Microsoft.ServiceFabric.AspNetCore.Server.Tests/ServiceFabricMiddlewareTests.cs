@@ -12,9 +12,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
-    using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Xunit;
+    using FluentAssertions;
 
     public class ServiceFabricMiddlewareTests
     {
@@ -45,7 +45,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// Verify ErrorCode 410 is returned from Middleware, when UrlSuffix in Middleware doesn't match with what listener used
         /// when constructing url before returning to Naming Service.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyReturnCode410()
         {
             bool nextCalled = false;
@@ -62,14 +62,18 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             this.httpContext.Request.Path = this.listener.UrlSuffix + "xyz";
             middleware.Invoke(this.httpContext).GetAwaiter().GetResult();
 
-            this.httpContext.Response.StatusCode.Should().Be(StatusCodes.Status410Gone, "status code should be 410 when path base is different from url suffix.");
-            nextCalled.Should().BeFalse("next RequestDelegate is not called by middleware.");
+            this.httpContext.Response.StatusCode
+                .Should()
+                .Be(StatusCodes.Status410Gone, "status code should be 410 when path base is different from url suffix.");
+            nextCalled
+                .Should()
+                .BeFalse("next RequestDelegate is not called by middleware.");
         }
 
         /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNextInvocationWithUrlSuffix()
         {
             // configure listener useUniqueServiceUrl
@@ -80,7 +84,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNextInvocatioWithoutUrlSuffix()
         {
             // do not configure listener useUniqueServiceUrl
@@ -90,7 +94,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify Path and PathBase in next RequestDelegate invocation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyPathsInNextInvocationWithUrlSuffix()
         {
             // configure listener useUniqueServiceUrl
@@ -102,7 +106,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify Path and PathBase in next RequestDelegate invocation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyPathsInNextInvocationWithoutUrlSuffix()
         {
             // do not configure listener useUniqueServiceUrl
@@ -114,7 +118,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void VerifyNextInvocation()
         {
             bool nextCalled = false;
@@ -136,7 +140,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             Console.WriteLine("Before Invoke: HttpRequest.PathBase: " + this.httpContext.Request.PathBase);
             middleware.Invoke(this.httpContext).GetAwaiter().GetResult();
 
-            nextCalled.Should().BeTrue("next RequestDelegate is called by middleware");
+            nextCalled.Should()
+                .BeTrue("next RequestDelegate is called by middleware");
         }
 
         /// <summary>
@@ -172,24 +177,39 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 
             middleware.Invoke(this.httpContext).GetAwaiter().GetResult();
 
-            nextCalled.Should().BeTrue("next RequestDelegate is called by middleware");
-            pathBaseInNext.ToString().Should().Be(this.listener.UrlSuffix, "pathBase for next RequestDelegate is changed by middleware.");
-            pathInNext.ToString().Should().Be(requestPathSuffix, "Path for next RequestDelegate is changed by middleware.");
+            nextCalled
+                .Should()
+                .BeTrue("next RequestDelegate is called by middleware");
+
+            pathBaseInNext.ToString()
+                .Should()
+                .Be(this.listener.UrlSuffix, "pathBase for next RequestDelegate is changed by middleware.");
+            
+            pathInNext.ToString()
+                .Should()
+                .Be(requestPathSuffix, "Path for next RequestDelegate is changed by middleware.");
 
             // Verify Path and PathBase again when returned from next delegate.
-            this.httpContext.Request.Path.ToString().Should().Be(requestPath, "Path after next RequestDelegate has been called should be the original requestPath");
-            this.httpContext.Request.PathBase.ToString().Should().BeEmpty("PathBase after next RequestDelegate has been called should be empty");
+            this.httpContext.Request.Path.ToString()
+                .Should()
+                .Be(requestPath, "Path after next RequestDelegate has been called should be the original requestPath");
+            
+            this.httpContext.Request.PathBase.ToString()
+                .Should()
+                .BeEmpty("PathBase after next RequestDelegate has been called should be empty");
         }
 
         private IWebHost BuildFunc(string url, AspNetCoreCommunicationListener listener)
         {
             var mockServerAddressFeature = new Mock<IServerAddressesFeature>();
             mockServerAddressFeature.Setup(y => y.Addresses).Returns(new string[] { url });
+            
             var featureColelction = new FeatureCollection();
             featureColelction.Set(mockServerAddressFeature.Object);
 
             // Create mock IWebHost and set required things used by this test.
             var mockWebHost = new Mock<IWebHost>();
+            
             return mockWebHost.Object;
         }        
     }

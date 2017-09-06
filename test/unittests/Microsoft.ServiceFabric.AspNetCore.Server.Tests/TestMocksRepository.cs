@@ -59,6 +59,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             
             // Create mock Context and setup required things needed by tests.
             var mockContext = new Mock<ICodePackageActivationContext>();
+
             mockContext.Setup(x => x.GetEndpoints()).Returns(endpointCollection);
             mockContext.Setup(y => y.GetEndpoint(It.IsAny<string>())).Returns<string>(name =>
             {
