@@ -3,21 +3,21 @@
     <Import Project="..\..\properties\service_fabric_nuproj.props" />
     
     <PropertyGroup>
-      <Id>Microsoft.ServiceFabric.AspNetCore.WebListener</Id>
-      <Title>Microsoft.ServiceFabric.AspNetCore.WebListener</Title>
-      <Description>This package provides AspNetCore WebListener based communication listener for Service Fabric microservices.</Description>
-      <Summary>This package provides AspNetCore WebListener based communication listener for Service Fabric microservices.</Summary>
-      <Tags>ServiceFabric Microsoft Azure Fabric</Tags>
+    <Id>Microsoft.ServiceFabric.AspNetCore.HttpSys</Id>
+    <Title>Microsoft.ServiceFabric.AspNetCore.HttpSys</Title>
+    <Description>This package provides AspNetCore HttpSys server based communication listener for Service Fabric microservices.</Description>
+    <Summary>This package provides AspNetCore HttpSys server based communication listener for Service Fabric microservices.</Summary>
+    <Tags>ServiceFabric Microsoft Azure Fabric</Tags>
     </PropertyGroup>
 
     <Import Project="$(NuProjPath)\NuProj.props" />
     <Import Project="$(NuProjPath)\NuProj.targets" />
 
     <ItemGroup>
-      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.WebListener.dll">
+      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>lib\net45</TargetPath>
       </File>
-      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.WebListener.xml">
+      <File Include="$(DropFolder)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
         <TargetPath>lib\net45</TargetPath>
       </File>
     </ItemGroup>
@@ -26,8 +26,8 @@
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(FabricSdkNuGetPackageVersionOSS)]</Version>
       </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Server.WebListener">
-        <Version>1.0.0</Version>
+      <Dependency Include="Microsoft.AspNetCore.Server.HttpSys">
+        <Version>2.0.0</Version>
       </Dependency>
     </ItemGroup>
   </Project>
