@@ -13,6 +13,7 @@
     <!-- List of .csproj to build -->
     <ProjectsToBuild Include="src\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj;
                      src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj;
+                     src\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.csproj;
                      src\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.csproj"/>
 
     <ProjectsToBuildIncludingTests Include="@(ProjectsToBuild);
@@ -21,12 +22,14 @@
     <!-- List of .nuproj to build to generate nuget packages -->
     <NuprojsToBuild Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\Microsoft.ServiceFabric.AspNetCore.Abstractions.nuproj;
                     nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.nuproj;
-                     nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.nuproj"/>
+                    nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.nuproj;
+                    nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.nuproj"/>
 
     <!-- List of packages.config to restore nuget packages -->
     <PackagesConfigs Include="nuprojs\packages.config;
                       src\Microsoft.ServiceFabric.AspNetCore\packages.config;
                       src\Microsoft.ServiceFabric.AspNetCore.Kestrel\packages.config;
+                      src\Microsoft.ServiceFabric.AspNetCore.HttpSys\packages.config;
                       src\Microsoft.ServiceFabric.AspNetCore.WebListener\packages.config"/>
 
     <TestPackagesConfigs Include="@(PackagesConfigs);
@@ -65,6 +68,7 @@
     <Message Text="Copying NuGet packages to drop folder ..." Importance="High"/>
     <ItemGroup>
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*.nupkg"/>
+      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.HttpSys.*.nupkg"/>
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.WebListener.*.nupkg"/>
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Abstractions.*.nupkg"/>
     </ItemGroup>
@@ -93,6 +97,7 @@
     <ItemGroup>
       <Binaires Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.*"/>
       <Binaires Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
+      <Binaires Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
       <Binaires Include="src\Microsoft.ServiceFabric.AspNetCore.WebListener\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.WebListener.*"/>
     </ItemGroup>
     <Copy SourceFiles="@(Binaires)" DestinationFiles="@(Binaires->'$(DropFolder)\%(Destination)\%(Filename)%(Extension)')" />
