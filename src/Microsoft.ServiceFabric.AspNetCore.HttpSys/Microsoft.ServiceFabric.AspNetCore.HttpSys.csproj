@@ -5,7 +5,7 @@
   <PropertyGroup>
     <ProjectGuid>{B80B46C9-759A-4C5B-8618-C7A45395D9A2}</ProjectGuid>
     <RootNamespace>Microsoft.ServiceFabric.Services.Communication.AspNetCore</RootNamespace>
-    <AssemblyName>Microsoft.ServiceFabric.AspNetCore.Kestrel</AssemblyName>
+    <AssemblyName>Microsoft.ServiceFabric.AspNetCore.HttpSys</AssemblyName>
     <OutputType>Library</OutputType>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <ResourcesClassName>$(ResourcesFileName)</ResourcesClassName>
@@ -97,7 +97,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KestrelCommunicationListener.cs" />
+    <Compile Include="HttpSysCommunicationListener.cs" />
     <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
