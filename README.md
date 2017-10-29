@@ -7,7 +7,7 @@ The `Microsoft.ServiceFabric.Services.AspNetCore.*` NuGet packages contain imple
 This repo builds the following packages:
 -	Microsoft.ServiceFabric.AspNetCore.Abstractions
 -	Microsoft.ServiceFabric.AspNetCore.HttpSys
--	Microsoft.ServiceFabric.AspNetCore.Kestrel netstandard
+-	Microsoft.ServiceFabric.AspNetCore.Kestrel
 -	Microsoft.ServiceFabric.AspNetCore.WebListener
 
 These packages are documented [here](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-communication-aspnetcore).
