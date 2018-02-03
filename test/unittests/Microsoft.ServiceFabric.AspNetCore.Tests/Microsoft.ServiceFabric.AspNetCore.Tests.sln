@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ServiceFabric.AspNetCore.Tests", "Microsoft.ServiceFabric.AspNetCore.Tests.csproj", "{F9D9E1BB-212D-4785-8E1E-8427355AAF68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ServiceFabric.AspNetCore", "..\..\..\src\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj", "{A45918E1-6345-432E-AD6D-47DEEFB35661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore", "..\..\..\src\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj", "{A45918E1-6345-432E-AD6D-47DEEFB35661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ServiceFabric.AspNetCore.Kestrel", "..\..\..\src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj", "{B80B46C9-759A-4C5B-8618-C7A45395D9A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Kestrel", "..\..\..\src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj", "{B80B46C9-759A-4C5B-8618-C7A45395D9A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.ServiceFabric.AspNetCore.WebListener", "..\..\..\src\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.csproj", "{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.WebListener", "..\..\..\src\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.csproj", "{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.HttpSys", "..\..\..\src\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.csproj", "{7BE05428-AD27-41CB-B01A-85821B69175F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}.Debug|x64.Build.0 = Debug|x64
 		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}.Release|x64.ActiveCfg = Release|x64
 		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}.Release|x64.Build.0 = Release|x64
+		{7BE05428-AD27-41CB-B01A-85821B69175F}.Debug|x64.ActiveCfg = Debug|x64
+		{7BE05428-AD27-41CB-B01A-85821B69175F}.Debug|x64.Build.0 = Debug|x64
+		{7BE05428-AD27-41CB-B01A-85821B69175F}.Release|x64.ActiveCfg = Release|x64
+		{7BE05428-AD27-41CB-B01A-85821B69175F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CDABF99-A026-479B-B672-736D0A8C9A37}
 	EndGlobalSection
 EndGlobal
