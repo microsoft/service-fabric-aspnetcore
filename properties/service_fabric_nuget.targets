@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <!-- List of .nuproj to build to generate nuget packages -->
+    <NuprojsToBuild Include="$(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\Microsoft.ServiceFabric.AspNetCore.Abstractions.nuproj;
+                     $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.nuproj;
+                     $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.nuproj;
+                     $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.nuproj;"/>
+    
+    <!-- List of packages.config to restore nuget packages -->
+        <PackagesConfigs Include="nuprojs\packages.config"/>
+    </ItemGroup>
+
+  <!--Targets for generating Nuget packages -->
+  <Target Name="GenerateNugetPackages_Prod">
+    <!-- Restore nuproj -->
+    <Exec Command="&quot;$(NuGetExePath)&quot; restore %(PackagesConfigs.Identity) -NonInteractive -Verbosity quiet" />
+    <Message Text="Generating NuGet packages ..." Importance="High"/>
+    <MSBuild Projects ="@(NuprojsToBuild)" ContinueOnError ="false" Properties="Configuration=$(Configuration)" BuildInParallel="true"/>
+
+    <Message Text="Copying NuGet packages to drop folder ..." Importance="High"/>
+    <ItemGroup>
+      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Abstractions.*.nupkg"/>
+      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.HttpSys.*.nupkg"/>
+      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*.nupkg"/>
+      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.WebListener.*.nupkg"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(Nupkgs)" DestinationFiles="@(Nupkgs->'$(NugetPackageDropFolder)\%(Destination)\%(Filename)%(Extension)')" />
+  </Target>
+</Project>
