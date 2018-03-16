@@ -24,6 +24,9 @@ To build everything and generate NuGet packages, run the **build.ps1** script. N
 
 Each project can also be built individually directly through Visual Studio or by running the solution file through MSBuild.
 
+Binaries in the build are delay signed, these are fully signed in the official builds released by Microsoft. To use the binaries or to run unit tests from the build of this repository, strong name validation needs to be skipped for these assemblies. This can be done by running **SkipStrongName.ps1** script available in the root of the repository.
+
+
 ## Development
 Please refer to [Readme.md](https://github.com/Azure/service-fabric/Readme.md) at the Service Fabric home repo to learn more about our development process.
 
