@@ -1,12 +1,10 @@
 {
   "PublicKeyToken": "31bf3856ad364e35",
-  "ProductAssemblies":  [
+  "Assemblies":  [
     "Microsoft.ServiceFabric.AspNetCore",
     "Microsoft.ServiceFabric.AspNetCore.HttpSys",
     "Microsoft.ServiceFabric.AspNetCore.Kestrel",
-    "Microsoft.ServiceFabric.AspNetCore.WebListener"
-   ],
-   "TestAssemblies" : [
+    "Microsoft.ServiceFabric.AspNetCore.WebListener",
     "Microsoft.ServiceFabric.AspNetCore.Tests"
   ]
 }
