@@ -23,7 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
-    <PackageReference Include="Microsoft.ServiceFabric" Version="6.1.456" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="6.2.262" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore_netcore.csproj" />
