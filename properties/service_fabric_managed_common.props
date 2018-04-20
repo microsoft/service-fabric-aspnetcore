@@ -43,13 +43,20 @@
   <!-- Set Version numbers. These are used for generating Assemblies and Nuget packages. -->
   <PropertyGroup>
     <MajorVersion>3</MajorVersion>
-    <MinorVersion>0</MinorVersion>
+    <MinorVersion>1</MinorVersion>
     <BuildVersion>0</BuildVersion>
     <Revision>0</Revision>
 
     <Version>$(MajorVersion).$(MinorVersion).$(BuildVersion).$(Revision)</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <AssemblyFileVersion>$(Version)</AssemblyFileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Product>Microsoft Azure Service Fabric</Product>
+    <Copyright>Copyright (c) Microsoft Corporation.  All rights reserved.</Copyright>
+    <Company>Microsoft</Company>
+    <Authors>Microsoft</Authors>
   </PropertyGroup>
   
   <!-- Setting Paths -->
