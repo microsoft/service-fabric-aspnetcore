@@ -1,0 +1,1 @@
+Service Fabric pre-release nuget packages from other branches can be checked in here for develop branch until its officially released.

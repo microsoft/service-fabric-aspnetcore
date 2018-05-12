@@ -20,7 +20,7 @@
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
         <TargetPath>lib\net45</TargetPath>
       </File>
-      <File Include="$(DropFolderNetCore_win)Microsoft.ServiceFabric.AspNetCore.dll">
+      <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.dll">
         <TargetPath>ref\netstandard2.0</TargetPath>
       </File>
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
@@ -35,17 +35,11 @@
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
         <TargetPath>runtimes\win\lib\net471</TargetPath>
       </File>
-      <File Include="$(DropFolderNetCore_win)Microsoft.ServiceFabric.AspNetCore.dll">
-        <TargetPath>runtimes\win\lib\netstandard2.0</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetCore_linux)Microsoft.ServiceFabric.AspNetCore.dll">
-        <TargetPath>runtimes\linux\lib\netstandard2.0</TargetPath>
-      </File>
     </ItemGroup>
     
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.Services">
-        <Version>[$(FabricSdkNuGetPackageVersionOfficial)]</Version>
+        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
       </Dependency>
       <Dependency Include="Microsoft.AspNetCore.Hosting.Abstractions">
         <Version>1.0.0</Version>

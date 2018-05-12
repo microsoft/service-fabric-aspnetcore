@@ -26,9 +26,7 @@ Each project can also be built individually directly through Visual Studio or by
 
 Binaries in the build are delay signed, these are fully signed in the official builds released by Microsoft. To use the binaries or to run unit tests from the build of this repository, strong name validation needs to be skipped for these assemblies. This can be done by running **SkipStrongName.ps1** script available in the root of the repository.
 
-
-## Development
-We are currently working on transitioning all development to GitHub. For the time being we are continuing to do our own development internally. Upon each release of the SDK, we will push our latest changes to GitHub. We intend to bring more of our development process and tools into the open over time.
+For branches, please see [Branching Information](CONTRIBUTING.md#BranchingInformation)
 
 ## Releases and Support
 Official releases from Microsoft of the NuGet packages in this repo are released directly to NuGet and Web Platform Installer. Get the latest official release [here](http://www.microsoft.com/web/handlers/webpi.ashx?command=getinstallerredirect&appid=MicrosoftAzure-ServiceFabric-VS2015).
@@ -40,9 +38,7 @@ Please refer to [Contributing.md](https://github.com/Microsoft/service-fabric/bl
 
 ## Contributing code
 If you would like to become an active contributor to this project please
-follow the instructions provided in [Microsoft Azure Projects Contribution Guidelines](http://azure.github.io/guidelines.html).
-
-For details on contributing to Service Fabric projects, please refer to [Contributing.md](https://github.com/Microsoft/service-fabric/blob/master/CONTRIBUTING.md) at the Service Fabric home repo for details on contributing code.
+follow the instructions provided in [Microsoft Azure Projects Contribution Guidelines](http://azure.github.io/guidelines.html). For details, please refer to [Contributing.md](CONTRIBUTING.md).
 
 ## Documentation
 Service Fabric has a rich set of conceptual and reference documentation available at [https://docs.microsoft.com/azure/service-fabric](https://docs.microsoft.com/azure/service-fabric).

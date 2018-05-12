@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <Import Project="..\..\..\properties\service_fabric_managed_dotnetframework.props" />
+  <Import Project="..\..\..\properties\service_fabric_managed_netframework.props" />
   <PropertyGroup>
     <ProjectGuid>{F9D9E1BB-212D-4785-8E1E-8427355AAF68}</ProjectGuid>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.Tests</AssemblyName>
@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.1.262" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="$(NugetPkg_Version_Microsoft_ServiceFabric_Services)" />
     <PackageReference Include="Moq" Version="4.7.145" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />

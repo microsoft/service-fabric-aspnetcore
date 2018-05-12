@@ -2,23 +2,33 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Set Paths -->
   <PropertyGroup>
-    <RepoRoot>$(MSBuildThisFileDirectory)..\</RepoRoot>
+    
+    <!-- Set RepoRoot -->
+    <RepoRoot>$([System.String]::Copy('$(MSBuildThisFileDirectory)').Replace('properties\',''))</RepoRoot>
     <RequestedVerbosity Condition=" '$(RequestedVerbosity)' == '' ">minimal</RequestedVerbosity>
     
     <!-- Set Output Paths-->
     <OutputPath>bin\$(Configuration)\</OutputPath>
-    <OutputPath_win>bin\$(Configuration)\win\</OutputPath_win>
-    <OutputPath_linux>bin\$(Configuration)\linux\</OutputPath_linux>
     
     <!-- Set Drop folders -->
     <DropFolder>$(RepoRoot)drop\$(Configuration)\</DropFolder>
     <DropFolderNetFramework>$(RepoRoot)drop\$(Configuration)\netframework\</DropFolderNetFramework>
-    <DropFolderNetCore>$(RepoRoot)drop\$(Configuration)\netcore\</DropFolderNetCore>
-    <DropFolderNetCore_win>$(DropFolderNetCore)win\</DropFolderNetCore_win>
-    <DropFolderNetCore_linux>$(DropFolderNetCore)linux\</DropFolderNetCore_linux>
+    <DropFolderNetStandard>$(RepoRoot)drop\$(Configuration)\netstandard\</DropFolderNetStandard>
     <NugetPackageDropFolder>$(DropFolder)\packages</NugetPackageDropFolder>
     
     <!-- Set Nuget exe path -->
-    <NuGetExePath Condition="'$(NuGetExePath)' == ''">$(RepoRoot)\external\nuget.exe</NuGetExePath>
+    <NuGetExePath Condition="'$(NuGetExePath)' == ''">$(RepoRoot)\nuget\nuget.exe</NuGetExePath>
+
+    <!-- Versions used for Microsoft.ServiceFabric.* nuget packages from other repos.-->
+    <NugetPkg_Version_Microsoft_ServiceFabric>6.2.274</NugetPkg_Version_Microsoft_ServiceFabric>
+    <NugetPkg_Version_Microsoft_ServiceFabric_Services>3.1.274</NugetPkg_Version_Microsoft_ServiceFabric_Services>
+
+    <!-- Set versions for files and nuget packages nuget packages generated from this repo. -->
+    <!-- TODO: Versions numbers are changed here manually for now, Integrate this with GitVersion. -->
+    <MajorVersion>3</MajorVersion>
+    <MinorVersion>4</MinorVersion>
+    <BuildVersion>0</BuildVersion>
+    <Revision>0</Revision>
+
   </PropertyGroup>
 </Project>

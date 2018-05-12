@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <Import Project="..\..\properties\service_fabric_managed_dotnetframework.props" />
+  <Import Project="..\..\properties\service_fabric_managed_netframework.props" />
   <PropertyGroup>
     <ProjectGuid>{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}</ProjectGuid>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.WebListener</AssemblyName>
@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
-    <PackageReference Include="Microsoft.ServiceFabric" Version="6.2.262" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="$(NugetPkg_Version_Microsoft_ServiceFabric)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj" />
