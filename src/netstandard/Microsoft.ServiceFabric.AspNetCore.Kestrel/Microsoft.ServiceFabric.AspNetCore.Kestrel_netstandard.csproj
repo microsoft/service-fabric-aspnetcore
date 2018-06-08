@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\properties\service_fabric_managed_netstandard.props" />
+  <Import Project="..\..\..\properties\service_fabric_managed_stylecop.props" />
   <PropertyGroup>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.Kestrel</AssemblyName>
     <RootNamespace>Microsoft.ServiceFabric.Services.Communication.AspNetCore</RootNamespace>

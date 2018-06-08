@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="..\..\properties\service_fabric_managed_netframework.props" />
+  <Import Project="..\..\properties\service_fabric_managed_stylecop.props" />
   <PropertyGroup>
     <ProjectGuid>7be05428-ad27-41cb-b01a-85821b69175f</ProjectGuid>
     <RootNamespace>Microsoft.ServiceFabric.Services.Communication.AspNetCore</RootNamespace>

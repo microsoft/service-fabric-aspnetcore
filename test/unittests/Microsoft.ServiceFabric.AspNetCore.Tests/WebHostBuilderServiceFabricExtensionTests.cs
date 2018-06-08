@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 
@@ -10,37 +10,43 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using FluentAssertions;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Hosting.Server.Features;
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
-    using FluentAssertions;
     using Moq;
     using Xunit;
 
+    /// <summary>
+    /// Test class for WebHostBuilderServiceFabricExtension.
+    /// </summary>
     public class WebHostBuilderServiceFabricExtensionTests
     {
-        private Dictionary<string, string> settings;
-        private AspNetCoreCommunicationListener listener;
-        IWebHostBuilder builder;
+        private readonly Dictionary<string, string> settings;
+        private readonly AspNetCoreCommunicationListener listener;
+        private readonly IWebHostBuilder builder;
 
         /// <summary>
         /// Used by test to check if services were configured by WebHostBuilderServiceFabricExtension.UseServiceFabricIntegration
         /// </summary>
         private bool servicesConfigured;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebHostBuilderServiceFabricExtensionTests"/> class.
+        /// </summary>
         public WebHostBuilderServiceFabricExtensionTests()
         {
-            settings = new Dictionary<string, string>();
+            this.settings = new Dictionary<string, string>();
+
             // create mock IWebHostBuilder to test functionality of Service Fabric WebHostBuilder extension
             var mockBuilder = new Mock<IWebHostBuilder>();
 
             // setup call backs for Getting and setting settings.
             mockBuilder.Setup(y => y.GetSetting(It.IsAny<string>())).Returns<string>(name =>
             {
-                string value;
-                this.settings.TryGetValue(name, out value);
+                this.settings.TryGetValue(name, out var value);
                 return value;
             });
 
@@ -55,7 +61,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             this.servicesConfigured = false;
 
             var context = TestMocksRepository.GetMockStatelessServiceContext();
-            this.listener = new KestrelCommunicationListener(context, (uri, listen) => BuildFunc(uri, listen));
+            this.listener = new KestrelCommunicationListener(context, (uri, listen) => this.BuildFunc(uri, listen));
         }
 
         /// <summary>
@@ -66,12 +72,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             this.builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.None);
             this.servicesConfigured.Should().BeTrue("services are configured.");
-            listener.UrlSuffix.Should().BeEmpty("listener is not Configured to use UniqueServiceUrl.");
+            this.listener.UrlSuffix.Should().BeEmpty("listener is not Configured to use UniqueServiceUrl.");
 
             // Call the UseServiceFabricIntegration() again and verify that its dual invocation, doesn't have adverse affect.
-            builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.None);
+            this.builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.None);
             this.servicesConfigured.Should().BeTrue("services are configured.");
-            listener.UrlSuffix.Should().BeEmpty("listener is not Configured to use UniqueServiceUrl.");
+            this.listener.UrlSuffix.Should().BeEmpty("listener is not Configured to use UniqueServiceUrl.");
         }
 
         /// <summary>
@@ -83,12 +89,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             // ServiceFabricIntegrationOptions.None doesn't adds middleware and doesn't configures listener to use UrlSuffix.
             this.builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.UseUniqueServiceUrl);
             this.servicesConfigured.Should().BeTrue("services are configured.");
-            listener.UrlSuffix.Should().NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
+            this.listener.UrlSuffix.Should().NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
 
             // Call the UseServiceFabricIntegration() again and verify that its dual invocation, doesn't have adverse affect.
             this.builder.UseServiceFabricIntegration(this.listener, ServiceFabricIntegrationOptions.UseUniqueServiceUrl);
             this.servicesConfigured.Should().BeTrue("services are configured.");
-            listener.UrlSuffix.Should().NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
+            this.listener.UrlSuffix.Should().NotBeEmpty("listener is Configured to use UniqueServiceUrl.");
         }
 
         private IWebHost BuildFunc(string url, AspNetCoreCommunicationListener listener)
@@ -102,6 +108,5 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             var mockWebHost = new Mock<IWebHost>();
             return mockWebHost.Object;
         }
-
     }
 }

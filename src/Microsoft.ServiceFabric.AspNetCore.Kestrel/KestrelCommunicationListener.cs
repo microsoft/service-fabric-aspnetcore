@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
@@ -17,7 +17,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         private readonly string endpointName;
 
         /// <summary>
-        /// Constructs a AspNetCore Kestrel based communication listener using a default address with http protocol and port 0.
+        /// Initializes a new instance of the <see cref="KestrelCommunicationListener"/> class using a default address with http protocol and port 0.
         /// Kestrel will dynamically bind to an unspecified, available port when port 0 is specified in url.
         /// </summary>
         /// <param name="serviceContext">The context of the service for which this communication listener is being constructed.</param>
@@ -29,7 +29,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         }
 
         /// <summary>
-        /// Constructs a AspNetCore Kestrel based communication listener.
+        /// Initializes a new instance of the <see cref="KestrelCommunicationListener"/> class.
         /// </summary>
         /// <param name="serviceContext">The context of the service for which this communication listener is being constructed.</param>
         /// <param name="endpointName">Name of endpoint resource defined in service manifest that should be used to create the address for listener.
@@ -50,7 +50,6 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             this.endpointName = endpointName;
         }
 
-
         /// <summary>
         /// Gets url for the listener. Listener url is created using the endpointName passed in the constructor.
         /// If the endpointName was null, a default url with http protocol and port zero is returned.
@@ -65,12 +64,14 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             if (this.endpointName != null)
             {
                 var serviceEndpoint = this.GetEndpointResourceDescription(this.endpointName);
-                listenUrl = string.Format(CultureInfo.InvariantCulture, "{0}://+:{1}",
-                    serviceEndpoint.Protocol.ToString().ToLower(), serviceEndpoint.Port);
+                listenUrl = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}://+:{1}",
+                    serviceEndpoint.Protocol.ToString().ToLower(),
+                    serviceEndpoint.Port);
             }
 
             return listenUrl;
         }
     }
 }
-

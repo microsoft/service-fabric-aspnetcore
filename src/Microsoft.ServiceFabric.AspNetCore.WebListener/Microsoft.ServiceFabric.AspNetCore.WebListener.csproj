@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="..\..\properties\service_fabric_managed_netframework.props" />
+  <Import Project="..\..\properties\service_fabric_managed_stylecop.props" />
   <PropertyGroup>
     <ProjectGuid>{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}</ProjectGuid>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.WebListener</AssemblyName>
