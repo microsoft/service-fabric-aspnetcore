@@ -1,14 +1,14 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 
 namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
-    using System.Numerics;
     using System.Fabric;
     using System.Fabric.Description;
+    using System.Numerics;
     using Moq;
 
     /// <summary>
@@ -16,37 +16,40 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     /// </summary>
     internal static class TestMocksRepository
     {
-        internal static Guid MockPartitionID = Guid.NewGuid();
-        internal static long MockReplicaOrInstanceID = 99999999999;
-        internal static string MockFQDN = "MockFQDN";
-        internal static string MockServiceTypeName = "MockServiceTypeName";
-        internal static Uri MockServiceUri = new Uri("fabric:/MockServiceName");
+        private const long MockReplicaOrInstanceID = 99999999999;
+        private const string MockFQDN = "MockFQDN";
+        private const string MockServiceTypeName = "MockServiceTypeName";
+        private const string MockServiceUri = "fabric:/MockServiceName";
+        private static Guid mockPartitionID = Guid.NewGuid();
 
         internal static StatefulServiceContext GetMockStatefulServiceContext()
         {
-            return new StatefulServiceContext(GetNodeContext(),
+            return new StatefulServiceContext(
+                GetNodeContext(),
                 GetCodePackageActivationContext(),
                 MockServiceTypeName,
-                MockServiceUri,
+                new Uri(MockServiceUri),
                 null,
-                MockPartitionID,
+                mockPartitionID,
                 MockReplicaOrInstanceID);
         }
 
         internal static StatelessServiceContext GetMockStatelessServiceContext()
         {
-            return new StatelessServiceContext(GetNodeContext(),
+            return new StatelessServiceContext(
+                GetNodeContext(),
                 GetCodePackageActivationContext(),
                 MockServiceTypeName,
-                MockServiceUri,
+                new Uri(MockServiceUri),
                 null,
-                MockPartitionID,
+                mockPartitionID,
                 MockReplicaOrInstanceID);
         }
 
         private static NodeContext GetNodeContext()
         {
-            return new NodeContext("MockNode",
+            return new NodeContext(
+                "MockNode",
                 new NodeId(BigInteger.Zero, BigInteger.Zero),
                 BigInteger.Zero,
                 "MockNodeType",
@@ -56,7 +59,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         private static ICodePackageActivationContext GetCodePackageActivationContext()
         {
             var endpointCollection = new KeyedCollectionImpl<string, EndpointResourceDescription>(x => x.Name);
-            
+
             // Create mock Context and setup required things needed by tests.
             var mockContext = new Mock<ICodePackageActivationContext>();
             mockContext.Setup(x => x.GetEndpoints()).Returns(endpointCollection);
@@ -66,6 +69,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             });
 
             return mockContext.Object;
-        }        
+        }
     }
 }

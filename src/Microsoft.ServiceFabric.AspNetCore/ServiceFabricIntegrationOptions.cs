@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
@@ -26,6 +26,6 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// <summary>
         /// This option will enable the Service Fabric Reverse Proxy integration middleware.
         /// </summary>
-        UseReverseProxyIntegration = 0x02
+        UseReverseProxyIntegration = 0x02,
     }
 }

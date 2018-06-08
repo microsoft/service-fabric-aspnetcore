@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
@@ -16,7 +16,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         private static readonly string SettingName = "UseServiceFabricIntegration";
 
         /// <summary>
-        /// Configures the Service to use ServiceFabricMiddleware and tells the listener that middleware is configured for the service so that it can 
+        /// Configures the Service to use ServiceFabricMiddleware and tells the listener that middleware is configured for the service so that it can
         /// suffix PartitionId and ReplicaOrInstanceId  to url before providing it to Service Fabric Runtime.
         /// </summary>
         /// <param name="hostBuilder">The Microsoft.AspNetCore.Hosting.IWebHostBuilder to configure.</param>
@@ -28,7 +28,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             if (hostBuilder == null)
             {
                 throw new ArgumentNullException("hostBuilder");
-            }                        
+            }
 
             // Check if 'UseServiceFabricIntegration' has already been called.
             if (hostBuilder.GetSetting(SettingName) != null && hostBuilder.GetSetting(SettingName).Equals(true.ToString(), StringComparison.Ordinal))

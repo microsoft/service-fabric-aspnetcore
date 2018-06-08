@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
@@ -24,10 +24,11 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             return app =>
             {
                 app.UseServiceFabricMiddleware(this.urlSuffix);
-                if (options.HasFlag(ServiceFabricIntegrationOptions.UseReverseProxyIntegration))
+                if (this.options.HasFlag(ServiceFabricIntegrationOptions.UseReverseProxyIntegration))
                 {
                     app.UseServiceFabricReverseProxyIntegrationMiddleware();
                 }
+
                 next(app);
             };
         }

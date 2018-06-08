@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 
@@ -7,22 +7,28 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
     using System.Threading.Tasks;
+    using FluentAssertions;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Hosting.Server.Features;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Features;
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
-    using FluentAssertions;
     using Moq;
     using Xunit;
 
+    /// <summary>
+    /// Test class for ServiceFabricMiddleware.
+    /// </summary>
     public class ServiceFabricMiddlewareTests
     {
-        private HttpContext httpContext;        
-        private AspNetCoreCommunicationListener listener;
+        private readonly HttpContext httpContext;
+        private readonly AspNetCoreCommunicationListener listener;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServiceFabricMiddlewareTests"/> class.
+        /// </summary>
         public ServiceFabricMiddlewareTests()
-        {            
+        {
             // setup HttpRequest mock
             var mockHttpRequest = new Mock<HttpRequest>();
             mockHttpRequest.SetupAllProperties();
@@ -35,12 +41,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             var mockHttpContext = new Mock<HttpContext>();
             mockHttpContext.Setup(y => y.Response).Returns(mockHttpResponse.Object);
             mockHttpContext.Setup(y => y.Request).Returns(mockHttpRequest.Object);
-            this.httpContext = mockHttpContext.Object;            
+            this.httpContext = mockHttpContext.Object;
 
             var context = TestMocksRepository.GetMockStatelessServiceContext();
-            this.listener = new KestrelCommunicationListener(context, BuildFunc);
+            this.listener = new KestrelCommunicationListener(context, this.BuildFunc);
         }
-        
+
         /// <summary>
         /// Verify ErrorCode 410 is returned from Middleware, when UrlSuffix in Middleware doesn't match with what listener used
         /// when constructing url before returning to Naming Service.
@@ -48,16 +54,16 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         [Fact]
         public void VerifyReturnCode410()
         {
-            bool nextCalled = false;
+            var nextCalled = false;
 
             this.listener.ConfigureToUseUniqueServiceUrl();
-            var middleware = new ServiceFabricMiddleware((httpContext) =>
+            var middleware = new ServiceFabricMiddleware(
+                (httpContext) =>
             {
                 nextCalled = true;
                 return Task.FromResult(true);
             }, this.listener.UrlSuffix);
 
-            
             // send a request in which Path is different than urlSuffix
             this.httpContext.Request.Path = this.listener.UrlSuffix + "xyz";
             middleware.Invoke(this.httpContext).GetAwaiter().GetResult();
@@ -107,7 +113,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             // do not configure listener useUniqueServiceUrl
             // In this case urlSuffix will be empty
-
             this.VerifyPathsInNextInvocation();
         }
 
@@ -117,9 +122,10 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         [Fact]
         public void VerifyNextInvocation()
         {
-            bool nextCalled = false;
+            var nextCalled = false;
 
-            var middleware = new ServiceFabricMiddleware((httpContext) =>
+            var middleware = new ServiceFabricMiddleware(
+                (httpContext) =>
             {
                 nextCalled = true;
                 Console.WriteLine("In Next Request Delegate: HttpRequest.Path: " + httpContext.Request.Path);
@@ -146,10 +152,11 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             PathString pathInNext = null;
             PathString pathBaseInNext = null;
-            var nextCalled = false;            
+            var nextCalled = false;
 
-            var middleware = new ServiceFabricMiddleware((httpContext) =>
-            {                
+            var middleware = new ServiceFabricMiddleware(
+                (httpContext) =>
+            {
                 pathInNext = httpContext.Request.Path;
                 pathBaseInNext = httpContext.Request.PathBase;
                 Console.WriteLine("In Next Request Delegate: HttpRequest.Path: " + httpContext.Request.Path);
@@ -161,7 +168,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 
             // send a request in which Path is different than urlSuffix, but has extra segment after it.
             // This extra segment should become Path for next delegate, and Path should become PathBase for next delegate.
-            Console.WriteLine("UrlSuffix is: " +this.listener.UrlSuffix);
+            Console.WriteLine("UrlSuffix is: " + this.listener.UrlSuffix);
 
             var requestPathSuffix = "/abc";
             var requestPath = this.listener.UrlSuffix + requestPathSuffix;
@@ -191,6 +198,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             // Create mock IWebHost and set required things used by this test.
             var mockWebHost = new Mock<IWebHost>();
             return mockWebHost.Object;
-        }        
+        }
     }
 }

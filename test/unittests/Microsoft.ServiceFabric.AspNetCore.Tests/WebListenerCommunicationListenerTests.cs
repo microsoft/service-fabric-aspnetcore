@@ -1,15 +1,18 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 
 namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
-    using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
     using FluentAssertions;
+    using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
     using Xunit;
 
+    /// <summary>
+    /// Test class for WebListenerCommunicationListener.
+    /// </summary>
     public class WebListenerCommunicationListenerTests : AspNetCoreCommunicationListenerTests
     {
         /// <summary>
@@ -17,35 +20,35 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// 1. When no endpointRef is provided:
         ///   a. url given to Func to create IWebHost should be http://+:0
         ///   b. url returned from OpenAsync should be http://IPAddressOrFQDN:0/PartitionId/ReplicaId
-        ///   
-        ///   
+        ///
+        ///
         /// 2. When endpointRef is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port. 
+        ///   a. url given to Func to create IWebHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId
-        /// 
+        ///
         /// </summary>
         [Fact]
         public void VerifyWithUseUniqueServiceUrlOption()
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
-            context.CodePackageActivationContext.GetEndpoints().Add(GetTestEndpoint());
-            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
+            context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
+            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
             this.UseUniqueServiceUrlOptionVerifier();
         }
 
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.None
         /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port. 
+        ///   a. url given to Func to create IWebHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port
-        /// 
-        /// </summary>        
+        ///
+        /// </summary>
         [Fact]
         public void VerifyWithoutUseUniqueServiceUrlOption()
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
-            context.CodePackageActivationContext.GetEndpoints().Add(GetTestEndpoint());
-            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
+            context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
+            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
             this.WithoutUseUniqueServiceUrlOptionVerifier();
         }
 
@@ -56,8 +59,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         public void VerifyListenerOpenClose()
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
-            context.CodePackageActivationContext.GetEndpoints().Add(GetTestEndpoint());
-            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => BuildFunc(uri, listen));
+            context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
+            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
 
             this.ListenerOpenCloseVerifier();
         }
@@ -68,7 +71,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         [Fact]
         public void ExceptionForEndpointNotFound()
         {
-            this.Listener = new WebListenerCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => BuildFunc(uri, listen));
+            this.Listener = new WebListenerCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => this.BuildFunc(uri, listen));
             this.ExceptionForEndpointNotFoundVerifier();
         }
 
@@ -80,14 +83,18 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             Action action =
                 () =>
-                    new WebListenerCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), null,
-                        BuildFunc);
+                    new WebListenerCommunicationListener(
+                        TestMocksRepository.GetMockStatelessServiceContext(),
+                        null,
+                        this.BuildFunc);
             action.ShouldThrow<ArgumentException>();
 
             action =
                 () =>
-                    new WebListenerCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(),
-                        string.Empty, BuildFunc);
+                    new WebListenerCommunicationListener(
+                        TestMocksRepository.GetMockStatelessServiceContext(),
+                        string.Empty,
+                        this.BuildFunc);
             action.ShouldThrow<ArgumentException>();
         }
     }

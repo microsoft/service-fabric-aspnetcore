@@ -15,13 +15,46 @@
 
     <ItemGroup>
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
-        <TargetPath>lib\net45</TargetPath>
+        <TargetPath>lib\net452</TargetPath>
       </File>
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
-        <TargetPath>lib\net45</TargetPath>
+        <TargetPath>lib\net452</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
+        <TargetPath>lib\net46</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
+        <TargetPath>lib\net46</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
+        <TargetPath>lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
+        <TargetPath>lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
+        <TargetPath>lib\net471</TargetPath>
       </File>
       <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
-        <TargetPath>ref\netstandard2.0</TargetPath>
+        <TargetPath>lib\netstandard2.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.Kestrel.xml">
+        <TargetPath>lib\netstandard2.0</TargetPath>
       </File>
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.Kestrel.dll">
         <TargetPath>runtimes\win\lib\net461</TargetPath>

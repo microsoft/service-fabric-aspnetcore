@@ -23,9 +23,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.Asp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.WebListener_netstandard", "src\netstandard\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener_netstandard.csproj", "{D2A2C053-71A4-4582-94C4-DA4262C9BEF7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BC6C4F04-5CED-4AB6-930B-3348145E6316}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BC6C4F04-5CED-4AB6-930B-3348145E6316}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Tests", "test\unittests\Microsoft.ServiceFabric.AspNetCore.Tests\Microsoft.ServiceFabric.AspNetCore.Tests.csproj", "{F9D9E1BB-212D-4785-8E1E-8427355AAF68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0371241A-7255-4C77-AE01-00B80954DC23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{BA7A4C8B-A2B3-4349-878D-4AB5681B9FA6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +81,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{DFB5E99B-B17D-4FD4-8CA8-24C399606962} = {0371241A-7255-4C77-AE01-00B80954DC23}
+		{20F40AB7-34AB-4ECE-9206-EADCDF1147A0} = {0371241A-7255-4C77-AE01-00B80954DC23}
 		{A45918E1-6345-432E-AD6D-47DEEFB35661} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
 		{7BE05428-AD27-41CB-B01A-85821B69175F} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
 		{B80B46C9-759A-4C5B-8618-C7A45395D9A2} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}

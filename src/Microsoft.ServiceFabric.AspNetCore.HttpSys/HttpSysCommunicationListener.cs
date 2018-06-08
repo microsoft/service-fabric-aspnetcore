@@ -1,5 +1,5 @@
-﻿// ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.  All rights reserved.
+// ------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 // ------------------------------------------------------------
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
@@ -17,7 +17,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         private readonly string endpointName;
 
         /// <summary>
-        /// Constructs a AspNetCore HttpSys server based communication listener.
+        /// Initializes a new instance of the <see cref="HttpSysCommunicationListener"/> class.
         /// </summary>
         /// <param name="serviceContext">The context of the service for which this communication listener is being constructed.</param>
         /// <param name="endpointName">Name of endpoint resource defined in service manifest that should be used to create the address for listener.</param>
@@ -41,11 +41,13 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         protected override string GetListenerUrl()
         {
             var serviceEndpoint = this.GetEndpointResourceDescription(this.endpointName);
-            var listenUrl = string.Format(CultureInfo.InvariantCulture, "{0}://+:{1}",
-                serviceEndpoint.Protocol.ToString().ToLower(), serviceEndpoint.Port);
+            var listenUrl = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}://+:{1}",
+                serviceEndpoint.Protocol.ToString().ToLower(),
+                serviceEndpoint.Port);
 
             return listenUrl;
         }
     }
 }
-
