@@ -19,6 +19,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.csproj" />
     <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj" />
     <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.csproj" />
   </ItemGroup>
