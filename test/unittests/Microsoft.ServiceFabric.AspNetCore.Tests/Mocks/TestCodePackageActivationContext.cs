@@ -23,7 +23,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     /// <seealso cref="System.Fabric.ICodePackageActivationContext" />
     public class TestCodePackageActivationContext : ICodePackageActivationContext
     {
-        private readonly IConfiguration config;
+        private readonly IDictionary<string, IConfiguration> configs;
 
         // private readonly XElement manifest = null;
         private bool disposedValue = false; // To detect redundant calls
@@ -34,12 +34,27 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <param name="config">The configuration used to populate the activation context.</param>
         public TestCodePackageActivationContext(IConfiguration config)
         {
-            this.config = config;
+            this.configs = new Dictionary<string, IConfiguration>() { { "Config", config } };
 
             // this.manifest = XElement.Load("PackageRoot\\ServiceManifest.xml");
             this.ApplicationName = config[nameof(this.ApplicationName)];
             this.ApplicationTypeName = config[nameof(this.ApplicationTypeName)];
 
+            // this.ServiceTypes = new TestServiceTypes(config, this.manifest);
+            // this.Endpoints = new TestEndPoints(config, this.manifest);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCodePackageActivationContext"/> class.
+        /// </summary>
+        /// <param name="configs">The configuration used to populate the activation context.</param>
+        public TestCodePackageActivationContext(IDictionary<string, IConfiguration> configs)
+        {
+            this.configs = configs;
+
+            // this.manifest = XElement.Load("PackageRoot\\ServiceManifest.xml");
+            // this.ApplicationName = config[nameof(this.ApplicationName)];
+            // this.ApplicationTypeName = config[nameof(this.ApplicationTypeName)];
             // this.ServiceTypes = new TestServiceTypes(config, this.manifest);
             // this.Endpoints = new TestEndPoints(config, this.manifest);
         }
@@ -148,6 +163,17 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         private string ServiceManifestVersion { get; set; }
 
         /// <summary>
+        /// Triggers the configuration package modified event.
+        /// </summary>
+        /// <param name="configurationRoot">The configuration root.</param>
+        public void TriggerConfigurationPackageModifiedEvent(IConfigurationRoot configurationRoot)
+        {
+            var oldPackage = this.GetConfigurationPackageObject("Config");
+            var newPackage = MockConfigurationPackage.CreateDefaultPackage(configurationRoot, "Config");
+            this.ConfigurationPackageModifiedEvent(this, new PackageModifiedEventArgs<ConfigurationPackage>() { OldPackage = oldPackage, NewPackage = newPackage });
+        }
+
+        /// <summary>
         /// Retrieves the principals defined in the application manifest.
         /// </summary>
         /// <returns>
@@ -193,7 +219,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// </returns>
         public IList<string> GetConfigurationPackageNames()
         {
-            return new List<string>() { "Config" };
+            return this.configs.Keys.ToList();
         }
 
         /// <summary>
@@ -208,7 +234,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// </remarks>
         public ConfigurationPackage GetConfigurationPackageObject(string packageName)
         {
-            return MockConfigurationPackage.CreateDefaultPackage(this.config, packageName);
+            var config = this.configs[packageName];
+            return MockConfigurationPackage.CreateDefaultPackage(config, packageName);
         }
 
         /// <summary>

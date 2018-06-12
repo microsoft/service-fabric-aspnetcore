@@ -32,6 +32,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 var parameter = TestHelper.CreateInstanced<ConfigurationProperty>();
                 parameter.Set("Name", item.Key);
                 parameter.Set("Value", item.Value);
+                parameter.Set(nameof(ConfigurationProperty.IsEncrypted), item.Key.Contains("Security") || item.Value.Contains("Security"));
                 parameters.Add(parameter);
             }
 
