@@ -77,8 +77,5 @@
       <Dependency Include="Microsoft.Extensions.Configuration">
         <Version>1.0.0</Version>
       </Dependency>
-      <Dependency Include="Microsoft.Extensions.Logging">
-        <Version>1.0.0</Version>
-      </Dependency>
     </ItemGroup>
   </Project>
