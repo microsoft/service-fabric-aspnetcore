@@ -44,11 +44,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             builder.AddServiceFabricConfiguration(context);
             var config = builder.Build();
 
-            config["Section1:Name"].Should().Be("Xiaoxiao");
-            config["Section1:Age"].Should().Be("6");
+            config["Config:Section1:Name"].Should().Be("Xiaoxiao");
+            config["Section1:Name"].Should().BeNull("Default behavior shall include the package name in key.");
+            config["Config:Section1:Age"].Should().Be("6");
             config["Config:Gender"].Should().Be(null);
-            config["Section1:Gender"].Should().Be(null);
-            config["Section2:Gender"].Should().Be("M");
+            config["Config:Section1:Gender"].Should().Be(null);
+            config["Config:Section2:Gender"].Should().Be("M");
         }
 
         /// <summary>
@@ -70,9 +71,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             builder.AddServiceFabricConfiguration(context);
             var config = builder.Build();
 
-            config["Section1:Name"].Should().Be("Xiaoxiao");
-            config["Section1:Age"].Should().Be("6");
-            config["Section1:Gender"].Should().Be("M");
+            config["Config:Section1:Name"].Should().Be("Xiaoxiao");
+            config["Config:Section1:Age"].Should().Be("6");
+            config["Config:Section1:Gender"].Should().Be("M");
 
             // trigger config update
             context.TriggerConfigurationPackageModifiedEvent(new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
@@ -82,9 +83,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 { "Section1:Gender", "M" },
             }).Build());
 
-            config["Section1:Name"].Should().Be("Lele");
-            config["Section1:Age"].Should().Be("3");
-            config["Section1:Gender"].Should().Be("M");
+            config["Config:Section1:Name"].Should().Be("Lele");
+            config["Config:Section1:Age"].Should().Be("3");
+            config["Config:Section1:Gender"].Should().Be("M");
         }
 
         /// <summary>
@@ -159,7 +160,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             builder.AddServiceFabricConfiguration(context);
             var config = builder.Build();
 
-            config["SecuritySection:SecuritySSN"].Should().Be("EncryptedValue");
+            config["Config:SecuritySection:SecuritySSN"].Should().Be("EncryptedValue");
 
             var builder2 = new ConfigurationBuilder();
 
@@ -209,7 +210,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                     };
 
                     options.IncludePackageName = false;
-                    options.DecryptValue = true;
                 });
 
             var config = builder.Build();

@@ -75,11 +75,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
             {
                 var options = new ServiceFabricConfigurationOptions(packageName);
 
-                // if there is only single package, do not include the package name by default
-                // otherwise for multiple packages include the package name.
-                // this default could be changed in options delegate.
-                options.IncludePackageName = packageNames.Count > 1;
-
                 if (optionsDelegate != null)
                 {
                     optionsDelegate(options);

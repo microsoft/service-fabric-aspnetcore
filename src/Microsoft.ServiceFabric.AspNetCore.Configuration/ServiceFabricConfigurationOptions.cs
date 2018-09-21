@@ -28,7 +28,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
             this.IncludePackageName = true;
             this.DecryptValue = false; // secure by default.
 
-            this.ConfigAction = this.DefaultConfigDelegate;
+            this.ConfigAction = this.DefaultConfigAction;
             this.ExtractKeyFunc = this.DefaultExtractKeyFunc;
             this.ExtractValueFunc = this.DefaultExtractValueFunc;
         }
@@ -43,18 +43,27 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
         /// </summary>
         /// <remarks>
         /// This is for advanced usage scenario to take data from package and populate into the dictionary.
-        /// the default value is a delegate which used SectionName and ParamName as the key and value as the param value regardless of encrypted or not.
+        /// For example, this could be used to populate json configuration files, adding logging for configuration updates, etc.
+        /// The default value is a delegate which used PackageName, SectionName and ParamName as the key and value as the param value regardless of encrypted or not.
         /// </remarks>
         public Action<ConfigurationPackage, IDictionary<string, string>> ConfigAction { get; set; }
 
         /// <summary>
         /// Gets or sets the function to extract the IConfiguration key from the fabric configuration section and property.
+        /// The return value of the fuction would be used as the key for IConfiguration in ConfigAction.
         /// </summary>
+        /// <remarks>
+        /// The default value is a function which used PackageName, SectionName and ParamName as the key with default IncludePackageName as true.
+        /// </remarks>
         public Func<FabricConfigurationSection, ConfigurationProperty,  string> ExtractKeyFunc { get; set; }
 
         /// <summary>
         /// Gets or sets the function to extract the IConfiguration value from the fabric configuration section and property.
+        /// The return value of the fuction would be used as the value for IConfiguration in ConfigAction.
         /// </summary>
+        /// <remarks>
+        /// The default value is a function which used the param value regardless of encrypted or not with default DecryptValue flag as true.
+        /// </remarks>
         public Func<FabricConfigurationSection, ConfigurationProperty, string> ExtractValueFunc { get; set; }
 
         /// <summary>
@@ -74,7 +83,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
         /// </remarks>
         public bool DecryptValue { get; set; }
 
-        internal void DefaultConfigDelegate(ConfigurationPackage config, IDictionary<string, string> data)
+        internal void DefaultConfigAction(ConfigurationPackage config, IDictionary<string, string> data)
         {
             foreach (var section in config.Settings.Sections)
             {
