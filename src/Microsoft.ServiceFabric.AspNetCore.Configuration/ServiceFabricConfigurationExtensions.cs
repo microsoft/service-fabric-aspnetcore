@@ -45,6 +45,21 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
         /// <returns>the same configuration builder with service fabric configuration added.</returns>
         public static IConfigurationBuilder AddServiceFabricConfiguration(this IConfigurationBuilder builder, ICodePackageActivationContext context)
         {
+            return builder.AddServiceFabricConfiguration(context, null);
+        }
+
+        /// <summary>
+        /// Add configuration for given configuration package from packageName parameter as well as customize config action to populate the Data.
+        /// </summary>
+        /// <param name="builder">the configuration builder.</param>
+        /// <param name="context">the activation context with information for configuration packages.</param>
+        /// <param name="optionsDelegate">the delegate to change the configuration options including configuration actions.</param>
+        /// <returns>the same configuration builder with service fabric configuration added.</returns>
+        public static IConfigurationBuilder AddServiceFabricConfiguration(
+            this IConfigurationBuilder builder,
+            ICodePackageActivationContext context,
+            Action<ServiceFabricConfigurationOptions> optionsDelegate)
+        {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -55,46 +70,25 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
                 throw new ArgumentNullException(nameof(context));
             }
 
-            foreach (var packageName in context.GetConfigurationPackageNames())
+            var packageNames = context.GetConfigurationPackageNames();
+            foreach (var packageName in packageNames)
             {
-                builder.Add(new ServiceFabricConfigurationSource(context, packageName));
+                var options = new ServiceFabricConfigurationOptions(packageName);
+
+                // if there is only single package, do not include the package name by default
+                // otherwise for multiple packages include the package name.
+                // this default could be changed in options delegate.
+                options.IncludePackageName = packageNames.Count > 1;
+
+                if (optionsDelegate != null)
+                {
+                    optionsDelegate(options);
+                }
+
+                builder.Add(new ServiceFabricConfigurationSource(context, options));
             }
 
             return builder;
-        }
-
-        /// <summary>
-        /// Add configuration for given configuration package from packageName parameter
-        /// </summary>
-        /// <param name="builder">the configuration builder.</param>
-        /// <param name="context">the activation context with information for configuration packages.</param>
-        /// <param name="packageName">the name of configuration package to add configuration for.</param>
-        /// <returns>the same configuration builder with service fabric configuration added.</returns>
-        public static IConfigurationBuilder AddServiceFabricConfiguration(this IConfigurationBuilder builder, ICodePackageActivationContext context, string packageName)
-        {
-            return builder.Add(new ServiceFabricConfigurationSource(context, packageName));
-        }
-
-        /// <summary>
-        /// Add configuration for given configuration package from packageName parameter as well as customize config action to populate the Data.
-        /// </summary>
-        /// <param name="builder">the configuration builder.</param>
-        /// <param name="context">the activation context with information for configuration packages.</param>
-        /// <param name="packageName">the name of configuration package to add configuration for.</param>
-        /// <param name="configAction">the action to take that will populate the configuration from package.</param>
-        /// <returns>the same configuration builder with service fabric configuration added.</returns>
-        public static IConfigurationBuilder AddServiceFabricConfiguration(
-            this IConfigurationBuilder builder,
-            ICodePackageActivationContext context,
-            string packageName,
-            Action<ConfigurationPackage, IDictionary<string, string>> configAction)
-        {
-            if (configAction == null)
-            {
-                throw new ArgumentNullException(nameof(configAction));
-            }
-
-            return builder.Add(new ServiceFabricConfigurationSource(context, packageName, configAction));
         }
     }
 }

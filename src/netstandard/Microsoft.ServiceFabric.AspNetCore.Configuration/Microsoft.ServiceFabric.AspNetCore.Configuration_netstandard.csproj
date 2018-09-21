@@ -19,10 +19,7 @@
   <ItemGroup>
     <!--Add required .cs files -->
     <Compile Include="$(SourceCodeDir)*.cs" Exclude="$(SourceCodeDir)SR.Designer.cs" Link="$([System.String]::Copy('%(Identity)').Replace('$(SourceCodeDir)',''))" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="E:\Github\service-fabric-aspnetcore\src\Microsoft.ServiceFabric.AspNetCore.Configuration\ServiceFabricConfigExtensions.cs" />
-  </ItemGroup>
+  </ItemGroup>  
   <ItemGroup>
     <Compile Include="$(SourceCodeDir)SR.Designer.cs">
       <Link>SR.Designer.cs</Link>

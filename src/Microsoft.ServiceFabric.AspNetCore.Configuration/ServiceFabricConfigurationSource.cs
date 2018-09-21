@@ -12,28 +12,24 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
 
     internal class ServiceFabricConfigurationSource : IConfigurationSource
     {
-        private readonly Action<ConfigurationPackage, IDictionary<string, string>> configAction;
+        private readonly ServiceFabricConfigurationOptions options;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceFabricConfigurationSource"/> class.
         /// </summary>
         /// <param name="activationContext">the code package activation context.</param>
-        /// <param name="packageName">the name of the package.</param>
-        /// <param name="configAction">the action to take to populate the configuration</param>
-        public ServiceFabricConfigurationSource(ICodePackageActivationContext activationContext, string packageName, Action<ConfigurationPackage, IDictionary<string, string>> configAction = default(Action<ConfigurationPackage, IDictionary<string, string>>))
+        /// <param name="options">the configuration options.</param>
+        public ServiceFabricConfigurationSource(ICodePackageActivationContext activationContext, ServiceFabricConfigurationOptions options)
         {
-            this.PackageName = packageName;
             this.ActivationContext = activationContext;
-            this.configAction = configAction;
+            this.options = options;
         }
-
-        public string PackageName { get; }
 
         public ICodePackageActivationContext ActivationContext { get; }
 
         public IConfigurationProvider Build(IConfigurationBuilder builder)
         {
-            return new ServiceFabricConfigurationProvider(this.ActivationContext, this.PackageName, this.configAction);
+            return new ServiceFabricConfigurationProvider(this.ActivationContext, this.options);
         }
     }
 }

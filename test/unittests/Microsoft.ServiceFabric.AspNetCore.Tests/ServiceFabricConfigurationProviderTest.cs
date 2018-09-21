@@ -37,6 +37,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             }).Build();
 
             var context = new TestCodePackageActivationContext(contextConfig);
+            var names = context.GetCodePackageNames();
+            names.Count.Should().Be(1, "Only 1 config package");
 
             var builder = new ConfigurationBuilder();
             builder.AddServiceFabricConfiguration(context);
@@ -44,7 +46,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 
             config["Section1:Name"].Should().Be("Xiaoxiao");
             config["Section1:Age"].Should().Be("6");
-            config["Gender"].Should().Be(null);
+            config["Config:Gender"].Should().Be(null);
             config["Section1:Gender"].Should().Be(null);
             config["Section2:Gender"].Should().Be("M");
         }
@@ -110,7 +112,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             // first configuration
             var contextConfig1 = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
-                { "Section1:Name", "Xiaoxiao" },
+                { "SameSection:Name", "Xiaoxiao" },
                 { "Section1:Age", "6" },
                 { "Section1:Gender", "M" },
             }).Build();
@@ -118,8 +120,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             // 2nd configuration
             var contextConfig2 = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
-                { "Section2:Name", "Xiaoxiao" },
-                { "Section2:Age", "6" },
+                { "SameSection:Name", "Lele" },
+                { "Section2:Age", "3" },
                 { "Section2:Gender", "M" },
             }).Build();
 
@@ -129,13 +131,13 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             builder.AddServiceFabricConfiguration(context);
             var config = builder.Build() as ConfigurationRoot;
 
-            config["Section1:Name"].Should().Be("Xiaoxiao");
-            config["Section1:Age"].Should().Be("6");
-            config["Section1:Gender"].Should().Be("M");
+            config["Config1:SameSection:Name"].Should().Be("Xiaoxiao");
+            config["Config1:Section1:Age"].Should().Be("6");
+            config["Config1:Section1:Gender"].Should().Be("M");
 
-            config["Section1:Name"].Should().Be("Xiaoxiao");
-            config["Section1:Age"].Should().Be("6");
-            config["Section1:Gender"].Should().Be("M");
+            config["Config2:SameSection:Name"].Should().Be("Lele");
+            config["Config2:Section2:Age"].Should().Be("3");
+            config["Config2:Section2:Gender"].Should().Be("M");
         }
 
         /// <summary>
@@ -146,8 +148,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var contextConfig = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
-                // in the mock this section is special handled to turn IsEncrypted to true
-                { "SecuritySection:SSN", "EncryptedValue" },
+                // in the MockConfigurationProperties this section is special handled to turn IsEncrypted to true as follow
+                // parameter.Set(nameof(ConfigurationProperty.IsEncrypted), item.Key.Contains("Security") || item.Value.Contains("Security"));
+                { "SecuritySection:SecuritySSN", "EncryptedValue" },
             }).Build();
 
             var context = new TestCodePackageActivationContext(contextConfig);
@@ -156,7 +159,15 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             builder.AddServiceFabricConfiguration(context);
             var config = builder.Build();
 
-            config["SecuritySection:SSN"].Should().Be("EncryptedValue");
+            config["SecuritySection:SecuritySSN"].Should().Be("EncryptedValue");
+
+            var builder2 = new ConfigurationBuilder();
+
+            // set flag to decrypt the value
+            builder2.AddServiceFabricConfiguration(context, (options) => options.DecryptValue = true);
+
+            Action config2 = () => builder2.Build();
+            config2.ShouldThrow<FabricException>("FabricException expected here because DecryptValue will fail here with invalid values.");
         }
 
         /// <summary>
@@ -165,25 +176,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         [Fact]
         public void TestConfigAction()
         {
-            ILogger logger = new ConsoleLogger("Test", null, false);
-            Action<ConfigurationPackage, IDictionary<string, string>> configAction = (package, configData) =>
-            {
-                logger.LogInformation($"Config Update for package {package.Path} started");
-
-                foreach (var section in package.Settings.Sections)
-                {
-                    this.sectionCount++;
-
-                    foreach (var param in section.Parameters)
-                    {
-                        configData[$"{section.Name}{ConfigurationPath.KeyDelimiter}{param.Name}"] = param.Value;
-                        this.valueCount++;
-                    }
-                }
-
-                logger.LogInformation($"Config Update for package {package.Path} finished");
-            };
-
             var contextConfig = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
                 { "Section1:Name", "Xiaoxiao" },
@@ -195,7 +187,31 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             this.valueCount = 0;
             this.sectionCount = 0;
             var builder = new ConfigurationBuilder();
-            builder.AddServiceFabricConfiguration(context, "Config", configAction);
+            builder.AddServiceFabricConfiguration(context, (options) =>
+                {
+                    options.ConfigAction = (package, configData) =>
+                    {
+                        ILogger logger = new ConsoleLogger("Test", null, false);
+                        logger.LogInformation($"Config Update for package {package.Path} started");
+
+                        foreach (var section in package.Settings.Sections)
+                        {
+                            this.sectionCount++;
+
+                            foreach (var param in section.Parameters)
+                            {
+                                configData[options.ExtractKeyFunc(section, param)] = options.ExtractValueFunc(section, param);
+                                this.valueCount++;
+                            }
+                        }
+
+                        logger.LogInformation($"Config Update for package {package.Path} finished");
+                    };
+
+                    options.IncludePackageName = false;
+                    options.DecryptValue = true;
+                });
+
             var config = builder.Build();
             config["Section1:Name"].Should().Be("Xiaoxiao");
             config["Section1:Age"].Should().Be("6");
