@@ -33,7 +33,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             {
                 { "Section1:Name", "Xiaoxiao" },
                 { "Section1:Age", "6" },
-                { "Section2:Gender", "M" },
+                { "Section1:Gender", "M" },
+                { "Section2:Gender", "F" },
             }).Build();
 
             var context = new TestCodePackageActivationContext(contextConfig);
@@ -48,8 +49,18 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             config["Section1:Name"].Should().BeNull("Default behavior shall include the package name in key.");
             config["Config:Section1:Age"].Should().Be("6");
             config["Config:Gender"].Should().Be(null);
-            config["Config:Section1:Gender"].Should().Be(null);
-            config["Config:Section2:Gender"].Should().Be("M");
+            config["Config:Section1:Gender"].Should().Be("M");
+            config["Config:Section2:Gender"].Should().Be("F");
+
+            // basic validate to bind to a class directly
+            // Note, in asp.net core 2.1 you could use the more simple ConfigurationBinder.Get<T> binds and returns the specified type instance directly.
+            // Get<T> is more convenient than using Bind but will require .net core version higher than 1.0
+            var person = new Person();
+            config.GetSection("Config:Section1").Bind(person);
+
+            person.Name.Should().Be("Xiaoxiao");
+            person.Age.Should().Be(6);
+            person.Gender.Should().Be("M");
         }
 
         /// <summary>
@@ -230,6 +241,15 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             config["Section1:Name"].Should().Be("Lele");
             this.sectionCount.Should().Be(1);
             this.valueCount.Should().Be(1);
+        }
+
+        internal class Person
+        {
+            public string Name { get; set; }
+
+            public string Gender { get; set; }
+
+            public int Age { get; set; }
         }
     }
 }
