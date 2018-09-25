@@ -4,6 +4,7 @@
   <!-- Target to build net standard projects.-->
   <ItemGroup>
     <Projects_Prod_netstandard Include="$(RepoRoot)src\netstandard\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore_netstandard.csproj;
+                                  $(RepoRoot)src\netstandard\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration_netstandard.csproj;
                                   $(RepoRoot)src\netstandard\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys_netstandard.csproj;
                                   $(RepoRoot)src\netstandard\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel_netstandard.csproj;
                                   $(RepoRoot)src\netstandard\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener_netstandard.csproj" />
@@ -26,6 +27,7 @@
   <Target Name="CopyProdBinaries_netstandard">
     <ItemGroup>
       <BinairesNetStandard Include="src\netstandard\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.*"/>
+      <BinairesNetStandard Include="src\netstandard\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
       <BinairesNetStandard Include="src\netstandard\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
       <BinairesNetStandard Include="src\netstandard\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
       <BinairesNetStandard Include="src\netstandard\Microsoft.ServiceFabric.AspNetCore.WebListener\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.WebListener.*"/>

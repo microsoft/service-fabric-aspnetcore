@@ -3,6 +3,7 @@
   <ItemGroup>
     <!-- List of .csproj to build -->
     <Projects_Prod_netframework Include="$(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj;
+                                   $(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.csproj;
                                    $(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.csproj;
                                    $(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj;
                                    $(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.csproj" />
@@ -47,6 +48,7 @@
   <Target Name="CopyProdBinaries_netframework">
     <ItemGroup>
       <BinairesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.*"/>
+      <BinairesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
       <BinairesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
       <BinairesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
       <BinairesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.WebListener\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.WebListener.*"/>

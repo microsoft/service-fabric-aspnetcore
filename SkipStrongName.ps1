@@ -3,6 +3,7 @@
 $registryPath = "HKLM:\SOFTWARE\Microsoft\StrongName\Verification"
 $publicKeyToken="31bf3856ad364e35"
 $assemblies = "Microsoft.ServiceFabric.AspNetCore",
+              "Microsoft.ServiceFabric.AspNetCore.Configuration",              
               "Microsoft.ServiceFabric.AspNetCore.HttpSys",
               "Microsoft.ServiceFabric.AspNetCore.Kestrel",
               "Microsoft.ServiceFabric.AspNetCore.WebListener",
