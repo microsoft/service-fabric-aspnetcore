@@ -44,6 +44,12 @@
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.WebListener.xml">
         <TargetPath>lib\net471</TargetPath>
       </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.WebListener.dll">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.WebListener.xml">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
       <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.WebListener.dll">
         <TargetPath>lib\netstandard2.0</TargetPath>
       </File>
@@ -61,6 +67,9 @@
       </File>
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.WebListener.dll">
         <TargetPath>runtimes\win\lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.WebListener.dll">
+        <TargetPath>runtimes\win\lib\net472</TargetPath>
       </File>
     </ItemGroup>
     
