@@ -12,7 +12,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
     using Microsoft.Extensions.Configuration;
 
     /// <summary>
-    /// Configuration extentions to add service fabric configuration
+    /// Configuration extentions to add service fabric configuration.
     /// </summary>
     public static class ServiceFabricConfigurationExtensions
     {

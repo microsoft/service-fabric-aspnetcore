@@ -409,7 +409,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Throws if disposed.
         /// </summary>
-        /// <exception cref="ObjectDisposedException">TestCodePackageActivationContext</exception>
+        /// <exception cref="ObjectDisposedException">TestCodePackageActivationContext.</exception>
         internal void ThrowIfDisposed()
         {
             if (this.disposedValue)

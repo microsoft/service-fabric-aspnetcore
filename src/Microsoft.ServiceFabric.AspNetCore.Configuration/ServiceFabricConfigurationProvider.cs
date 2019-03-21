@@ -35,7 +35,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
         }
 
         /// <summary>
-        /// Load the configuration
+        /// Load the configuration.
         /// </summary>
         public override void Load()
         {

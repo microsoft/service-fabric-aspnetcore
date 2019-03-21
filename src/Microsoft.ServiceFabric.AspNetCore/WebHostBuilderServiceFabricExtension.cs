@@ -9,7 +9,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// Class containing Service Fabric related extension methods for Microsoft.AspNetCore.Hosting.IWebHostBuilder
+    /// Class containing Service Fabric related extension methods for Microsoft.AspNetCore.Hosting.IWebHostBuilder.
     /// </summary>
     public static class WebHostBuilderServiceFabricExtension
     {
@@ -21,7 +21,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </summary>
         /// <param name="hostBuilder">The Microsoft.AspNetCore.Hosting.IWebHostBuilder to configure.</param>
         /// <param name="listener">The <see cref="AspNetCoreCommunicationListener"/> to configure.</param>
-        /// <param name="options">Options to configure ServiceFabricMiddleware and AspNetCoreCommunicationListener</param>
+        /// <param name="options">Options to configure ServiceFabricMiddleware and AspNetCoreCommunicationListener.</param>
         /// <returns>The Microsoft.AspNetCore.Hosting.IWebHostBuilder.</returns>
         public static IWebHostBuilder UseServiceFabricIntegration(this IWebHostBuilder hostBuilder, AspNetCoreCommunicationListener listener, ServiceFabricIntegrationOptions options)
         {

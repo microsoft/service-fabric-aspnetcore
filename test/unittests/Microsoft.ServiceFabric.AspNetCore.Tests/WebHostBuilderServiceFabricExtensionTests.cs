@@ -29,7 +29,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         private readonly IWebHostBuilder builder;
 
         /// <summary>
-        /// Used by test to check if services were configured by WebHostBuilderServiceFabricExtension.UseServiceFabricIntegration
+        /// Used by test to check if services were configured by WebHostBuilderServiceFabricExtension.UseServiceFabricIntegration.
         /// </summary>
         private bool servicesConfigured;
 
@@ -65,7 +65,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         }
 
         /// <summary>
-        /// Verify WebHostBuilderExtension for ServiceFabricIntegrationOptions.None
+        /// Verify WebHostBuilderExtension for ServiceFabricIntegrationOptions.None.
         /// </summary>
         [Fact]
         public void VerifyWithServiceFabricIntegrationOptions_None()
@@ -81,7 +81,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         }
 
         /// <summary>
-        /// Verify WebHostBuilderExtension for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
+        /// Verify WebHostBuilderExtension for ServiceFabricIntegrationOptions.UseUniqueServiceUrl.
         /// </summary>
         [Fact]
         public void VerifyWithServiceFabricIntegrationOptions_UseUniqueServiceUrl()

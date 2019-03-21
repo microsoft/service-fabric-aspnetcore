@@ -14,7 +14,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using System.Threading.Tasks;
 
     /// <summary>
-    /// TestHelper
+    /// TestHelper.
     /// </summary>
     internal static class TestHelper
     {
