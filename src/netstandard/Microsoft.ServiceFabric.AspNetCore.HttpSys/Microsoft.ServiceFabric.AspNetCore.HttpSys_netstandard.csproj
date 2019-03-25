@@ -23,10 +23,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(SourceCodeDir)SR.resx">
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
     <PackageReference Include="Microsoft.ServiceFabric" Version="$(NugetPkg_Version_Microsoft_ServiceFabric)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore_netstandard.csproj" />
-  </ItemGroup>
+  </ItemGroup>  
 </Project>

@@ -87,7 +87,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                         TestMocksRepository.GetMockStatelessServiceContext(),
                         null,
                         this.BuildFunc);
-            action.ShouldThrow<ArgumentException>();
+            action.Should().Throw<ArgumentException>();
 
             action =
                 () =>
@@ -95,7 +95,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                         TestMocksRepository.GetMockStatelessServiceContext(),
                         string.Empty,
                         this.BuildFunc);
-            action.ShouldThrow<ArgumentException>();
+            action.Should().Throw<ArgumentException>();
         }
     }
 }
