@@ -179,7 +179,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             builder2.AddServiceFabricConfiguration(context, (options) => options.DecryptValue = true);
 
             Action config2 = () => builder2.Build();
-            config2.ShouldThrow<FabricException>("FabricException expected here because DecryptValue will fail here with invalid values.");
+            config2.Should().Throw<FabricException>("FabricException expected here because DecryptValue will fail here with invalid values.");
         }
 
         /// <summary>
