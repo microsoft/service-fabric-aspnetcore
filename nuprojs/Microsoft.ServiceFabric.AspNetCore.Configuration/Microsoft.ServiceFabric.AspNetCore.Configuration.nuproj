@@ -8,6 +8,7 @@
       <Description>This package provides Configuration for creating AspNetCore Service Fabric microservices.</Description>
       <Summary>This package provides Configuration for creating AspNetCore Service Fabric microservices.</Summary>
       <Tags>ServiceFabric Microsoft Azure Fabric</Tags>
+      <Version>3.3.644</Version>
     </PropertyGroup>
 
     <Import Project="$(NuProjPath)\NuProj.props" />
@@ -81,7 +82,7 @@
     
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.Services">
-        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <Version>$(NugetPkg_Version_Microsoft_ServiceFabric_Services)</Version>
       </Dependency>
       <Dependency Include="Microsoft.Extensions.Configuration">
         <Version>1.0.0</Version>
