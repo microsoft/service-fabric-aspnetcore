@@ -34,6 +34,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Configuration", "src\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.csproj", "{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Configuration_netstandard", "src\netstandard\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration_netstandard.csproj", "{0098591A-5F95-4BBA-A397-E6AAE9322742}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -76,6 +80,14 @@ Global
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68}.Debug|x64.Build.0 = Debug|x64
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68}.Release|x64.ActiveCfg = Release|x64
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68}.Release|x64.Build.0 = Release|x64
+		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}.Debug|x64.ActiveCfg = Debug|x64
+		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}.Debug|x64.Build.0 = Debug|x64
+		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}.Release|x64.ActiveCfg = Release|x64
+		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}.Release|x64.Build.0 = Release|x64
+		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Debug|x64.ActiveCfg = Debug|x64
+		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Debug|x64.Build.0 = Debug|x64
+		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Release|x64.ActiveCfg = Release|x64
+		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +104,8 @@ Global
 		{84EA0BAE-E5D9-4B0B-A1E4-0639078EE6D1} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
 		{D2A2C053-71A4-4582-94C4-DA4262C9BEF7} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68} = {BC6C4F04-5CED-4AB6-930B-3348145E6316}
+		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
+		{0098591A-5F95-4BBA-A397-E6AAE9322742} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CDABF99-A026-479B-B672-736D0A8C9A37}
