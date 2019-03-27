@@ -168,7 +168,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         protected void ExceptionForEndpointNotFoundVerifier()
         {
             Action action = () => this.Listener.OpenAsync(CancellationToken.None);
-            action.ShouldThrow<InvalidOperationException>();
+            action.Should().Throw<InvalidOperationException>();
         }
     }
 }

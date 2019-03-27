@@ -89,7 +89,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                         string.Empty,
                         (uri, listen) => this.BuildFunc(uri, listen));
 
-            action.ShouldThrow<ArgumentException>();
+            action.Should().Throw<ArgumentException>();
         }
     }
 }
