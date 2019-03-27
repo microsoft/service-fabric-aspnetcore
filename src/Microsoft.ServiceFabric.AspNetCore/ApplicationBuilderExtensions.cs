@@ -21,7 +21,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// Extension method to use ServiceFabricMiddleware for Service Fabric stateful or stateless service
         /// using Kestrel or WebListener as WebServer.
         /// </summary>
-        /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder</param>
+        /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
         /// <param name="urlSuffix">Url suffix to determine if the request is meant for current partition and replica.</param>
         /// <returns>IApplicationBuilder instance.</returns>
         public static IApplicationBuilder UseServiceFabricMiddleware(this IApplicationBuilder builder, string urlSuffix)
@@ -43,7 +43,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// Extension method to use ServiceFabricReverseProxyIntegrationMiddleware for Service Fabric stateful or stateless service
         /// using Kestrel or WebListener as WebServer.
         /// </summary>
-        /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder</param>
+        /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
         /// <returns>IApplicationBuilder instance.</returns>
         public static IApplicationBuilder UseServiceFabricReverseProxyIntegrationMiddleware(this IApplicationBuilder builder)
         {

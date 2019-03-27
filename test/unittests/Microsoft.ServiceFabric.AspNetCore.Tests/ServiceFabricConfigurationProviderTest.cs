@@ -16,7 +16,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using Xunit;
 
     /// <summary>
-    /// Test for ServiceFabricConfigurationProvider
+    /// Test for ServiceFabricConfigurationProvider.
     /// </summary>
     public class ServiceFabricConfigurationProviderTest
     {
@@ -24,7 +24,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         private int sectionCount = 0;
 
         /// <summary>
-        /// Verify that the basic types could be loaded
+        /// Verify that the basic types could be loaded.
         /// </summary>
         [Fact]
         public void TestHappyCase()
@@ -64,7 +64,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         }
 
         /// <summary>
-        /// Verify the configuration updates
+        /// Verify the configuration updates.
         /// </summary>
         [Fact]
         public void TestConfigUpdate()

@@ -11,7 +11,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using Microsoft.Extensions.Configuration;
 
     /// <summary>
-    /// Mock implementation of the package
+    /// Mock implementation of the package.
     /// </summary>
     public static class MockConfigurationPackage
     {

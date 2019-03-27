@@ -12,7 +12,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using ConfigurationSection = System.Fabric.Description.ConfigurationSection;
 
     /// <summary>
-    /// Mock implementation of the sections
+    /// Mock implementation of the sections.
     /// </summary>
     public class MockConfigurationSections : KeyedCollection<string, ConfigurationSection>
     {

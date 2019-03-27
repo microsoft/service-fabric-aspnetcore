@@ -24,7 +24,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         ///
         /// 2. When endpointRef is provided (protocol and port comes from endpoint.) :
         ///   a. url given to Func to create IWebHost should be protocol://+:port.
-        ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId
+        ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId.
         ///
         /// </summary>
         [Fact]
@@ -40,7 +40,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// Tests Url for ServiceFabricIntegrationOptions.None
         /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
         ///   a. url given to Func to create IWebHost should be protocol://+:port.
-        ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port
+        ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port.
         ///
         /// </summary>
         [Fact]
