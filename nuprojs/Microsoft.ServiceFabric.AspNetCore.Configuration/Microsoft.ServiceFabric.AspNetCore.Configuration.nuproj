@@ -51,6 +51,12 @@
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Configuration.xml">
         <TargetPath>lib\net471</TargetPath>
       </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Configuration.dll">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.Configuration.xml">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
       <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.Configuration.dll">
         <TargetPath>lib\netstandard2.0</TargetPath>
       </File>
@@ -69,11 +75,14 @@
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.Configuration.dll">
         <TargetPath>runtimes\win\lib\net471</TargetPath>
       </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.Configuration.dll">
+        <TargetPath>runtimes\win\lib\net472</TargetPath>
+      </File>
     </ItemGroup>
     
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.Services">
-        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <Version>$(NugetPkg_Version_Microsoft_ServiceFabric_Services)</Version>
       </Dependency>
       <Dependency Include="Microsoft.Extensions.Configuration">
         <Version>1.0.0</Version>
