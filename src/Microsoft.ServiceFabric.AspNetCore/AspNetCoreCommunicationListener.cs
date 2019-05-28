@@ -14,6 +14,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Hosting.Server.Features;
+    using Microsoft.ServiceFabric.Services;
     using Microsoft.ServiceFabric.Services.Communication.Runtime;
 
     /// <summary>
@@ -48,6 +49,8 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             this.build = build;
             this.serviceContext = serviceContext;
             this.urlSuffix = string.Empty;
+
+            ServiceTelemetry.ASPNETCoreCommunicationListenerEvent(serviceContext);
         }
 
         /// <summary>
