@@ -82,7 +82,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             mockWebHost.Setup(y => y.ServerFeatures).Returns(featureColelction);
 
             // setup call backs for Start , Dispose.
-            mockWebHost.Setup(y => y.Start()).Callback(() => this.IsStarted = true);
+            mockWebHost.Setup(y => y.StartAsync(CancellationToken.None)).Callback(() => this.IsStarted = true);
             mockWebHost.Setup(y => y.Dispose()).Callback(() => this.IsStarted = false);
 
             // tell listener whether to generate UniqueServiceUrls
@@ -151,11 +151,11 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             this.Listener.OpenAsync(CancellationToken.None).GetAwaiter().GetResult();
             this.IsStarted.Should().BeTrue();
 
-            this.Listener.CloseAsync(CancellationToken.None);
+            this.Listener.CloseAsync(CancellationToken.None).GetAwaiter().GetResult();
             this.IsStarted.Should().BeFalse();
 
             // Open Abort
-            this.Listener.OpenAsync(CancellationToken.None);
+            this.Listener.OpenAsync(CancellationToken.None).GetAwaiter().GetResult();
             this.IsStarted.Should().BeTrue();
 
             this.Listener.Abort();
@@ -167,7 +167,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// </summary>
         protected void ExceptionForEndpointNotFoundVerifier()
         {
-            Action action = () => this.Listener.OpenAsync(CancellationToken.None);
+            Action action = () => this.Listener.OpenAsync(CancellationToken.None).GetAwaiter().GetResult();
             action.Should().Throw<InvalidOperationException>();
         }
     }

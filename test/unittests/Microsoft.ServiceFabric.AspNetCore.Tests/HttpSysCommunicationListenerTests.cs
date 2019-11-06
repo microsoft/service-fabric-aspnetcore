@@ -11,9 +11,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using Xunit;
 
     /// <summary>
-    /// Test class for WebListenerCommunicationListener.
+    /// Test class for HttpSysCommunicationListener.
     /// </summary>
-    public class WebListenerCommunicationListenerTests : AspNetCoreCommunicationListenerTests
+    public class HttpSysCommunicationListenerTests : AspNetCoreCommunicationListenerTests
     {
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
@@ -32,7 +32,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
             this.UseUniqueServiceUrlOptionVerifier();
         }
 
@@ -48,7 +48,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
             this.WithoutUseUniqueServiceUrlOptionVerifier();
         }
 
@@ -60,7 +60,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new WebListenerCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
 
             this.ListenerOpenCloseVerifier();
         }
@@ -71,7 +71,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         [Fact]
         public void ExceptionForEndpointNotFound()
         {
-            this.Listener = new WebListenerCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = new HttpSysCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => this.BuildFunc(uri, listen));
             this.ExceptionForEndpointNotFoundVerifier();
         }
 
@@ -83,7 +83,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             Action action =
                 () =>
-                    new WebListenerCommunicationListener(
+                    new HttpSysCommunicationListener(
                         TestMocksRepository.GetMockStatelessServiceContext(),
                         null,
                         this.BuildFunc);
@@ -91,7 +91,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 
             action =
                 () =>
-                    new WebListenerCommunicationListener(
+                    new HttpSysCommunicationListener(
                         TestMocksRepository.GetMockStatelessServiceContext(),
                         string.Empty,
                         this.BuildFunc);

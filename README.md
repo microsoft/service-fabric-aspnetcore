@@ -2,13 +2,12 @@
 
 This repo contains ASP.NET Core integration for Service Fabric Reliable Services.
 
-The `Microsoft.ServiceFabric.Services.AspNetCore.*` NuGet packages contain implementations of `ICommunicationListener` that start the ASP.NET Core web host for either Kestrel or WebListener in a Service Fabric Reliable Service. The `ICommunicationListener` allows you to configure `IWebHost`, and then it manages its lifetime.
+The `Microsoft.ServiceFabric.Services.AspNetCore.*` NuGet packages contain implementations of `ICommunicationListener` that start the ASP.NET Core web host for either Kestrel or HttpSys in a Service Fabric Reliable Service. The `ICommunicationListener` allows you to configure `IWebHost`, and then it manages its lifetime.
 
 This repo builds the following packages:
 -	Microsoft.ServiceFabric.AspNetCore.Abstractions
 -	Microsoft.ServiceFabric.AspNetCore.HttpSys
 -	Microsoft.ServiceFabric.AspNetCore.Kestrel
--	Microsoft.ServiceFabric.AspNetCore.WebListener
 -   Microsoft.ServiceFabric.AspNetCore.Configuration
 
 These packages are documented [here](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-communication-aspnetcore).

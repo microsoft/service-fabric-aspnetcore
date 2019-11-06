@@ -6,11 +6,10 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
     using System;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
-    /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or WebListener.
+    /// A middleware to be used with Service Fabric stateful and stateless services hosted in Kestrel or HttpSys.
     /// This middleware automatically adds X-ServiceFabric ResourceNotFound header, required by the Service Fabric Reverse Proxy, when 404 status code is returned.
     /// </summary>
     public class ServiceFabricReverseProxyIntegrationMiddleware
@@ -53,8 +52,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                     context.Response.Headers[XServiceFabricHeader] = XServiceFabricResourceNotFoundValue;
                 }
 
-                // TODO: When upgraded to .NET Standard 2.0 replace with Task.CompletedTask to avoid unnecessary allocation
-                return Task.FromResult<object>(null);
+                return Task.CompletedTask;
             });
 
             return this.next(context);

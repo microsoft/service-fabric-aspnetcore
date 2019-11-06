@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <!-- List of .csproj to build -->
+    <Projects_Prod Include="$(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj;
+                                   $(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.csproj;
+                                   $(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.csproj;
+                                   $(RepoRoot)src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj" />
+    
+    <Projects_Test Include="$(RepoRoot)test\unittests\Microsoft.ServiceFabric.AspNetCore.Tests\Microsoft.ServiceFabric.AspNetCore.Tests.csproj"  />
+    
+  </ItemGroup>
+
+
+  <!--Targets for prod code -->
+  <Target Name="RestorePackagesProd">
+    <!-- Restores nuget packages and project specific tools -->
+    <MSBuild Projects ="@(Projects_Prod)" ContinueOnError ="false" Targets="restore" Properties="Verbosity=quiet"/>
+  </Target>
+  
+  <Target Name="BuildProd">
+    <Message Text="Building all projects ..." Importance="High"/>
+    <MSBuild Projects ="@(Projects_Prod)" ContinueOnError ="false" Properties="Configuration=$(Configuration)" BuildInParallel="true"/>
+  </Target>
+
+  <Target Name="CleanProd">
+    <MSBuild Projects ="@(Projects_Prod)" ContinueOnError ="false" Targets="Clean" Properties="Configuration=$(Configuration)"/>
+  </Target>
+
+
+  <!--Targets for test code -->
+  <Target Name="RestorePackagesTest">
+    <!-- Restores nuget packages and project specific tools -->
+    <MSBuild Projects ="@(Projects_Test)" ContinueOnError ="false" Targets="restore"/>
+  </Target>
+
+  <Target Name="BuildTest">
+    <Message Text="Building all test projects ..." Importance="High"/>
+    <MSBuild Projects ="@(Projects_Test)" ContinueOnError ="false" Properties="Configuration=$(Configuration)" BuildInParallel="true"/>
+  </Target>
+
+  <!-- Target for cleaning test projects. -->
+  <Target Name="CleanTest">
+    <!-- Clean -->
+    <MSBuild Projects ="@(Projects_Test)" ContinueOnError ="false" Targets="Clean" Properties="Configuration=$(Configuration)"/>
+  </Target>
+
+  <!-- Copy prod binaries -->
+  <Target Name="CopyProdBinaries">
+    <Message Text="Copying binaries to drop folder ..." Importance="High"/>
+    <ItemGroup>
+      <BinairesNetStandard Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.*"/>
+      <BinairesNetStandard Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
+      <BinairesNetStandard Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
+      <BinairesNetStandard Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(BinairesNetStandard)" DestinationFiles="@(BinairesNetStandard->'$(DropFolderNetStandard)\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+   
+</Project>

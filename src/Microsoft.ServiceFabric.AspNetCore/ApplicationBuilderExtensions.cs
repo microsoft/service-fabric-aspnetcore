@@ -6,10 +6,6 @@
 namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Builder;
 
     /// <summary>
@@ -19,7 +15,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     {
         /// <summary>
         /// Extension method to use ServiceFabricMiddleware for Service Fabric stateful or stateless service
-        /// using Kestrel or WebListener as WebServer.
+        /// using Kestrel or HttpSys as WebServer.
         /// </summary>
         /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
         /// <param name="urlSuffix">Url suffix to determine if the request is meant for current partition and replica.</param>
@@ -41,7 +37,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 
         /// <summary>
         /// Extension method to use ServiceFabricReverseProxyIntegrationMiddleware for Service Fabric stateful or stateless service
-        /// using Kestrel or WebListener as WebServer.
+        /// using Kestrel or HttpSys as WebServer.
         /// </summary>
         /// <param name="builder">Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
         /// <returns>IApplicationBuilder instance.</returns>
