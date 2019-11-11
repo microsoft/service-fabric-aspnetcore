@@ -31,7 +31,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             }
 
             // Check if 'UseServiceFabricIntegration' has already been called.
-            if (hostBuilder.GetSetting(SettingName) != null && hostBuilder.GetSetting(SettingName).Equals(true.ToString(), StringComparison.Ordinal))
+            if (hostBuilder.GetSetting(SettingName) == true.ToString())
             {
                 return hostBuilder;
             }

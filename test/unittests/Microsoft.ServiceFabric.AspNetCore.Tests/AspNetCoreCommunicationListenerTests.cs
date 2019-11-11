@@ -104,7 +104,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         protected void UseUniqueServiceUrlOptionVerifier()
         {
             this.IntegrationOptions = ServiceFabricIntegrationOptions.UseUniqueServiceUrl;
-            var expectedProtocol = ExpectedProtocolFromEndpoint.ToString().ToLower();
+            var expectedProtocol = ExpectedProtocolFromEndpoint.ToString().ToLowerInvariant();
             var expectedPort = DefaultExpectedPort;
 
             Console.WriteLine("Starting Verification of urls with UseUniqueServiceUrl option when endpoint ref is provided");
@@ -128,7 +128,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         protected void WithoutUseUniqueServiceUrlOptionVerifier()
         {
             this.IntegrationOptions = ServiceFabricIntegrationOptions.None;
-            var expectedProtocol = ExpectedProtocolFromEndpoint.ToString().ToLower();
+            var expectedProtocol = ExpectedProtocolFromEndpoint.ToString().ToLowerInvariant();
             var expectedPort = DefaultExpectedPort;
 
             Console.WriteLine("Starting Verification of urls with UseUniqueServiceUrl option when endpoint ref is provided");

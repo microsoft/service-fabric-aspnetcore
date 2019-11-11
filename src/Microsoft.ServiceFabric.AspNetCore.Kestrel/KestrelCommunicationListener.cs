@@ -42,7 +42,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         public KestrelCommunicationListener(ServiceContext serviceContext, string endpointName, Func<string, AspNetCoreCommunicationListener, IWebHost> build)
             : base(serviceContext, build)
         {
-            if (endpointName != null && endpointName.Equals(string.Empty))
+            if (endpointName?.Length == 0)
             {
                 throw new ArgumentException(SR.EndpointNameEmptyExceptionMessage);
             }
@@ -67,7 +67,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 listenUrl = string.Format(
                     CultureInfo.InvariantCulture,
                     "{0}://+:{1}",
-                    serviceEndpoint.Protocol.ToString().ToLower(),
+                    serviceEndpoint.Protocol.ToString().ToLowerInvariant(),
                     serviceEndpoint.Port);
             }
 

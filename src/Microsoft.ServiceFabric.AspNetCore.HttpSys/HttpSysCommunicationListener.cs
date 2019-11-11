@@ -44,7 +44,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             var listenUrl = string.Format(
                 CultureInfo.InvariantCulture,
                 "{0}://+:{1}",
-                serviceEndpoint.Protocol.ToString().ToLower(),
+                serviceEndpoint.Protocol.ToString().ToLowerInvariant(),
                 serviceEndpoint.Port);
 
             return listenUrl;

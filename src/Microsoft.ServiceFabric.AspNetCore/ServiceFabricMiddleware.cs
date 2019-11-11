@@ -57,7 +57,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new ArgumentNullException("context");
             }
 
-            if (this.urlSuffix.Equals(string.Empty))
+            if (this.urlSuffix.Length == 0)
             {
                 // when urlSuffix is empty string, just call the next middleware in pipeline.
                 await this.next(context);

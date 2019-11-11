@@ -45,15 +45,18 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new ArgumentNullException(nameof(context));
             }
 
-            context.Response.OnStarting(() =>
-            {
-                if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+            context.Response.OnStarting(
+                state =>
                 {
-                    context.Response.Headers[XServiceFabricHeader] = XServiceFabricResourceNotFoundValue;
-                }
+                    var response = (HttpResponse)state;
+                    if (response.StatusCode == StatusCodes.Status404NotFound)
+                    {
+                        response.Headers[XServiceFabricHeader] = XServiceFabricResourceNotFoundValue;
+                    }
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                },
+                context.Response);
 
             return this.next(context);
         }
