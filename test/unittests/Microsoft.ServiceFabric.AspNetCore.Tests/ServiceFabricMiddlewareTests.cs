@@ -84,16 +84,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         }
 
         /// <summary>
-        /// Verify next RequestDelegate invocation when Path is valid.
-        /// </summary>
-        [Fact]
-        public void VerifyNextInvocatioWithoutUrlSuffix()
-        {
-            // do not configure listener useUniqueServiceUrl
-            this.VerifyNextInvocation();
-        }
-
-        /// <summary>
         /// Verify Path and PathBase in next RequestDelegate invocation.
         /// </summary>
         [Fact]
@@ -106,21 +96,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         }
 
         /// <summary>
-        /// Verify Path and PathBase in next RequestDelegate invocation.
-        /// </summary>
-        [Fact]
-        public void VerifyPathsInNextInvocationWithoutUrlSuffix()
-        {
-            // do not configure listener useUniqueServiceUrl
-            // In this case urlSuffix will be empty
-            this.VerifyPathsInNextInvocation();
-        }
-
-        /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        [Fact]
-        public void VerifyNextInvocation()
+        private void VerifyNextInvocation()
         {
             var nextCalled = false;
 

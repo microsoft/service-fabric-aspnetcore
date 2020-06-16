@@ -36,6 +36,11 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new ArgumentNullException("urlSuffix");
             }
 
+            if (urlSuffix == string.Empty)
+            {
+                throw new ArgumentException("urlSuffix is empty");
+            }
+
             return builder.UseMiddleware<ServiceFabricMiddleware>(urlSuffix);
         }
 
