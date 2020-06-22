@@ -42,11 +42,6 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new ArgumentNullException("urlSuffix");
             }
 
-            if (urlSuffix == string.Empty)
-            {
-                throw new ArgumentException("urlSuffix is empty");
-            }
-
             this.urlSuffix = urlSuffix;
             this.next = next;
         }
@@ -63,36 +58,44 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new ArgumentNullException("context");
             }
 
-            // If this middleware is enabled by specifying UseServiceFabricIntegration(), CommunicationListnerBehavior is:
-            //   With ServiceFabricIntegrationOptions.UseUniqueServiceUrl (urlSuffix is /PartitionId/ReplicaOrInstanceId)
-            //      - Url given to WebServer is http://+:port
-            //      - Url given to Service Fabric Runtime is http://ip:port/PartitionId/ReplicaOrInstanceId
-
-            // Since when registering with IWebHost, only http://+:port is provided:
-            //    - HttpRequest.Path contains everything in url after http://+:port, and it must start with urlSuffix
-
-            // So short circuit and return StatusCode 410 if (message isn't intended for this replica,):
-            //    - HttpRequest.Path doesn't start with urlSuffix
-            if (!context.Request.Path.StartsWithSegments(this.urlSuffix, out var matchedPath, out var remainingPath))
+            if (this.urlSuffix.Equals(string.Empty))
             {
-                context.Response.StatusCode = StatusCodes.Status410Gone;
-                return;
-            }
-
-            // All good, change Path, PathBase and call next middleware in the pipeline
-            var originalPath = context.Request.Path;
-            var originalPathBase = context.Request.PathBase;
-            context.Request.Path = remainingPath;
-            context.Request.PathBase = originalPathBase.Add(matchedPath);
-
-            try
-            {
+                // when urlSuffix is empty string, just call the next middleware in pipeline.
                 await this.next(context);
             }
-            finally
+            else
             {
-                context.Request.Path = originalPath;
-                context.Request.PathBase = originalPathBase;
+                // If this middleware is enabled by specifying UseServiceFabricIntegration(), CommunicationListnerBehavior is:
+                //   With ServiceFabricIntegrationOptions.UseUniqueServiceUrl (urlSuffix is /PartitionId/ReplicaOrInstanceId)
+                //      - Url given to WebServer is http://+:port
+                //      - Url given to Service Fabric Runtime is http://ip:port/PartitionId/ReplicaOrInstanceId
+
+                // Since when registering with IWebHost, only http://+:port is provided:
+                //    - HttpRequest.Path contains everything in url after http://+:port, and it must start with urlSuffix
+
+                // So short circuit and return StatusCode 410 if (message isn't intended for this replica,):
+                //    - HttpRequest.Path doesn't start with urlSuffix
+                if (!context.Request.Path.StartsWithSegments(this.urlSuffix, out var matchedPath, out var remainingPath))
+                {
+                    context.Response.StatusCode = StatusCodes.Status410Gone;
+                    return;
+                }
+
+                // All good, change Path, PathBase and call next middleware in the pipeline
+                var originalPath = context.Request.Path;
+                var originalPathBase = context.Request.PathBase;
+                context.Request.Path = remainingPath;
+                context.Request.PathBase = originalPathBase.Add(matchedPath);
+
+                try
+                {
+                    await this.next(context);
+                }
+                finally
+                {
+                    context.Request.Path = originalPath;
+                    context.Request.PathBase = originalPathBase;
+                }
             }
         }
     }

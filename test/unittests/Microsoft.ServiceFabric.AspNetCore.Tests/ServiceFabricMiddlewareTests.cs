@@ -59,10 +59,10 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             this.listener.ConfigureToUseUniqueServiceUrl();
             var middleware = new ServiceFabricMiddleware(
                 (httpContext) =>
-            {
-                nextCalled = true;
-                return Task.FromResult(true);
-            }, this.listener.UrlSuffix);
+                {
+                    nextCalled = true;
+                    return Task.FromResult(true);
+                }, this.listener.UrlSuffix);
 
             // send a request in which Path is different than urlSuffix
             this.httpContext.Request.Path = this.listener.UrlSuffix + "xyz";
@@ -84,6 +84,16 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         }
 
         /// <summary>
+        /// Verify next RequestDelegate invocation when Path is valid.
+        /// </summary>
+        [Fact]
+        public void VerifyNextInvocatioWithoutUrlSuffix()
+        {
+            // do not configure listener useUniqueServiceUrl
+            this.VerifyNextInvocation();
+        }
+
+        /// <summary>
         /// Verify Path and PathBase in next RequestDelegate invocation.
         /// </summary>
         [Fact]
@@ -96,20 +106,32 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         }
 
         /// <summary>
+        /// Verify Path and PathBase in next RequestDelegate invocation.
+        /// </summary>
+        [Fact]
+        public void VerifyPathsInNextInvocationWithoutUrlSuffix()
+        {
+            // do not configure listener useUniqueServiceUrl
+            // In this case urlSuffix will be empty
+            this.VerifyPathsInNextInvocation();
+        }
+
+        /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        private void VerifyNextInvocation()
+        [Fact]
+        public void VerifyNextInvocation()
         {
             var nextCalled = false;
 
             var middleware = new ServiceFabricMiddleware(
                 (httpContext) =>
-            {
-                nextCalled = true;
-                Console.WriteLine("In Next Request Delegate: HttpRequest.Path: " + httpContext.Request.Path);
-                Console.WriteLine("In Next Request Delegate: HttpRequest.PathBase: " + httpContext.Request.PathBase);
-                return Task.FromResult(true);
-            }, this.listener.UrlSuffix);
+                {
+                    nextCalled = true;
+                    Console.WriteLine("In Next Request Delegate: HttpRequest.Path: " + httpContext.Request.Path);
+                    Console.WriteLine("In Next Request Delegate: HttpRequest.PathBase: " + httpContext.Request.PathBase);
+                    return Task.FromResult(true);
+                }, this.listener.UrlSuffix);
 
             // send a request in which Path is same as urlSuffix
             Console.WriteLine("UrlSuffix is: " + this.listener.UrlSuffix);
@@ -134,15 +156,15 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 
             var middleware = new ServiceFabricMiddleware(
                 (httpContext) =>
-            {
-                pathInNext = httpContext.Request.Path;
-                pathBaseInNext = httpContext.Request.PathBase;
-                Console.WriteLine("In Next Request Delegate: HttpRequest.Path: " + httpContext.Request.Path);
-                Console.WriteLine("In Next Request Delegate: HttpRequest.PathBase: " + httpContext.Request.PathBase);
+                {
+                    pathInNext = httpContext.Request.Path;
+                    pathBaseInNext = httpContext.Request.PathBase;
+                    Console.WriteLine("In Next Request Delegate: HttpRequest.Path: " + httpContext.Request.Path);
+                    Console.WriteLine("In Next Request Delegate: HttpRequest.PathBase: " + httpContext.Request.PathBase);
 
-                nextCalled = true;
-                return Task.FromResult(true);
-            }, this.listener.UrlSuffix);
+                    nextCalled = true;
+                    return Task.FromResult(true);
+                }, this.listener.UrlSuffix);
 
             // send a request in which Path is different than urlSuffix, but has extra segment after it.
             // This extra segment should become Path for next delegate, and Path should become PathBase for next delegate.
