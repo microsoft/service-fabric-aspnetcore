@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\properties\service_fabric_managed_common.props" />
   <Import Project="..\..\..\properties\service_fabric_managed_stylecop.props" />
   <PropertyGroup>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.Tests</AssemblyName>
     <RootNamespace>Microsoft.ServiceFabric.AspNetCore.Tests</RootNamespace>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -14,10 +13,7 @@
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="$(NugetPkg_Version_Microsoft_ServiceFabric_Services)" />
     <PackageReference Include="Moq" Version="4.13.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.console" Version="2.4.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

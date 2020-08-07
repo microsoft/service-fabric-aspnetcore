@@ -23,7 +23,11 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         {
             return app =>
             {
-                app.UseServiceFabricMiddleware(this.urlSuffix);
+                if (!string.IsNullOrEmpty(this.urlSuffix))
+                {
+                    app.UseServiceFabricMiddleware(this.urlSuffix);
+                }
+
                 if (this.options.HasFlag(ServiceFabricIntegrationOptions.UseReverseProxyIntegration))
                 {
                     app.UseServiceFabricReverseProxyIntegrationMiddleware();
