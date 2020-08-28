@@ -10,7 +10,7 @@
   <PropertyGroup>
     <Authors>Microsoft</Authors>
     <Owners>Microsoft,ServiceFabric</Owners>
-    <ProjectUrl>http://aka.ms/servicefabric</ProjectUrl>
+    <ProjectUrl>https://github.com/microsoft/service-fabric-aspnetcore/</ProjectUrl>
     <LicenseUrl>http://www.microsoft.com/web/webpi/eula/net_library_eula_ENU.htm</LicenseUrl>
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
     <RequireLicenseAcceptance>True</RequireLicenseAcceptance>
