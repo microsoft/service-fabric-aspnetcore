@@ -23,14 +23,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
 
             this.context.ConfigurationPackageModifiedEvent += (sender, e) =>
             {
-                this.LoadPackage(e.NewPackage, reload: true);
-                this.OnReload(); // Notify the change
+                this.HandleNewPackage(e.NewPackage);
             };
 
             this.context.ConfigurationPackageAddedEvent += (sender, e) =>
             {
-                this.LoadPackage(e.Package, reload: true);
-                this.OnReload(); // Notify the change
+                this.HandleNewPackage(e.Package);
             };
         }
 
@@ -41,6 +39,16 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
         {
             var config = this.context.GetConfigurationPackageObject(this.options.PackageName);
             this.LoadPackage(config);
+        }
+
+        private void HandleNewPackage(ConfigurationPackage package)
+        {
+            // Load configuration from new package only if it is the ConfigPackage mapped to this provider
+            if (package.Description.Name == this.options.PackageName)
+            {
+                this.LoadPackage(package, reload: true);
+                this.OnReload(); // Notify the change
+            }
         }
 
         private void LoadPackage(ConfigurationPackage config, bool reload = false)
