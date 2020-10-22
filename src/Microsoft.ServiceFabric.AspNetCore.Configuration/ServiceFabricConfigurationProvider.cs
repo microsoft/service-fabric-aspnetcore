@@ -42,9 +42,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
         }
 
         /// <summary>
-        /// Handle loading of a new package provided by a ConfigurationPackageModifiedEvent or a ConfigurationPackageAddedEvent
+        /// Handle loading of a new package provided by a ConfigurationPackageModifiedEvent or a ConfigurationPackageAddedEvent.
         /// </summary>
-        /// <param name="package">The new package to load from</param>
+        /// <param name="package">The new package to load from.</param>
         private void HandleNewPackage(ConfigurationPackage package)
         {
             if (package.Description is null)
