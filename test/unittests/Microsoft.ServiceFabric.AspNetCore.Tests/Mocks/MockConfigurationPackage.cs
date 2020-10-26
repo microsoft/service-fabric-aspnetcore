@@ -19,9 +19,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var package = TestHelper.CreateInstanced<ConfigurationPackage>();
             var settings = TestHelper.CreateInstanced<ConfigurationSettings>();
+            var desc = TestHelper.CreateInstanced<ConfigurationPackageDescription>();
             var basePath = Environment.CurrentDirectory;
+            desc.Set("Name", packageName);
             package.Set("Settings", settings);
-            package.Set("Path", $"{basePath}\\PackageRoot\\Config\\");
+            package.Set("Path", $"{basePath}\\{packageName}\\PackageRoot\\Config\\");
+            package.Set("Description", desc);
 
             var section = TestHelper.CreateInstanced<System.Fabric.Description.ConfigurationSection>();
             settings.Set(nameof(ConfigurationSettings.Sections), MockConfigurationSections.CreateDefault(config));

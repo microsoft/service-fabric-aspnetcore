@@ -166,10 +166,11 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// Triggers the configuration package modified event.
         /// </summary>
         /// <param name="configurationRoot">The configuration root.</param>
-        public void TriggerConfigurationPackageModifiedEvent(IConfigurationRoot configurationRoot)
+        /// <param name="packageName">The name of the package.</param>
+        public void TriggerConfigurationPackageModifiedEvent(IConfigurationRoot configurationRoot, string packageName)
         {
-            var oldPackage = this.GetConfigurationPackageObject("Config");
-            var newPackage = MockConfigurationPackage.CreateDefaultPackage(configurationRoot, "Config");
+            var oldPackage = this.GetConfigurationPackageObject(packageName);
+            var newPackage = MockConfigurationPackage.CreateDefaultPackage(configurationRoot, packageName);
             this.ConfigurationPackageModifiedEvent(this, new PackageModifiedEventArgs<ConfigurationPackage>() { OldPackage = oldPackage, NewPackage = newPackage });
         }
 

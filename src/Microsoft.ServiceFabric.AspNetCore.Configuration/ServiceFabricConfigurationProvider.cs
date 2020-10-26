@@ -23,14 +23,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
 
             this.context.ConfigurationPackageModifiedEvent += (sender, e) =>
             {
-                this.LoadPackage(e.NewPackage, reload: true);
-                this.OnReload(); // Notify the change
+                this.HandleNewPackage(e.NewPackage);
             };
 
             this.context.ConfigurationPackageAddedEvent += (sender, e) =>
             {
-                this.LoadPackage(e.Package, reload: true);
-                this.OnReload(); // Notify the change
+                this.HandleNewPackage(e.Package);
             };
         }
 
@@ -43,7 +41,31 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
             this.LoadPackage(config);
         }
 
-        private void LoadPackage(ConfigurationPackage config, bool reload = false)
+        /// <summary>
+        /// Handle loading of a new package provided by a ConfigurationPackageModifiedEvent or a ConfigurationPackageAddedEvent.
+        /// </summary>
+        /// <param name="package">The new package to load from.</param>
+        private void HandleNewPackage(ConfigurationPackage package)
+        {
+            if (package.Description is null)
+            {
+                throw new ArgumentNullException($"{nameof(package)}.Description", $"A valid Description must be provided with {nameof(package)}.");
+            }
+
+            // Load configuration from new package only if it is the ConfigPackage mapped to this provider
+            if (package.Description.Name == this.options.PackageName)
+            {
+                this.LoadPackage(package, reload: true);
+                this.OnReload(); // Notify the change
+            }
+        }
+
+        /// <summary>
+        /// Load and populate data from <paramref name="package"/>.
+        /// </summary>
+        /// <param name="package">The package to load from.</param>
+        /// <param name="reload">Whether or not to completely refresh <see cref="Data"/>.</param>
+        private void LoadPackage(ConfigurationPackage package, bool reload = false)
         {
             if (reload)
             {
@@ -51,7 +73,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Configuration
             }
 
             // call the delegate action to populate the Data
-            this.options.ConfigAction(config, this.Data);
+            this.options.ConfigAction(package, this.Data);
         }
     }
 }
