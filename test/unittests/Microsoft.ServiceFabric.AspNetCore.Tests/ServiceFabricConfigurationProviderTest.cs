@@ -7,7 +7,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
     using System.Collections.Generic;
-    using System.Fabric;
     using FluentAssertions;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
@@ -87,12 +86,14 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             config["Config:Section1:Gender"].Should().Be("M");
 
             // trigger config update
-            context.TriggerConfigurationPackageModifiedEvent(new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
+            context.TriggerConfigurationPackageModifiedEvent(
+                new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
                 { "Section1:Name", "Lele" },
                 { "Section1:Age", "3" },
                 { "Section1:Gender", "M" },
-            }).Build());
+            }).Build(),
+                "Config");
 
             config["Config:Section1:Name"].Should().Be("Lele");
             config["Config:Section1:Age"].Should().Be("3");
@@ -119,9 +120,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// Tests the multi configs.
         /// </summary>
         [Fact]
-        public void TestMultiConfigs()
+        public void TestMultiConfigsWithUpdate()
         {
-            // first configuration
+            // Case 1: Configuration is loaded correctly from multiple providers
             var contextConfig1 = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
                 { "SameSection:Name", "Xiaoxiao" },
@@ -129,7 +130,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 { "Section1:Gender", "M" },
             }).Build();
 
-            // 2nd configuration
             var contextConfig2 = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
                 { "SameSection:Name", "Lele" },
@@ -146,6 +146,25 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             config["Config1:SameSection:Name"].Should().Be("Xiaoxiao");
             config["Config1:Section1:Age"].Should().Be("6");
             config["Config1:Section1:Gender"].Should().Be("M");
+
+            config["Config2:SameSection:Name"].Should().Be("Lele");
+            config["Config2:Section2:Age"].Should().Be("3");
+            config["Config2:Section2:Gender"].Should().Be("M");
+
+            // Case 2: ServiceFabricConfigurationProvider only loads configuration from the ConfigPackage it is mapped to
+            //  (and does not load from other ConfigPackages) when a config update event is triggered
+            context.TriggerConfigurationPackageModifiedEvent(
+                new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
+            {
+                { "SameSection:Name", "Jill" },
+                { "Section1:Age", "30" },
+                { "Section1:Gender", "F" },
+            }).Build(),
+                "Config1");
+
+            config["Config1:SameSection:Name"].Should().Be("Jill");
+            config["Config1:Section1:Age"].Should().Be("30");
+            config["Config1:Section1:Gender"].Should().Be("F");
 
             config["Config2:SameSection:Name"].Should().Be("Lele");
             config["Config2:Section2:Age"].Should().Be("3");
@@ -233,10 +252,11 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             this.sectionCount = 0;
 
             // trigger config update
-            context.TriggerConfigurationPackageModifiedEvent(new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
+            context.TriggerConfigurationPackageModifiedEvent(
+                new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
             {
                 { "Section1:Name", "Lele" },
-            }).Build());
+            }).Build(), "Config");
 
             config["Section1:Name"].Should().Be("Lele");
             this.sectionCount.Should().Be(1);
