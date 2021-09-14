@@ -3,25 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2019
 VisualStudioVersion = 16.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnetstandard", "dotnetstandard", "{DFB5E99B-B17D-4FD4-8CA8-24C399606962}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnetframework", "dotnetframework", "{20F40AB7-34AB-4ECE-9206-EADCDF1147A0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore", "src\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj", "{A45918E1-6345-432E-AD6D-47DEEFB35661}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.HttpSys", "src\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.csproj", "{7BE05428-AD27-41CB-B01A-85821B69175F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Kestrel", "src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj", "{B80B46C9-759A-4C5B-8618-C7A45395D9A2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.WebListener", "src\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.csproj", "{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore_netstandard", "src\netstandard\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore_netstandard.csproj", "{E71C85DD-BCD2-4DE0-BC40-0915E019ABDC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.HttpSys_netstandard", "src\netstandard\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys_netstandard.csproj", "{97303DDD-02A0-480A-B1E6-CBB45675533D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Kestrel_netstandard", "src\netstandard\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel_netstandard.csproj", "{84EA0BAE-E5D9-4B0B-A1E4-0639078EE6D1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.WebListener_netstandard", "src\netstandard\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener_netstandard.csproj", "{D2A2C053-71A4-4582-94C4-DA4262C9BEF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BC6C4F04-5CED-4AB6-930B-3348145E6316}"
 EndProject
@@ -35,8 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Configuration", "src\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.csproj", "{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ServiceFabric.AspNetCore.Configuration_netstandard", "src\netstandard\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration_netstandard.csproj", "{0098591A-5F95-4BBA-A397-E6AAE9322742}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,26 +40,6 @@ Global
 		{B80B46C9-759A-4C5B-8618-C7A45395D9A2}.Debug|x64.Build.0 = Debug|x64
 		{B80B46C9-759A-4C5B-8618-C7A45395D9A2}.Release|x64.ActiveCfg = Release|x64
 		{B80B46C9-759A-4C5B-8618-C7A45395D9A2}.Release|x64.Build.0 = Release|x64
-		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}.Debug|x64.ActiveCfg = Debug|x64
-		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}.Debug|x64.Build.0 = Debug|x64
-		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}.Release|x64.ActiveCfg = Release|x64
-		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210}.Release|x64.Build.0 = Release|x64
-		{E71C85DD-BCD2-4DE0-BC40-0915E019ABDC}.Debug|x64.ActiveCfg = Debug|x64
-		{E71C85DD-BCD2-4DE0-BC40-0915E019ABDC}.Debug|x64.Build.0 = Debug|x64
-		{E71C85DD-BCD2-4DE0-BC40-0915E019ABDC}.Release|x64.ActiveCfg = Release|x64
-		{E71C85DD-BCD2-4DE0-BC40-0915E019ABDC}.Release|x64.Build.0 = Release|x64
-		{97303DDD-02A0-480A-B1E6-CBB45675533D}.Debug|x64.ActiveCfg = Debug|x64
-		{97303DDD-02A0-480A-B1E6-CBB45675533D}.Debug|x64.Build.0 = Debug|x64
-		{97303DDD-02A0-480A-B1E6-CBB45675533D}.Release|x64.ActiveCfg = Release|x64
-		{97303DDD-02A0-480A-B1E6-CBB45675533D}.Release|x64.Build.0 = Release|x64
-		{84EA0BAE-E5D9-4B0B-A1E4-0639078EE6D1}.Debug|x64.ActiveCfg = Debug|x64
-		{84EA0BAE-E5D9-4B0B-A1E4-0639078EE6D1}.Debug|x64.Build.0 = Debug|x64
-		{84EA0BAE-E5D9-4B0B-A1E4-0639078EE6D1}.Release|x64.ActiveCfg = Release|x64
-		{84EA0BAE-E5D9-4B0B-A1E4-0639078EE6D1}.Release|x64.Build.0 = Release|x64
-		{D2A2C053-71A4-4582-94C4-DA4262C9BEF7}.Debug|x64.ActiveCfg = Debug|x64
-		{D2A2C053-71A4-4582-94C4-DA4262C9BEF7}.Debug|x64.Build.0 = Debug|x64
-		{D2A2C053-71A4-4582-94C4-DA4262C9BEF7}.Release|x64.ActiveCfg = Release|x64
-		{D2A2C053-71A4-4582-94C4-DA4262C9BEF7}.Release|x64.Build.0 = Release|x64
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68}.Debug|x64.ActiveCfg = Debug|x64
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68}.Debug|x64.Build.0 = Debug|x64
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68}.Release|x64.ActiveCfg = Release|x64
@@ -84,28 +48,16 @@ Global
 		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}.Debug|x64.Build.0 = Debug|x64
 		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}.Release|x64.ActiveCfg = Release|x64
 		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780}.Release|x64.Build.0 = Release|x64
-		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Debug|x64.ActiveCfg = Debug|x64
-		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Debug|x64.Build.0 = Debug|x64
-		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Release|x64.ActiveCfg = Release|x64
-		{0098591A-5F95-4BBA-A397-E6AAE9322742}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DFB5E99B-B17D-4FD4-8CA8-24C399606962} = {0371241A-7255-4C77-AE01-00B80954DC23}
-		{20F40AB7-34AB-4ECE-9206-EADCDF1147A0} = {0371241A-7255-4C77-AE01-00B80954DC23}
-		{A45918E1-6345-432E-AD6D-47DEEFB35661} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
-		{7BE05428-AD27-41CB-B01A-85821B69175F} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
-		{B80B46C9-759A-4C5B-8618-C7A45395D9A2} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
-		{4B0C49A1-C3C1-4CD7-BD3F-B6AC6B5FD210} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
-		{E71C85DD-BCD2-4DE0-BC40-0915E019ABDC} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
-		{97303DDD-02A0-480A-B1E6-CBB45675533D} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
-		{84EA0BAE-E5D9-4B0B-A1E4-0639078EE6D1} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
-		{D2A2C053-71A4-4582-94C4-DA4262C9BEF7} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
+		{A45918E1-6345-432E-AD6D-47DEEFB35661} = {0371241A-7255-4C77-AE01-00B80954DC23}
+		{7BE05428-AD27-41CB-B01A-85821B69175F} = {0371241A-7255-4C77-AE01-00B80954DC23}
+		{B80B46C9-759A-4C5B-8618-C7A45395D9A2} = {0371241A-7255-4C77-AE01-00B80954DC23}
 		{F9D9E1BB-212D-4785-8E1E-8427355AAF68} = {BC6C4F04-5CED-4AB6-930B-3348145E6316}
-		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780} = {20F40AB7-34AB-4ECE-9206-EADCDF1147A0}
-		{0098591A-5F95-4BBA-A397-E6AAE9322742} = {DFB5E99B-B17D-4FD4-8CA8-24C399606962}
+		{99AEA1AC-AA3B-426D-A0BE-2B2FAB68C780} = {0371241A-7255-4C77-AE01-00B80954DC23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CDABF99-A026-479B-B672-736D0A8C9A37}

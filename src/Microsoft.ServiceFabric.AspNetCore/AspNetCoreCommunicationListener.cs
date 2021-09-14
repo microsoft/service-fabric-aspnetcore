@@ -91,14 +91,13 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task">Task</see> that represents outstanding operation.
         /// </returns>
-        public virtual Task CloseAsync(CancellationToken cancellationToken)
+        public virtual async Task CloseAsync(CancellationToken cancellationToken)
         {
             if (this.webHost != null)
             {
+                await this.webHost.StopAsync(cancellationToken);
                 this.webHost.Dispose();
             }
-
-            return Task.FromResult(true);
         }
 
         /// <summary>
@@ -110,7 +109,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// A <see cref="System.Threading.Tasks.Task">Task</see> that represents outstanding operation. The result of the Task is
         /// is endpoint string on which IWebHost is listening.
         /// </returns>
-        public virtual Task<string> OpenAsync(CancellationToken cancellationToken)
+        public virtual async Task<string> OpenAsync(CancellationToken cancellationToken)
         {
             this.webHost = this.build(this.GetListenerUrl(), this);
 
@@ -119,7 +118,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new InvalidOperationException(SR.WebHostNullExceptionMessage);
             }
 
-            this.webHost.Start();
+            await this.webHost.StartAsync(cancellationToken);
 
             // AspNetCore 1.x returns http://+:port
             // AspNetCore 2.0 returns http://[::]:port
@@ -147,7 +146,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             //    - modify Path and PathBase in Microsoft.AspNetCore.Http.HttpRequest to be sent correctly to the service code.
             url = url.TrimEnd(new[] { '/' }) + this.UrlSuffix;
 
-            return Task.FromResult(url);
+            return url;
         }
 
         /// <summary>

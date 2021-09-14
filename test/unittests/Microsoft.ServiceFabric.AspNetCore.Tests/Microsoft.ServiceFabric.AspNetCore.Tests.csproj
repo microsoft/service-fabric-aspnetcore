@@ -1,9 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <Import Project="..\..\..\properties\service_fabric_managed_netstandard.props" />
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\properties\service_fabric_managed_common.props" />
   <Import Project="..\..\..\properties\service_fabric_managed_stylecop.props" />
   <PropertyGroup>
-    <ProjectGuid>{F9D9E1BB-212D-4785-8E1E-8427355AAF68}</ProjectGuid>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.Tests</AssemblyName>
     <RootNamespace>Microsoft.ServiceFabric.AspNetCore.Tests</RootNamespace>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -11,9 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.9.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="$(NugetPkg_Version_Microsoft_ServiceFabric_Services)" />
     <PackageReference Include="Moq" Version="4.13.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -24,8 +21,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\netstandard\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration_netstandard.csproj" />
-    <ProjectReference Include="..\..\..\src\netstandard\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel_netstandard.csproj" />
-    <ProjectReference Include="..\..\..\src\netstandard\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener_netstandard.csproj" />
+    <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.csproj" />
+    <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.csproj" />
+    <ProjectReference Include="..\..\..\src\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.csproj" />
   </ItemGroup>
 </Project>

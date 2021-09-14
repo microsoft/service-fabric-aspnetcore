@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <Import Project="..\..\properties\service_fabric_managed_netframework.props" />
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\properties\service_fabric_managed_common.props" />
   <Import Project="..\..\properties\service_fabric_managed_stylecop.props" />
   <PropertyGroup>
-    <ProjectGuid>{B80B46C9-759A-4C5B-8618-C7A45395D9A2}</ProjectGuid>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.Kestrel</AssemblyName>
     <RootNamespace>Microsoft.ServiceFabric.Services.Communication.AspNetCore</RootNamespace>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
     <PackageReference Include="Microsoft.ServiceFabric" Version="$(NugetPkg_Version_Microsoft_ServiceFabric)" />
   </ItemGroup>
   <ItemGroup>

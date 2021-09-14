@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="RebuildAll" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="properties\service_fabric_common.props" />
-  <Import Project="properties\service_fabric_managed_netstandard.targets" />
-  <Import Project="properties\service_fabric_managed_netframework.targets" />
+  <Import Project="properties\service_fabric_managed.targets" />
   <Import Project="properties\service_fabric_nuget.targets" />
 
 
@@ -16,7 +15,7 @@
     <Message Text="SUCCESS!  Generated binaries and packages are dropped at $(CurrentDir)drop\$(Configuration)" Importance="High"/>
   </Target>
 
-  <Target Name="BuildAll" DependsOnTargets="RestorePackagesProd;RestorePackagesTest;BuildProd;BuildTest;CopyProdBinaries;GenerateNugetPackages">
+  <Target Name="BuildAll" DependsOnTargets="RestorePackagesProd;RestorePackagesTest;BuildProd;BuildTest;CopyProdBinaries;GenerateNugetPackages_Prod">
     <Message Text="SUCCESS!  Generated binaries and packages are dropped at $(CurrentDir)drop\$(Configuration)" Importance="High"/>
   </Target>
 
@@ -27,41 +26,8 @@
 
   <!-- Generates nuget packages from the build, this target doesn't builds code, build must have been done before invoking this target.
        This allows signing of binaires after build and consuming them in nuget packages. -->
-  <Target Name="GeneratePackages" DependsOnTargets="GenerateNugetPackages">
+  <Target Name="GeneratePackages" DependsOnTargets="GenerateNugetPackages_Prod">
     <Message Text="SUCCESS!  Generated packages are dropped at $(CurrentDir)drop\$(Configuration)" Importance="High"/>
-  </Target>
-
-
-  <!-- Targets to Restore packages and project tools -->
-  <Target Name="RestorePackagesProd">
-    <CallTarget Targets="RestoreProd_netframework;RestoreProd_netstandard;" />
-  </Target>
-
-  <Target Name="RestorePackagesTest">
-    <CallTarget Targets="RestoreTest_netframework" />
-  </Target>
-
-  <!--Target for building product code. -->
-  <Target Name="BuildProd">
-    <Message Text="Building all projects ..." Importance="High"/>
-    <CallTarget Targets="BuildProd_netframework;BuildProd_netstandard;" />
-  </Target>
-
-  <!--Target for copying product binaries to drop. -->
-  <Target Name="CopyProdBinaries">
-    <Message Text="Copying binaries to drop folder ..." Importance="High"/>
-    <CallTarget Targets="CopyProdBinaries_netframework;CopyProdBinaries_netstandard;" />
-  </Target>
-
-  <!--Target for generating nuget packages. -->
-  <Target Name="GenerateNugetPackages">
-    <CallTarget Targets="GenerateNugetPackages_Prod" />
-  </Target>
-
-  <!--Target for building test code. -->
-  <Target Name="BuildTest">
-    <Message Text="Building all test projects ..." Importance="High"/>
-    <CallTarget Targets="BuildTest_netframework" />
   </Target>
 
   <!--Targets for cleaning product and test code. -->
@@ -80,13 +46,5 @@
 
     <Message Text="Cleaning all projects ..."/>
     <CallTarget Targets="CleanProd;CleanTest" />
-  </Target>
-
-  <Target Name="CleanProd">
-    <CallTarget Targets="CleanProd_netframework;CleanProd_netstandard" />
-  </Target>
-
-  <Target Name="CleanTest">
-    <CallTarget Targets="CleanTest_netframework" />
   </Target>
 </Project>

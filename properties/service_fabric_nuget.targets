@@ -6,7 +6,6 @@
                      $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.nuproj;
                      $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.nuproj;
                      $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.nuproj;
-                     $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\Microsoft.ServiceFabric.AspNetCore.WebListener.nuproj;
                      $(RepoRoot)nuprojs\SF.AspNetCore.Internal\SF.AspNetCore.Internal.nuproj;"/>
     
     <!-- List of packages.config to restore nuget packages -->
@@ -26,7 +25,6 @@
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Configuration.*.nupkg"/>
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.HttpSys.*.nupkg"/>
       <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*.nupkg"/>
-      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.WebListener\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.WebListener.*.nupkg"/>
       <Nupkgs Include="nuprojs\SF.AspNetCore.Internal\$(OutputPath)\SF.AspNetCore.Internal.*.nupkg"/>
     </ItemGroup>
     <Copy SourceFiles="@(Nupkgs)" DestinationFiles="@(Nupkgs->'$(NugetPackageDropFolder)\%(Destination)\%(Filename)%(Extension)')" />

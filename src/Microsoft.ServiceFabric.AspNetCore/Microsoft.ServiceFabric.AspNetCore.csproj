@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <Import Project="..\..\properties\service_fabric_managed_netframework.props" />
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\properties\service_fabric_managed_common.props" />
   <Import Project="..\..\properties\service_fabric_managed_stylecop.props" />
   <PropertyGroup>
-    <ProjectGuid>{A45918E1-6345-432E-AD6D-47DEEFB35661}</ProjectGuid>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore</AssemblyName>
     <RootNamespace>Microsoft.ServiceFabric.Services.Communication.AspNetCore</RootNamespace>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.1.0" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="$(NugetPkg_Version_Microsoft_ServiceFabric_Services)" />
   </ItemGroup>
   <ItemGroup>
