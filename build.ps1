@@ -60,6 +60,8 @@ if($MSBuildFullPath -eq "")
     }
 }
 
+$MSBuildFullPath = "C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\MSBuild.exe"
+
 if (!(Test-Path $MSBuildFullPath))
 {
     throw "Unable to find MSBuild installed on this machine. Please install Visual Studio 2019 or if its installed at non-default location, provide the full ppath to msbuild using -MSBuildFullPath parameter."

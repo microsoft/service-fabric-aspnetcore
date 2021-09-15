@@ -222,9 +222,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 {
                     options.ConfigAction = (package, configData) =>
                     {
-                        ILogger logger = new ConsoleLogger("Test", null, false);
-                        logger.LogInformation($"Config Update for package {package.Path} started");
-
+                        // logger = new ConsoleLogger("Test", null, false);
+                        // logger.LogInformation($"Config Update for package {package.Path} started");
                         foreach (var section in package.Settings.Sections)
                         {
                             this.sectionCount++;
@@ -236,7 +235,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                             }
                         }
 
-                        logger.LogInformation($"Config Update for package {package.Path} finished");
+                        // logger.LogInformation($"Config Update for package {package.Path} finished");
                     };
 
                     options.IncludePackageName = false;

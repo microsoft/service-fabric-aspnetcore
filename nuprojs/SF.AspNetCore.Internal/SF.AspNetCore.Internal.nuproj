@@ -14,9 +14,17 @@
     <Import Project="$(NuProjPath)\NuProj.targets" />
 
     <ItemGroup>
+      <File Include="$(DropFolderNetFramework)*.*">
+        <TargetPath>lib\netframework</TargetPath>
+      </File>
       <File Include="$(DropFolderNetStandard)*.*">
         <TargetPath>lib\netstandard</TargetPath>
       </File>
-      
+      <File Include="$(DropFolderNet5)*.*">
+        <TargetPath>lib\net5.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet6)*.*">
+        <TargetPath>lib\net6.0</TargetPath>
+      </File>
     </ItemGroup>    
   </Project>

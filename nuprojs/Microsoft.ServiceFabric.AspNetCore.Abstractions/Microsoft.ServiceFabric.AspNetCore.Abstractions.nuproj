@@ -14,11 +14,68 @@
     <Import Project="$(NuProjPath)\NuProj.targets" />
 
     <ItemGroup>
-      <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.dll">
-        <TargetPath>lib\netstandard2.0</TargetPath>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net461</TargetPath>
       </File>
-      <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.xml">
-        <TargetPath>lib\netstandard2.0</TargetPath>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\netcoreapp3.1</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\netcoreapp3.1</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet5)Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net5.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet5)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net5.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net6.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net6.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net472</TargetPath>
       </File>
     </ItemGroup>
     
@@ -26,8 +83,12 @@
       <Dependency Include="Microsoft.ServiceFabric.Services">
         <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
       </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Hosting.Abstractions">
-        <Version>2.1.0</Version>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Dependency  Include="Microsoft.AspNetCore.Hosting.Abstractions">
+        <Version>2.2.0</Version>
+        <TargetFramework>net40</TargetFramework>
       </Dependency>
     </ItemGroup>
   </Project>
