@@ -82,13 +82,41 @@
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.Services">
         <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
       </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+      </FrameworkReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Dependency Include="Microsoft.ServiceFabric.Services">
+        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <TargetFramework>net5.0</TargetFramework>
+      </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net5.0</TargetFramework>
+      </FrameworkReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Dependency Include="Microsoft.ServiceFabric.Services">
+        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <TargetFramework>net6.0</TargetFramework>
+      </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net6.0</TargetFramework>
+      </FrameworkReference>
     </ItemGroup>
     
     <ItemGroup>
       <Dependency  Include="Microsoft.AspNetCore.Hosting.Abstractions">
-        <Version>2.2.0</Version>
-        <TargetFramework>net40</TargetFramework>
+        <Version>2.0.0</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.ServiceFabric.Services">
+        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <TargetFramework>net461</TargetFramework>
       </Dependency>
     </ItemGroup>
   </Project>

@@ -82,6 +82,28 @@
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+      </Dependency>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net5.0</TargetFramework>
+      </Dependency>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net6.0</TargetFramework>
       </Dependency>
     </ItemGroup>
   </Project>
