@@ -45,6 +45,9 @@
         <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>netcoreapp3.1</TargetFramework>
       </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+      </FrameworkReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -52,6 +55,9 @@
         <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>net5.0</TargetFramework>
       </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net5.0</TargetFramework>
+      </FrameworkReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -59,11 +65,18 @@
         <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>net6.0</TargetFramework>
       </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net6.0</TargetFramework>
+      </FrameworkReference>
     </ItemGroup>
 
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Server.Kestrel">
+        <Version>2.1.0</Version>
         <TargetFramework>net461</TargetFramework>
       </Dependency>
     </ItemGroup>
