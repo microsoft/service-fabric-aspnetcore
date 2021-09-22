@@ -20,6 +20,30 @@
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
         <TargetPath>lib\net461</TargetPath>
       </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
       <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>lib\netcoreapp3.1</TargetPath>
       </File>
@@ -37,6 +61,21 @@
       </File>
       <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
         <TargetPath>lib\net6.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net472</TargetPath>
       </File>
     </ItemGroup>
 

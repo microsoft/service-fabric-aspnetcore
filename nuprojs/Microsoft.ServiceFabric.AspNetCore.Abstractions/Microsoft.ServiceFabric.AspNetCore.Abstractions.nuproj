@@ -20,6 +20,30 @@
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
         <TargetPath>lib\net461</TargetPath>
       </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.xml">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
       <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.dll">
         <TargetPath>lib\netcoreapp3.1</TargetPath>
       </File>
@@ -38,6 +62,21 @@
       <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.dll">
         <TargetPath>lib\net6.0</TargetPath>
       </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.dll">
+        <TargetPath>runtimes\win\lib\net472</TargetPath>
+      </File>
     </ItemGroup>
     
     <ItemGroup>
@@ -71,12 +110,36 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Dependency  Include="Microsoft.AspNetCore.Hosting.Abstractions">
+      <Dependency Include="Microsoft.ServiceFabric.Services">
+        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Hosting">
         <Version>2.1.0</Version>
         <TargetFramework>net461</TargetFramework>
       </Dependency>
-      <Dependency Include="Microsoft.ServiceFabric.Services">
-        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+      <Dependency Include="Microsoft.AspNetCore.Hosting.Abstractions">
+        <Version>2.1.0</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Hosting.Server.Abstractions">
+        <Version>2.1.0</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Http.Abstractions">
+        <Version>2.1.0</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.AspNetCore.Http.Features">
+        <Version>2.1.0</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+        <Version>2.1.0</Version>
+        <TargetFramework>net461</TargetFramework>
+      </Dependency>
+      <Dependency Include="Microsoft.Extensions.DependencyInjection">
+        <Version>2.1.0</Version>
         <TargetFramework>net461</TargetFramework>
       </Dependency>
     </ItemGroup>
