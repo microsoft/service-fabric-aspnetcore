@@ -10,7 +10,6 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     using FluentAssertions;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Logging.Console;
     using Microsoft.ServiceFabric.AspNetCore.Configuration;
     using Xunit;
 
@@ -222,7 +221,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 {
                     options.ConfigAction = (package, configData) =>
                     {
-                        ILogger logger = new ConsoleLogger("Test", null, false);
+                        using ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+                        ILogger logger = loggerFactory.CreateLogger("test");
                         logger.LogInformation($"Config Update for package {package.Path} started");
 
                         foreach (var section in package.Settings.Sections)

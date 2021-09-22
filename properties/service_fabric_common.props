@@ -12,7 +12,10 @@
     
     <!-- Set Drop folders -->
     <DropFolder>$(RepoRoot)drop\$(Configuration)\</DropFolder>
-    <DropFolderNetStandard>$(RepoRoot)drop\$(Configuration)\netstandard\</DropFolderNetStandard>
+    <DropFolderNetFramework>$(RepoRoot)drop\$(Configuration)\net461\</DropFolderNetFramework>
+    <DropFolderNetCore>$(RepoRoot)drop\$(Configuration)\netcoreapp3.1\</DropFolderNetCore>
+    <DropFolderNet5>$(RepoRoot)drop\$(Configuration)\net5.0\</DropFolderNet5>
+    <DropFolderNet6>$(RepoRoot)drop\$(Configuration)\net6.0\</DropFolderNet6>
     <NugetPackageDropFolder>$(DropFolder)\packages</NugetPackageDropFolder>
     
     <!-- Set Nuget exe path -->
