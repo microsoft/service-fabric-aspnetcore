@@ -88,9 +88,7 @@
       <FrameworkReference Include="Microsoft.AspNetCore.App">
         <TargetFramework>netcoreapp3.1</TargetFramework>
       </FrameworkReference>
-    </ItemGroup>
 
-    <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>net5.0</TargetFramework>
@@ -98,9 +96,7 @@
       <FrameworkReference Include="Microsoft.AspNetCore.App">
         <TargetFramework>net5.0</TargetFramework>
       </FrameworkReference>
-    </ItemGroup>
 
-    <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>net6.0</TargetFramework>
@@ -108,9 +104,7 @@
       <FrameworkReference Include="Microsoft.AspNetCore.App">
         <TargetFramework>net6.0</TargetFramework>
       </FrameworkReference>
-    </ItemGroup>
 
-    <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>net461</TargetFramework>
