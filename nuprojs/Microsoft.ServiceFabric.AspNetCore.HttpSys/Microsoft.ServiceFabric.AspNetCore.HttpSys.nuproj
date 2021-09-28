@@ -8,26 +8,110 @@
     <Description>This package provides AspNetCore HttpSys server based communication listener for Service Fabric microservices.</Description>
     <Summary>This package provides AspNetCore HttpSys server based communication listener for Service Fabric microservices.</Summary>
     <Tags>ServiceFabric Microsoft Azure Fabric</Tags>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     </PropertyGroup>
 
     <Import Project="$(NuProjPath)\NuProj.props" />
     <Import Project="$(NuProjPath)\NuProj.targets" />
 
     <ItemGroup>
-      <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\netstandard2.0</TargetPath>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net461</TargetPath>
       </File>
-      <File Include="$(DropFolderNetStandard)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\netstandard2.0</TargetPath>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net472</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\netcoreapp3.1</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\netcoreapp3.1</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet5)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net5.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet5)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net5.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net6.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net6.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net461</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net462</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net47</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net471</TargetPath>
+      </File>
+      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>runtimes\win\lib\net472</TargetPath>
       </File>
     </ItemGroup>
-    
+
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+      </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+      </FrameworkReference>
+
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net5.0</TargetFramework>
+      </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net5.0</TargetFramework>
+      </FrameworkReference>
+
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net6.0</TargetFramework>
+      </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net6.0</TargetFramework>
+      </FrameworkReference>
+
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net461</TargetFramework>
       </Dependency>
       <Dependency Include="Microsoft.AspNetCore.Server.HttpSys">
         <Version>2.1.0</Version>
+        <TargetFramework>net461</TargetFramework>
       </Dependency>
     </ItemGroup>
   </Project>

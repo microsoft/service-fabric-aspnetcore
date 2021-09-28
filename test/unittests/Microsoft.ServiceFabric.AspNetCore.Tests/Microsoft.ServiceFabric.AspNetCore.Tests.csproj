@@ -5,12 +5,12 @@
   <PropertyGroup>
     <AssemblyName>Microsoft.ServiceFabric.AspNetCore.Tests</AssemblyName>
     <RootNamespace>Microsoft.ServiceFabric.AspNetCore.Tests</RootNamespace>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="FluentAssertions" Version="5.9.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="$(NugetPkg_Version_Microsoft_ServiceFabric_Services)" />
     <PackageReference Include="Moq" Version="4.13.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
