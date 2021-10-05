@@ -19,6 +19,12 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using Microsoft.Extensions.Hosting;
     using Microsoft.ServiceFabric.Services.Communication.Runtime;
 
+    internal enum HostType
+    {
+        WebHost,
+        GenericHost,
+    }
+
     /// <summary>
     /// Base class for creating AspNetCore based communication listener for Service Fabric stateless or stateful service.
     /// </summary>
@@ -31,7 +37,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         private IHost host;
         private string urlSuffix = null;
         private bool configuredToUseUniqueServiceUrl = false;
-        private bool isUsingGenericHost;
+        private HostType hostType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AspNetCoreCommunicationListener"/> class.
@@ -54,7 +60,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             this.webHostBuild = build;
             this.serviceContext = serviceContext;
             this.urlSuffix = string.Empty;
-            this.isUsingGenericHost = false;
+            this.hostType = HostType.WebHost;
         }
 
         /// <summary>
@@ -78,7 +84,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             this.hostBuild = build;
             this.serviceContext = serviceContext;
             this.urlSuffix = string.Empty;
-            this.isUsingGenericHost = true;
+            this.hostType = HostType.GenericHost;
         }
 
         /// <summary>
@@ -108,11 +114,11 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </summary>
         public virtual void Abort()
         {
-            if (!this.isUsingGenericHost && this.webHost != null)
+            if (this.hostType == HostType.WebHost && this.webHost != null)
             {
                 this.webHost.Dispose();
             }
-            else if (this.isUsingGenericHost && this.host != null)
+            else if (this.hostType == HostType.GenericHost && this.host != null)
             {
                 this.host.StopAsync().GetAwaiter().GetResult();
                 this.host.Dispose();
@@ -129,12 +135,12 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </returns>
         public virtual async Task CloseAsync(CancellationToken cancellationToken)
         {
-            if (!this.isUsingGenericHost && this.webHost != null)
+            if (this.hostType == HostType.WebHost && this.webHost != null)
             {
                 await this.webHost.StopAsync(cancellationToken);
                 this.webHost.Dispose();
             }
-            else if (this.isUsingGenericHost && this.host != null)
+            else if (this.hostType == HostType.GenericHost && this.host != null)
             {
                 await this.host.StopAsync(cancellationToken);
                 this.host.Dispose();
@@ -153,7 +159,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         public virtual async Task<string> OpenAsync(CancellationToken cancellationToken)
         {
             string url = null;
-            if (!this.isUsingGenericHost)
+            if (this.hostType == HostType.WebHost)
             {
                 this.webHost = this.webHostBuild(this.GetListenerUrl(), this);
 
