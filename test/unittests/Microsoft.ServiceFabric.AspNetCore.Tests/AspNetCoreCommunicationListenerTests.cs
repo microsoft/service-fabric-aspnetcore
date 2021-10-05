@@ -93,12 +93,12 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             // Create mock IServerAddressesFeature and set required things used by tests.
             var mockServerAddressFeature = new Mock<IServerAddressesFeature>();
             mockServerAddressFeature.Setup(y => y.Addresses).Returns(new string[] { url });
-            var featureColelction = new FeatureCollection();
-            featureColelction.Set(mockServerAddressFeature.Object);
+            var featureCollection = new FeatureCollection();
+            featureCollection.Set(mockServerAddressFeature.Object);
 
             // Create mock IWebHost and set required things used by tests.
             var mockWebHost = new Mock<IWebHost>();
-            mockWebHost.Setup(y => y.ServerFeatures).Returns(featureColelction);
+            mockWebHost.Setup(y => y.ServerFeatures).Returns(featureCollection);
 
             // setup call backs for Start , Dispose.
             mockWebHost.Setup(y => y.StartAsync(CancellationToken.None)).Callback(() => this.IsStarted = true);
@@ -159,7 +159,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
         /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port.
+        ///   a. url given to Func to create IWebHost/IHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId.
         ///
         /// </summary>
@@ -183,7 +183,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.None
         /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port.
+        ///   a. url given to Func to create IWebHost/IHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port.
         ///
         /// </summary>

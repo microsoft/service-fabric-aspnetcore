@@ -17,7 +17,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     public class KestrelCommunicationListenerTests : AspNetCoreCommunicationListenerTests
     {
         // 1. When no endpointRef is provided:
-        //   a. url given to Func to create IWebHost should be http://+:0
+        //   a. url given to Func to create IWebHost/IHost should be http://+:0
         //   b. url returned from OpenAsync should be http://IPAddressOrFQDN:0/PartitionId/ReplicaId
         //
         //
@@ -25,7 +25,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
         /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port.
+        ///   a. url given to Func to create IWebHost/IHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId.
         ///
         /// </summary>
@@ -43,7 +43,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.None
         /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port.
+        ///   a. url given to Func to create IWebHost/IHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port.
         ///
         /// </summary>

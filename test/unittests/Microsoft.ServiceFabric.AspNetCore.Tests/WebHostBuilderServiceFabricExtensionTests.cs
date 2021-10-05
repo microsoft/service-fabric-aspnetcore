@@ -101,8 +101,8 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         {
             var mockServerAddressFeature = new Mock<IServerAddressesFeature>();
             mockServerAddressFeature.Setup(y => y.Addresses).Returns(new string[] { url });
-            var featureColelction = new FeatureCollection();
-            featureColelction.Set(mockServerAddressFeature.Object);
+            var featureCollection = new FeatureCollection();
+            featureCollection.Set(mockServerAddressFeature.Object);
 
             // Create mock IWebHost and set required things used by this test.
             var mockWebHost = new Mock<IWebHost>();
