@@ -6,12 +6,17 @@
 namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
+    using System.Collections.Generic;
+    using System.Fabric;
     using System.Threading.Tasks;
     using FluentAssertions;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Hosting.Server;
     using Microsoft.AspNetCore.Hosting.Server.Features;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Features;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
     using Moq;
     using Xunit;
@@ -22,7 +27,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     public class ServiceFabricMiddlewareTests
     {
         private readonly HttpContext httpContext;
-        private readonly AspNetCoreCommunicationListener listener;
+        private AspNetCoreCommunicationListener listener;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceFabricMiddlewareTests"/> class.
@@ -42,20 +47,35 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             mockHttpContext.Setup(y => y.Response).Returns(mockHttpResponse.Object);
             mockHttpContext.Setup(y => y.Request).Returns(mockHttpRequest.Object);
             this.httpContext = mockHttpContext.Object;
+        }
 
-            var context = TestMocksRepository.GetMockStatelessServiceContext();
-            this.listener = new KestrelCommunicationListener(context, this.BuildFunc);
+        /// <summary>
+        /// Gets strings for the two Host Types - WebHost and GenericHost.
+        /// </summary>
+        public static IEnumerable<object[]> HostTypes
+        {
+            get
+            {
+                return new List<object[]>
+                {
+                    new object[] { "WebHost" },
+                    new object[] { "GenericHost" },
+                };
+            }
         }
 
         /// <summary>
         /// Verify ErrorCode 410 is returned from Middleware, when UrlSuffix in Middleware doesn't match with what listener used
         /// when constructing url before returning to Naming Service.
         /// </summary>
-        [Fact]
-        public void VerifyReturnCode410()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyReturnCode410(string hostType)
         {
             var nextCalled = false;
 
+            this.listener = this.CreateListener(TestMocksRepository.GetMockStatelessServiceContext(), hostType);
             this.listener.ConfigureToUseUniqueServiceUrl();
             var middleware = new ServiceFabricMiddleware(
                 (httpContext) =>
@@ -75,9 +95,13 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        [Fact]
-        public void VerifyNextInvocationWithUrlSuffix()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyNextInvocationWithUrlSuffix(string hostType)
         {
+            this.listener = this.CreateListener(TestMocksRepository.GetMockStatelessServiceContext(), hostType);
+
             // configure listener useUniqueServiceUrl
             this.listener.ConfigureToUseUniqueServiceUrl();
             this.VerifyNextInvocation();
@@ -86,9 +110,13 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        [Fact]
-        public void VerifyNextInvocatioWithoutUrlSuffix()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyNextInvocatioWithoutUrlSuffix(string hostType)
         {
+            this.listener = this.CreateListener(TestMocksRepository.GetMockStatelessServiceContext(), hostType);
+
             // do not configure listener useUniqueServiceUrl
             this.VerifyNextInvocation();
         }
@@ -96,9 +124,13 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify Path and PathBase in next RequestDelegate invocation.
         /// </summary>
-        [Fact]
-        public void VerifyPathsInNextInvocationWithUrlSuffix()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyPathsInNextInvocationWithUrlSuffix(string hostType)
         {
+            this.listener = this.CreateListener(TestMocksRepository.GetMockStatelessServiceContext(), hostType);
+
             // configure listener useUniqueServiceUrl
             // In this case urlSuffix will be /PArtitionId/ReplicaId
             this.listener.ConfigureToUseUniqueServiceUrl();
@@ -108,9 +140,13 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify Path and PathBase in next RequestDelegate invocation.
         /// </summary>
-        [Fact]
-        public void VerifyPathsInNextInvocationWithoutUrlSuffix()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyPathsInNextInvocationWithoutUrlSuffix(string hostType)
         {
+            this.listener = this.CreateListener(TestMocksRepository.GetMockStatelessServiceContext(), hostType);
+
             // do not configure listener useUniqueServiceUrl
             // In this case urlSuffix will be empty
             this.VerifyPathsInNextInvocation();
@@ -119,8 +155,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Verify next RequestDelegate invocation when Path is valid.
         /// </summary>
-        [Fact]
-        public void VerifyNextInvocation()
+        private void VerifyNextInvocation()
         {
             var nextCalled = false;
 
@@ -188,7 +223,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             this.httpContext.Request.PathBase.ToString().Should().BeEmpty("PathBase after next RequestDelegate has been called should be empty");
         }
 
-        private IWebHost BuildFunc(string url, AspNetCoreCommunicationListener listener)
+        private IWebHost IWebHostBuildFunc(string url, AspNetCoreCommunicationListener listener)
         {
             var mockServerAddressFeature = new Mock<IServerAddressesFeature>();
             mockServerAddressFeature.Setup(y => y.Addresses).Returns(new string[] { url });
@@ -198,6 +233,41 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             // Create mock IWebHost and set required things used by this test.
             var mockWebHost = new Mock<IWebHost>();
             return mockWebHost.Object;
+        }
+
+        private IHost IHostBuildFunc(string url, AspNetCoreCommunicationListener listener)
+        {
+            var mockServerAddressFeature = new Mock<IServerAddressesFeature>();
+            mockServerAddressFeature.Setup(y => y.Addresses).Returns(new string[] { url });
+            var featureCollection = new FeatureCollection();
+            featureCollection.Set(mockServerAddressFeature.Object);
+
+            // Create mock IServer and set required things used by tests.
+            var mockServer = new Mock<IServer>();
+            mockServer.Setup(y => y.Features).Returns(featureCollection);
+
+            // Create ServiceCollection and IServiceProvider and set required things used for tests.
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IServer>(mockServer.Object);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            // Create mock IHost and set required things used by tests.
+            var mockHost = new Mock<IHost>();
+            mockHost.Setup(y => y.Services).Returns(serviceProvider);
+
+            return mockHost.Object;
+        }
+
+        private KestrelCommunicationListener CreateListener(StatelessServiceContext context, string hostType)
+        {
+            if (hostType == "WebHost")
+            {
+                return new KestrelCommunicationListener(context, (uri, listen) => this.IWebHostBuildFunc(uri, listen));
+            }
+            else
+            {
+                return new KestrelCommunicationListener(context, (uri, listen) => this.IHostBuildFunc(uri, listen));
+            }
         }
     }
 }

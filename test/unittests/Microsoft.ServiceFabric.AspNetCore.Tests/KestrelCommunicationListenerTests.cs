@@ -6,6 +6,7 @@
 namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
+    using System.Fabric;
     using FluentAssertions;
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
     using Xunit;
@@ -28,12 +29,14 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId.
         ///
         /// </summary>
-        [Fact]
-        public void VerifyWithUseUniqueServiceUrlOption()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyWithUseUniqueServiceUrlOption(string hostType)
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new KestrelCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = this.CreateListener(context, EndpointName, hostType);
             this.UseUniqueServiceUrlOptionVerifier();
         }
 
@@ -44,52 +47,70 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port.
         ///
         /// </summary>
-        [Fact]
-        public void VerifyWithoutUseUniqueServiceUrlOption()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyWithoutUseUniqueServiceUrlOption(string hostType)
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new KestrelCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = this.CreateListener(context, EndpointName, hostType);
             this.WithoutUseUniqueServiceUrlOptionVerifier();
         }
 
         /// <summary>
         /// Verify Listener Open and Close.
         /// </summary>
-        [Fact]
-        public void VerifyListenerOpenClose()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyListenerOpenClose(string hostType)
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new KestrelCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
-
+            this.Listener = this.CreateListener(context, EndpointName, hostType);
             this.ListenerOpenCloseVerifier();
         }
 
         /// <summary>
         /// InvalidOperationEXception is thrown when Endpoint is not found in service manifest.
         /// </summary>
-        [Fact]
-        public void ExceptionForEndpointNotFound()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void ExceptionForEndpointNotFound(string hostType)
         {
-            this.Listener = new KestrelCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = this.CreateListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", hostType);
             this.ExceptionForEndpointNotFoundVerifier();
         }
 
         /// <summary>
         /// ArgumentException is thrown when endpointName is empty string.
         /// </summary>
-        [Fact]
-        public void VerifyExceptionForEmptyEndpointName()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyExceptionForEmptyEndpointName(string hostType)
         {
             Action action =
                 () =>
-                    new KestrelCommunicationListener(
+                    this.CreateListener(
                         TestMocksRepository.GetMockStatelessServiceContext(),
                         string.Empty,
-                        (uri, listen) => this.BuildFunc(uri, listen));
-
+                        hostType);
             action.Should().Throw<ArgumentException>();
+        }
+
+        private KestrelCommunicationListener CreateListener(StatelessServiceContext context, string endpointName, string hostType)
+        {
+            if (hostType == "WebHost")
+            {
+                return new KestrelCommunicationListener(context, endpointName, (uri, listen) => this.IWebHostBuildFunc(uri, listen));
+            }
+            else
+            {
+                return new KestrelCommunicationListener(context, endpointName, (uri, listen) => this.IHostBuildFunc(uri, listen));
+            }
         }
     }
 }
