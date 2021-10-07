@@ -154,7 +154,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task">Task</see> that represents outstanding operation. The result of the Task is
-        /// is endpoint string on which IWebHost is listening.
+        /// is endpoint string on which IWebHost/IHost is listening.
         /// </returns>
         public virtual async Task<string> OpenAsync(CancellationToken cancellationToken)
         {
