@@ -120,7 +120,6 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             }
             else if (this.hostType == HostType.GenericHost && this.host != null)
             {
-                this.host.StopAsync().GetAwaiter().GetResult();
                 this.host.Dispose();
             }
         }
