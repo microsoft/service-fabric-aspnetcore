@@ -145,7 +145,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
             // setup call backs for Start , Dispose.
             mockHost.Setup(y => y.StartAsync(CancellationToken.None)).Callback(() => this.IsStarted = true);
             mockHost.Setup(y => y.StopAsync(CancellationToken.None)).Callback(() => this.IsStarted = false);
-            mockHost.Setup(y => y.Dispose()).Callback(() => { });
+            mockHost.Setup(y => y.Dispose()).Callback(() => this.IsStarted = false);
 
             // tell listener whether to generate UniqueServiceUrls
             if (this.IntegrationOptions.Equals(ServiceFabricIntegrationOptions.UseUniqueServiceUrl))

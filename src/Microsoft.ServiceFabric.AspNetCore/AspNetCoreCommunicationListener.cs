@@ -19,25 +19,15 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     using Microsoft.Extensions.Hosting;
     using Microsoft.ServiceFabric.Services.Communication.Runtime;
 
-    internal enum HostType
-    {
-        WebHost,
-        GenericHost,
-    }
-
     /// <summary>
     /// Base class for creating AspNetCore based communication listener for Service Fabric stateless or stateful service.
     /// </summary>
     public abstract class AspNetCoreCommunicationListener : ICommunicationListener
     {
-        private readonly Func<string, AspNetCoreCommunicationListener, IWebHost> webHostBuild;
-        private readonly Func<string, AspNetCoreCommunicationListener, IHost> hostBuild;
         private readonly ServiceContext serviceContext;
-        private IWebHost webHost;
-        private IHost host;
+        private readonly ICommunicationListener communicationListener;
         private string urlSuffix = null;
         private bool configuredToUseUniqueServiceUrl = false;
-        private HostType hostType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AspNetCoreCommunicationListener"/> class.
@@ -57,10 +47,9 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new ArgumentNullException("build");
             }
 
-            this.webHostBuild = build;
             this.serviceContext = serviceContext;
+            this.communicationListener = new WebHostCommunicationListener(build, this);
             this.urlSuffix = string.Empty;
-            this.hostType = HostType.WebHost;
         }
 
         /// <summary>
@@ -81,10 +70,9 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
                 throw new ArgumentNullException("build");
             }
 
-            this.hostBuild = build;
             this.serviceContext = serviceContext;
+            this.communicationListener = new GenericHostCommunicationListener(build, this);
             this.urlSuffix = string.Empty;
-            this.hostType = HostType.GenericHost;
         }
 
         /// <summary>
@@ -114,14 +102,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </summary>
         public virtual void Abort()
         {
-            if (this.hostType == HostType.WebHost && this.webHost != null)
-            {
-                this.webHost.Dispose();
-            }
-            else if (this.hostType == HostType.GenericHost && this.host != null)
-            {
-                this.host.Dispose();
-            }
+            this.communicationListener.Abort();
         }
 
         /// <summary>
@@ -132,18 +113,9 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task">Task</see> that represents outstanding operation.
         /// </returns>
-        public virtual async Task CloseAsync(CancellationToken cancellationToken)
+        public virtual Task CloseAsync(CancellationToken cancellationToken)
         {
-            if (this.hostType == HostType.WebHost && this.webHost != null)
-            {
-                await this.webHost.StopAsync(cancellationToken);
-                this.webHost.Dispose();
-            }
-            else if (this.hostType == HostType.GenericHost && this.host != null)
-            {
-                await this.host.StopAsync(cancellationToken);
-                this.host.Dispose();
-            }
+            return this.communicationListener.CloseAsync(cancellationToken);
         }
 
         /// <summary>
@@ -155,67 +127,9 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// A <see cref="System.Threading.Tasks.Task">Task</see> that represents outstanding operation. The result of the Task is
         /// is endpoint string on which IWebHost/IHost is listening.
         /// </returns>
-        public virtual async Task<string> OpenAsync(CancellationToken cancellationToken)
+        public virtual Task<string> OpenAsync(CancellationToken cancellationToken)
         {
-            string url = null;
-            if (this.hostType == HostType.WebHost)
-            {
-                this.webHost = this.webHostBuild(this.GetListenerUrl(), this);
-
-                if (this.webHost == null)
-                {
-                    throw new InvalidOperationException(SR.WebHostNullExceptionMessage);
-                }
-
-                await this.webHost.StartAsync(cancellationToken);
-
-                // AspNetCore 1.x returns http://+:port
-                // AspNetCore 2.0 returns http://[::]:port
-                url = this.webHost.ServerFeatures.Get<IServerAddressesFeature>().Addresses.FirstOrDefault();
-            }
-            else
-            {
-                this.host = this.hostBuild(this.GetListenerUrl(), this);
-
-                if (this.host == null)
-                {
-                    throw new InvalidOperationException(SR.HostNullExceptionMessage);
-                }
-
-                await this.host.StartAsync(cancellationToken);
-
-                var server = this.host.Services.GetService<IServer>();
-                if (server == null)
-                {
-                    throw new InvalidOperationException(SR.WebServerNotFound);
-                }
-
-                url = server.Features.Get<IServerAddressesFeature>().Addresses.FirstOrDefault();
-            }
-
-            if (url == null)
-            {
-                throw new InvalidOperationException(SR.ErrorNoUrlFromAspNetCore);
-            }
-
-            var publishAddress = this.serviceContext.PublishAddress;
-
-            if (url.Contains("://+:"))
-            {
-                url = url.Replace("://+:", $"://{publishAddress}:");
-            }
-            else if (url.Contains("://[::]:"))
-            {
-                url = url.Replace("://[::]:", $"://{publishAddress}:");
-            }
-
-            // When returning url to naming service, add UrlSuffix to it.
-            // This UrlSuffix will be used by middleware to:
-            //    - drop calls not intended for the service and return 410.
-            //    - modify Path and PathBase in Microsoft.AspNetCore.Http.HttpRequest to be sent correctly to the service code.
-            url = url.TrimEnd(new[] { '/' }) + this.UrlSuffix;
-
-            return url;
+            return this.communicationListener.OpenAsync(cancellationToken);
         }
 
         /// <summary>
@@ -247,6 +161,12 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         }
 
         /// <summary>
+        /// Gets url for this listener to be used with Web Server.
+        /// </summary>
+        /// <returns>url for this listener to be used with Web Server.</returns>
+        protected internal abstract string GetListenerUrl();
+
+        /// <summary>
         /// Retrieves the endpoint resource with a given name from the service manifest.
         /// </summary>
         /// <param name="endpointName">The name of the endpoint.</param>
@@ -265,11 +185,5 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 
             return this.serviceContext.CodePackageActivationContext.GetEndpoint(endpointName);
         }
-
-        /// <summary>
-        /// Gets url for this listener to be used with Web Server.
-        /// </summary>
-        /// <returns>url for this listener to be used with Web Server.</returns>
-        protected abstract string GetListenerUrl();
     }
 }
