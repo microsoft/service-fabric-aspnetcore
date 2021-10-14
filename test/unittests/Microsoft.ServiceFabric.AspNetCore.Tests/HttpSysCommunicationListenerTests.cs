@@ -6,6 +6,7 @@
 namespace Microsoft.ServiceFabric.AspNetCore.Tests
 {
     using System;
+    using System.Fabric;
     using FluentAssertions;
     using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
     using Xunit;
@@ -18,84 +19,105 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.UseUniqueServiceUrl
         /// 1. When no endpointRef is provided:
-        ///   a. url given to Func to create IWebHost should be http://+:0
+        ///   a. url given to Func to create IWebHost/IHost should be http://+:0
         ///   b. url returned from OpenAsync should be http://IPAddressOrFQDN:0/PartitionId/ReplicaId
         ///
         ///
         /// 2. When endpointRef is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port.
+        ///   a. url given to Func to create IWebHost/IHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port/PartitionId/ReplicaId.
         ///
         /// </summary>
-        [Fact]
-        public void VerifyWithUseUniqueServiceUrlOption()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyWithUseUniqueServiceUrlOption(string hostType)
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = this.CreateListener(context, EndpointName, hostType);
             this.UseUniqueServiceUrlOptionVerifier();
         }
 
         /// <summary>
         /// Tests Url for ServiceFabricIntegrationOptions.None
         /// 1. When endpoint name is provided (protocol and port comes from endpoint.) :
-        ///   a. url given to Func to create IWebHost should be protocol://+:port.
+        ///   a. url given to Func to create IWebHost/IHost should be protocol://+:port.
         ///   b. url returned from OpenAsync should be protocol://IPAddressOrFQDN:port.
         ///
         /// </summary>
-        [Fact]
-        public void VerifyWithoutUseUniqueServiceUrlOption()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyWithoutUseUniqueServiceUrlOption(string hostType)
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = this.CreateListener(context, EndpointName, hostType);
             this.WithoutUseUniqueServiceUrlOptionVerifier();
         }
 
         /// <summary>
         /// Verify Listener Open and Close.
         /// </summary>
-        [Fact]
-        public void VerifyListenerOpenClose()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyListenerOpenClose(string hostType)
         {
             var context = TestMocksRepository.GetMockStatelessServiceContext();
             context.CodePackageActivationContext.GetEndpoints().Add(this.GetTestEndpoint());
-            this.Listener = new HttpSysCommunicationListener(context, EndpointName, (uri, listen) => this.BuildFunc(uri, listen));
-
+            this.Listener = this.CreateListener(context, EndpointName, hostType);
             this.ListenerOpenCloseVerifier();
         }
 
         /// <summary>
         /// InvalidOperationException is thrown when Endpoint is not found in service manifest.
         /// </summary>
-        [Fact]
-        public void ExceptionForEndpointNotFound()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void ExceptionForEndpointNotFound(string hostType)
         {
-            this.Listener = new HttpSysCommunicationListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", (uri, listen) => this.BuildFunc(uri, listen));
+            this.Listener = this.CreateListener(TestMocksRepository.GetMockStatelessServiceContext(), "NoEndPoint", hostType);
             this.ExceptionForEndpointNotFoundVerifier();
         }
 
         /// <summary>
         /// ArgumentException is thrown when endpointName is null or empty string.
         /// </summary>
-        [Fact]
-        public void VerifyExceptionForNullOrEmptyEndpointName()
+        /// <param name="hostType">The type of host used to create the listener.</param>
+        [Theory]
+        [MemberData(nameof(HostTypes))]
+        public void VerifyExceptionForNullOrEmptyEndpointName(string hostType)
         {
             Action action =
                 () =>
-                    new HttpSysCommunicationListener(
+                    this.CreateListener(
                         TestMocksRepository.GetMockStatelessServiceContext(),
                         null,
-                        this.BuildFunc);
+                        hostType);
             action.Should().Throw<ArgumentException>();
 
             action =
                 () =>
-                    new HttpSysCommunicationListener(
+                    this.CreateListener(
                         TestMocksRepository.GetMockStatelessServiceContext(),
                         string.Empty,
-                        this.BuildFunc);
+                        hostType);
             action.Should().Throw<ArgumentException>();
+        }
+
+        private HttpSysCommunicationListener CreateListener(StatelessServiceContext context, string endpointName, string hostType)
+        {
+            if (hostType == "WebHost")
+            {
+                return new HttpSysCommunicationListener(context, endpointName, (uri, listen) => this.IWebHostBuildFunc(uri, listen));
+            }
+            else
+            {
+                return new HttpSysCommunicationListener(context, endpointName, (uri, listen) => this.IHostBuildFunc(uri, listen));
+            }
         }
     }
 }

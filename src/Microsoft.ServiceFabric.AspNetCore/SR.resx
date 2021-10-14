@@ -123,7 +123,13 @@
   <data name="ErrorNoUrlFromAspNetCore" xml:space="preserve">
     <value>"No Url returned from AspNetCore IServerAddressesFeature.</value>
   </data>
+  <data name="HostNullExceptionMessage" xml:space="preserve">
+    <value>IHost returned from build delegate is null.</value>
+  </data>
   <data name="WebHostNullExceptionMessage" xml:space="preserve">
     <value>IWebHost returned from build delegate is null.</value>
+  </data>
+  <data name="WebServerNotFound" xml:space="preserve">
+    <value>No web server found over IHost</value>
   </data>
 </root>
