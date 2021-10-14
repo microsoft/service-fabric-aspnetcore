@@ -25,7 +25,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
     public abstract class AspNetCoreCommunicationListener : ICommunicationListener
     {
         private readonly ServiceContext serviceContext;
-        private readonly ICommunicationListener communicationListener;
+        private readonly ICommunicationListener internalListener;
         private string urlSuffix = null;
         private bool configuredToUseUniqueServiceUrl = false;
 
@@ -48,7 +48,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             }
 
             this.serviceContext = serviceContext;
-            this.communicationListener = new WebHostCommunicationListener(build, this);
+            this.internalListener = new WebHostCommunicationListener(build, this);
             this.urlSuffix = string.Empty;
         }
 
@@ -71,7 +71,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             }
 
             this.serviceContext = serviceContext;
-            this.communicationListener = new GenericHostCommunicationListener(build, this);
+            this.internalListener = new GenericHostCommunicationListener(build, this);
             this.urlSuffix = string.Empty;
         }
 
@@ -102,7 +102,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </summary>
         public virtual void Abort()
         {
-            this.communicationListener.Abort();
+            this.internalListener.Abort();
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </returns>
         public virtual Task CloseAsync(CancellationToken cancellationToken)
         {
-            return this.communicationListener.CloseAsync(cancellationToken);
+            return this.internalListener.CloseAsync(cancellationToken);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         /// </returns>
         public virtual Task<string> OpenAsync(CancellationToken cancellationToken)
         {
-            return this.communicationListener.OpenAsync(cancellationToken);
+            return this.internalListener.OpenAsync(cancellationToken);
         }
 
         /// <summary>
