@@ -22,8 +22,8 @@
     <NuGetExePath Condition="'$(NuGetExePath)' == ''">$(RepoRoot)\nuget\nuget.exe</NuGetExePath>
 
     <!-- Versions used for Microsoft.ServiceFabric.* nuget packages from other repos.-->
-    <NugetPkg_Version_Microsoft_ServiceFabric>8.2.117</NugetPkg_Version_Microsoft_ServiceFabric>
-    <NugetPkg_Version_Microsoft_ServiceFabric_Services>5.2.0</NugetPkg_Version_Microsoft_ServiceFabric_Services>
+    <NugetPkg_Version_Microsoft_ServiceFabric>8.2.1235</NugetPkg_Version_Microsoft_ServiceFabric>
+    <NugetPkg_Version_Microsoft_ServiceFabric_Services>5.2.1235</NugetPkg_Version_Microsoft_ServiceFabric_Services>
 
     <!-- Set versions for files and nuget packages nuget packages generated from this repo. -->
     <!-- TODO: Versions numbers are changed here manually for now, Integrate this with GitVersion. -->
