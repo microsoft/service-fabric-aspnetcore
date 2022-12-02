@@ -127,33 +127,5 @@
         <Version>2.1.0</Version>
         <TargetFramework>net461</TargetFramework>
       </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Hosting.Abstractions">
-        <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Hosting.Server.Abstractions">
-        <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Http.Abstractions">
-        <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
-      </Dependency>
-      <Dependency Include="Microsoft.AspNetCore.Http.Features">
-        <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
-      </Dependency>
-      <Dependency Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-        <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
-      </Dependency>
-      <Dependency Include="Microsoft.Extensions.DependencyInjection">
-        <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
-      </Dependency>
-      <Dependency Include="Microsoft.Extensions.Hosting">
-        <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
-      </Dependency>
     </ItemGroup>
   </Project>
