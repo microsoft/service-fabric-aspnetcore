@@ -64,7 +64,6 @@
     </ItemGroup>
     <Copy SourceFiles="@(BinariesNetCore)" DestinationFiles="@(BinariesNetCore->'$(DropFolderNetCore)\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)')" />
 
-
     <ItemGroup>
       <BinariesNet5 Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)net5.0\Microsoft.ServiceFabric.AspNetCore.*"/>
       <BinariesNet5 Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)net5.0\Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
@@ -80,6 +79,14 @@
       <BinariesNet6 Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)net6.0\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
     </ItemGroup>
     <Copy SourceFiles="@(BinariesNet6)" DestinationFiles="@(BinariesNet6->'$(DropFolderNet6)\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <ItemGroup>
+      <BinariesNet7 Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)net7.0\Microsoft.ServiceFabric.AspNetCore.*"/>
+      <BinariesNet7 Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)net7.0\Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
+      <BinariesNet7 Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)net7.0\Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
+      <BinariesNet7 Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)net7.0\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(BinariesNet7)" DestinationFiles="@(BinariesNet7->'$(DropFolderNet7)\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
    
 </Project>
