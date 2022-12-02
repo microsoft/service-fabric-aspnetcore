@@ -16,6 +16,7 @@
     <DropFolderNetCore>$(RepoRoot)drop\$(Configuration)\netcoreapp3.1\</DropFolderNetCore>
     <DropFolderNet5>$(RepoRoot)drop\$(Configuration)\net5.0\</DropFolderNet5>
     <DropFolderNet6>$(RepoRoot)drop\$(Configuration)\net6.0\</DropFolderNet6>
+    <DropFolderNet7>$(RepoRoot)drop\$(Configuration)\net7.0\</DropFolderNet7>
     <NugetPackageDropFolder>$(DropFolder)\packages</NugetPackageDropFolder>
     
     <!-- Set Nuget exe path -->
