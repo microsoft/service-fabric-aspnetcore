@@ -12,7 +12,7 @@
     
     <!-- Set Drop folders -->
     <DropFolder>$(RepoRoot)drop\$(Configuration)\</DropFolder>
-    <DropFolderNetFramework>$(RepoRoot)drop\$(Configuration)\net461\</DropFolderNetFramework>
+    <DropFolderNetFramework>$(RepoRoot)drop\$(Configuration)\net462\</DropFolderNetFramework>
     <DropFolderNetCore>$(RepoRoot)drop\$(Configuration)\netcoreapp3.1\</DropFolderNetCore>
     <DropFolderNet5>$(RepoRoot)drop\$(Configuration)\net5.0\</DropFolderNet5>
     <DropFolderNet6>$(RepoRoot)drop\$(Configuration)\net6.0\</DropFolderNet6>

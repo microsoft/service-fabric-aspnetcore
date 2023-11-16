@@ -16,12 +16,6 @@
 
     <ItemGroup>
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\net461</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\net461</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>lib\net462</TargetPath>
       </File>
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
@@ -68,9 +62,6 @@
       </File>
       <File Include="$(DropFolderNet7)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
         <TargetPath>lib\net7.0</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>runtimes\win\lib\net461</TargetPath>
       </File>
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>runtimes\win\lib\net462</TargetPath>
@@ -121,11 +112,11 @@
 
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
-        <TargetFramework>net461</TargetFramework>
+        <TargetFramework>net462</TargetFramework>
       </Dependency>
       <Dependency Include="Microsoft.AspNetCore.Server.HttpSys">
         <Version>2.1.0</Version>
-        <TargetFramework>net461</TargetFramework>
+        <TargetFramework>net462</TargetFramework>
       </Dependency>
     </ItemGroup>
   </Project>

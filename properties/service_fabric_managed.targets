@@ -49,10 +49,10 @@
   <Target Name="CopyProdBinaries">
     <Message Text="Copying binaries to drop folder ..." Importance="High"/>
     <ItemGroup>
-      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)net461\Microsoft.ServiceFabric.AspNetCore.*"/>
-      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)net461\Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
-      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)net461\Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
-      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)net461\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
+      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)net462\Microsoft.ServiceFabric.AspNetCore.*"/>
+      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)net462\Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
+      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)net462\Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
+      <BinariesNetFramework Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)net462\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
     </ItemGroup>
     <Copy SourceFiles="@(BinariesNetFramework)" DestinationFiles="@(BinariesNetFramework->'$(DropFolderNetFramework)\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)')" />
 
