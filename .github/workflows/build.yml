@@ -16,8 +16,8 @@ on:
 jobs:
   build:
     name: Build Test
-    runs-on: windows-2022
-    # info about windows-2022 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2022-Readme.md
+    runs-on: windows-latest
+    # info about windows-latest https://github.com/actions/runner-images
     env:
       DROP_DIR: drop
       TEST_RESULT_DIR: drop\testresults
