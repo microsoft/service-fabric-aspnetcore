@@ -2,14 +2,14 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Set Paths -->
   <PropertyGroup>
-    
+
     <!-- Set RepoRoot -->
     <RepoRoot>$([System.String]::Copy('$(MSBuildThisFileDirectory)').Replace('properties\',''))</RepoRoot>
     <RequestedVerbosity Condition=" '$(RequestedVerbosity)' == '' ">minimal</RequestedVerbosity>
-    
+
     <!-- Set Output Paths-->
     <OutputPath>bin\$(Configuration)\</OutputPath>
-    
+
     <!-- Set Drop folders -->
     <DropFolder>$(RepoRoot)drop\$(Configuration)\</DropFolder>
     <DropFolderNetFramework>$(RepoRoot)drop\$(Configuration)\net462\</DropFolderNetFramework>
@@ -18,18 +18,18 @@
     <DropFolderNet6>$(RepoRoot)drop\$(Configuration)\net6.0\</DropFolderNet6>
     <DropFolderNet7>$(RepoRoot)drop\$(Configuration)\net7.0\</DropFolderNet7>
     <NugetPackageDropFolder>$(DropFolder)\packages</NugetPackageDropFolder>
-    
+
     <!-- Set Nuget exe path -->
     <NuGetExePath Condition="'$(NuGetExePath)' == ''">$(RepoRoot)\nuget\nuget.exe</NuGetExePath>
 
     <!-- Versions used for Microsoft.ServiceFabric.* nuget packages from other repos.-->
-    <NugetPkg_Version_Microsoft_ServiceFabric>10.0.1001</NugetPkg_Version_Microsoft_ServiceFabric>
-    <NugetPkg_Version_Microsoft_ServiceFabric_Services>7.0.1001</NugetPkg_Version_Microsoft_ServiceFabric_Services>
+    <NugetPkg_Version_Microsoft_ServiceFabric>11.0.1004</NugetPkg_Version_Microsoft_ServiceFabric>
+    <NugetPkg_Version_Microsoft_ServiceFabric_Services>8.0.1004</NugetPkg_Version_Microsoft_ServiceFabric_Services>
 
     <!-- Set versions for files and nuget packages nuget packages generated from this repo. -->
     <!-- TODO: Versions numbers are changed here manually for now, Integrate this with GitVersion. -->
-    <MajorVersion>7</MajorVersion>
-    <MinorVersion>1</MinorVersion>
+    <MajorVersion>8</MajorVersion>
+    <MinorVersion>0</MinorVersion>
     <BuildVersion>0</BuildVersion>
     <Revision>0</Revision>
 
