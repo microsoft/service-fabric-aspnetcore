@@ -30,5 +30,8 @@
       <File Include="$(DropFolderNet7)*.*">
         <TargetPath>lib\net7.0</TargetPath>
       </File>
+      <File Include="$(DropFolderNet8)*.*">
+        <TargetPath>lib\net8.0</TargetPath>
+      </File>
     </ItemGroup>    
   </Project>
