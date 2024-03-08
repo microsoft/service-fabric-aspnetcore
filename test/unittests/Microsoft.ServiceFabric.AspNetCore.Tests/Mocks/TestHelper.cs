@@ -21,7 +21,9 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         public static T CreateInstanced<T>()
             where T : class
         {
+#pragma warning disable SYSLIB0050 // FormatterServices is obsolete
             return FormatterServices.GetSafeUninitializedObject(typeof(T)) as T;
+#pragma warning restore SYSLIB0050
         }
 
         public static T Set<T>(this T instance, string property, object value)
