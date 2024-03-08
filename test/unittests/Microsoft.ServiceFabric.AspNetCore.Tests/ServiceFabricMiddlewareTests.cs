@@ -81,7 +81,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 (httpContext) =>
             {
                 nextCalled = true;
-                return Task.FromResult(true);
+                return Task.CompletedTask;
             }, this.listener.UrlSuffix);
 
             // send a request in which Path is different than urlSuffix
@@ -165,7 +165,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 nextCalled = true;
                 Console.WriteLine("In Next Request Delegate: HttpRequest.Path: " + httpContext.Request.Path);
                 Console.WriteLine("In Next Request Delegate: HttpRequest.PathBase: " + httpContext.Request.PathBase);
-                return Task.FromResult(true);
+                return Task.CompletedTask;
             }, this.listener.UrlSuffix);
 
             // send a request in which Path is same as urlSuffix
@@ -198,7 +198,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
                 Console.WriteLine("In Next Request Delegate: HttpRequest.PathBase: " + httpContext.Request.PathBase);
 
                 nextCalled = true;
-                return Task.FromResult(true);
+                return Task.CompletedTask;
             }, this.listener.UrlSuffix);
 
             // send a request in which Path is different than urlSuffix, but has extra segment after it.

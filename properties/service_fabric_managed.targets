@@ -87,6 +87,14 @@
       <BinariesNet7 Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)net7.0\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
     </ItemGroup>
     <Copy SourceFiles="@(BinariesNet7)" DestinationFiles="@(BinariesNet7->'$(DropFolderNet7)\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <ItemGroup>
+      <BinariesNet8 Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)net8.0\Microsoft.ServiceFabric.AspNetCore.*"/>
+      <BinariesNet8 Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)net8.0\Microsoft.ServiceFabric.AspNetCore.Configuration.*"/>
+      <BinariesNet8 Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)net8.0\Microsoft.ServiceFabric.AspNetCore.HttpSys.*"/>
+      <BinariesNet8 Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)net8.0\Microsoft.ServiceFabric.AspNetCore.Kestrel.*"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(BinariesNet8)" DestinationFiles="@(BinariesNet8->'$(DropFolderNet8)\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
    
 </Project>

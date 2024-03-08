@@ -63,6 +63,12 @@
       <File Include="$(DropFolderNet7)Microsoft.ServiceFabric.AspNetCore.Configuration.xml">
         <TargetPath>lib\net7.0</TargetPath>
       </File>
+      <File Include="$(DropFolderNet8)Microsoft.ServiceFabric.AspNetCore.Configuration.dll">
+        <TargetPath>lib\net8.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet8)Microsoft.ServiceFabric.AspNetCore.Configuration.xml">
+        <TargetPath>lib\net8.0</TargetPath>
+      </File>
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.Configuration.dll">
         <TargetPath>runtimes\win\lib\net462</TargetPath>
       </File>
@@ -108,6 +114,14 @@
       </Dependency>
       <FrameworkReference Include="Microsoft.AspNetCore.App">
         <TargetFramework>net7.0</TargetFramework>
+      </FrameworkReference>
+
+      <Dependency Include="Microsoft.ServiceFabric.Services">
+        <Version>[$(NugetPkg_Version_Microsoft_ServiceFabric_Services)]</Version>
+        <TargetFramework>net8.0</TargetFramework>
+      </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net8.0</TargetFramework>
       </FrameworkReference>
 
       <Dependency Include="Microsoft.ServiceFabric.Services">

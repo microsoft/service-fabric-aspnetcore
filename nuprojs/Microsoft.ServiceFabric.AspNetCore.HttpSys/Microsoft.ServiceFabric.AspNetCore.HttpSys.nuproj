@@ -63,6 +63,12 @@
       <File Include="$(DropFolderNet7)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
         <TargetPath>lib\net7.0</TargetPath>
       </File>
+      <File Include="$(DropFolderNet8)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
+        <TargetPath>lib\net8.0</TargetPath>
+      </File>
+      <File Include="$(DropFolderNet8)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
+        <TargetPath>lib\net8.0</TargetPath>
+      </File>
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>runtimes\win\lib\net462</TargetPath>
       </File>
@@ -112,10 +118,18 @@
 
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
+        <TargetFramework>net8.0</TargetFramework>
+      </Dependency>
+      <FrameworkReference Include="Microsoft.AspNetCore.App">
+        <TargetFramework>net8.0</TargetFramework>
+      </FrameworkReference>
+
+      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
+        <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>net462</TargetFramework>
       </Dependency>
       <Dependency Include="Microsoft.AspNetCore.Server.HttpSys">
-        <Version>2.1.0</Version>
+        <Version>2.1.12</Version>
         <TargetFramework>net462</TargetFramework>
       </Dependency>
     </ItemGroup>
