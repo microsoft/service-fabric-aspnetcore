@@ -129,7 +129,7 @@
         <TargetFramework>net462</TargetFramework>
       </Dependency>
       <Dependency Include="Microsoft.AspNetCore.Server.HttpSys">
-        <Version>2.1.0</Version>
+        <Version>2.1.12</Version>
         <TargetFramework>net462</TargetFramework>
       </Dependency>
     </ItemGroup>
