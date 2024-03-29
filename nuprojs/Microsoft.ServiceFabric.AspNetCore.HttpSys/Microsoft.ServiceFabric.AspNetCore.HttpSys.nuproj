@@ -21,47 +21,11 @@
       <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
         <TargetPath>lib\net462</TargetPath>
       </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\net47</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\net47</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\net471</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\net471</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\net472</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)\Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\net472</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\netcoreapp3.1</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetCore)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\netcoreapp3.1</TargetPath>
-      </File>
-      <File Include="$(DropFolderNet5)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\net5.0</TargetPath>
-      </File>
-      <File Include="$(DropFolderNet5)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\net5.0</TargetPath>
-      </File>
       <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>lib\net6.0</TargetPath>
       </File>
       <File Include="$(DropFolderNet6)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
         <TargetPath>lib\net6.0</TargetPath>
-      </File>
-      <File Include="$(DropFolderNet7)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>lib\net7.0</TargetPath>
-      </File>
-      <File Include="$(DropFolderNet7)Microsoft.ServiceFabric.AspNetCore.HttpSys.xml">
-        <TargetPath>lib\net7.0</TargetPath>
       </File>
       <File Include="$(DropFolderNet8)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>lib\net8.0</TargetPath>
@@ -72,48 +36,15 @@
       <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
         <TargetPath>runtimes\win\lib\net462</TargetPath>
       </File>
-      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>runtimes\win\lib\net47</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>runtimes\win\lib\net471</TargetPath>
-      </File>
-      <File Include="$(DropFolderNetFramework)Microsoft.ServiceFabric.AspNetCore.HttpSys.dll">
-        <TargetPath>runtimes\win\lib\net472</TargetPath>
-      </File>
     </ItemGroup>
 
     <ItemGroup>
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
         <Version>[$(NuGetPackageVersion)]</Version>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-      </Dependency>
-      <FrameworkReference Include="Microsoft.AspNetCore.App">
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-      </FrameworkReference>
-
-      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
-        <Version>[$(NuGetPackageVersion)]</Version>
-        <TargetFramework>net5.0</TargetFramework>
-      </Dependency>
-      <FrameworkReference Include="Microsoft.AspNetCore.App">
-        <TargetFramework>net5.0</TargetFramework>
-      </FrameworkReference>
-
-      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
-        <Version>[$(NuGetPackageVersion)]</Version>
         <TargetFramework>net6.0</TargetFramework>
       </Dependency>
       <FrameworkReference Include="Microsoft.AspNetCore.App">
         <TargetFramework>net6.0</TargetFramework>
-      </FrameworkReference>
-
-      <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
-        <Version>[$(NuGetPackageVersion)]</Version>
-        <TargetFramework>net7.0</TargetFramework>
-      </Dependency>
-      <FrameworkReference Include="Microsoft.AspNetCore.App">
-        <TargetFramework>net7.0</TargetFramework>
       </FrameworkReference>
 
       <Dependency Include="Microsoft.ServiceFabric.AspNetCore.Abstractions">
