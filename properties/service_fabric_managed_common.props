@@ -12,6 +12,12 @@
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <Platforms>AnyCPU</Platforms>
     <TargetFrameworks>net462;net6.0;net8.0</TargetFrameworks>
+    <!--
+      Suppress https://learn.microsoft.com/visualstudio/msbuild/errors/msb3270 due to mismatch of
+      Service Fabric Runtime assemblies built for AMD64 and
+      Service Fabric SDK assemblies built for AnyCPU.
+    -->
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
 
   <!-- Cls Compliant -->
