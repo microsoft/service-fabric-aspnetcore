@@ -18,6 +18,8 @@
       Service Fabric SDK assemblies built for AnyCPU.
     -->
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <!-- Build packages directly from C# projects -->
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <!-- Cls Compliant -->

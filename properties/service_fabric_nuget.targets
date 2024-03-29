@@ -2,11 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <!-- List of .nuproj to build to generate nuget packages -->
-    <NuprojsToBuild Include="$(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\Microsoft.ServiceFabric.AspNetCore.Abstractions.nuproj;
-                     $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.Configuration\Microsoft.ServiceFabric.AspNetCore.Configuration.nuproj;
-                     $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\Microsoft.ServiceFabric.AspNetCore.HttpSys.nuproj;
-                     $(RepoRoot)nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\Microsoft.ServiceFabric.AspNetCore.Kestrel.nuproj;
-                     $(RepoRoot)nuprojs\SF.AspNetCore.Internal\SF.AspNetCore.Internal.nuproj;"/>
+    <NuprojsToBuild Include="$(RepoRoot)nuprojs\SF.AspNetCore.Internal\SF.AspNetCore.Internal.nuproj;"/>
     
     <!-- List of packages.config to restore nuget packages -->
         <PackagesConfigs Include="nuprojs\packages.config"/>
@@ -21,10 +17,10 @@
 
     <Message Text="Copying NuGet packages to drop folder ..." Importance="High"/>
     <ItemGroup>
-      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Abstractions\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Abstractions.*.nupkg"/>
-      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Configuration.*.nupkg"/>
-      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.HttpSys.*.nupkg"/>
-      <Nupkgs Include="nuprojs\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*.nupkg"/>
+      <Nupkgs Include="src\Microsoft.ServiceFabric.AspNetCore\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.*.nupkg"/>
+      <Nupkgs Include="src\Microsoft.ServiceFabric.AspNetCore.Configuration\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Configuration.*.nupkg"/>
+      <Nupkgs Include="src\Microsoft.ServiceFabric.AspNetCore.HttpSys\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.HttpSys.*.nupkg"/>
+      <Nupkgs Include="src\Microsoft.ServiceFabric.AspNetCore.Kestrel\$(OutputPath)\Microsoft.ServiceFabric.AspNetCore.Kestrel.*.nupkg"/>
       <Nupkgs Include="nuprojs\SF.AspNetCore.Internal\$(OutputPath)\SF.AspNetCore.Internal.*.nupkg"/>
     </ItemGroup>
     <Copy SourceFiles="@(Nupkgs)" DestinationFiles="@(Nupkgs->'$(NugetPackageDropFolder)\%(Destination)\%(Filename)%(Extension)')" />
