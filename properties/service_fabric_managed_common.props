@@ -11,6 +11,7 @@
     <!-- Append TargetFramework to output path. -->
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <Platforms>AnyCPU</Platforms>
+    <TargetFrameworks>net462;net6.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <!-- Cls Compliant -->
