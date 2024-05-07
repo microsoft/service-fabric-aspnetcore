@@ -1,7 +1,8 @@
 pool:
   vmImage: windows-latest
 
-- job: Build Job
-  steps:
-  - pwsh: ./build.ps1
-    displayName: Build Step
+jobs:
+  - job: Build
+    steps:
+    - pwsh: ./build.ps1
+      displayName: Build Step
