@@ -5,4 +5,9 @@ jobs:
   - job: Build
     steps:
     - pwsh: ./build.ps1
-      displayName: Build Step
+      displayName: Build
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)\drop'
+        artifact: 'Drop'
+        publishLocation: 'pipeline'
