@@ -1,13 +1,21 @@
-pool:
-  vmImage: windows-latest
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: OneBranch.Pipelines/GovernedTemplates
+      ref: refs/heads/main
 
-jobs:
-  - job: Build
-    steps:
-    - pwsh: ./build.ps1
-      displayName: Build
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(Build.SourcesDirectory)\drop'
-        artifact: 'Drop'
-        publishLocation: 'pipeline'
+extends:
+  template: v2/OneBranch.Official.CrossPlat.yml@templates # https://aka.ms/obpipelines/templates
+  parameters:
+    stages:
+    - stage: main_stage
+      jobs:
+      - job: Build_Job
+        pool:
+          type: windows
+        variables: # More settings at https://aka.ms/obpipelines/yaml/jobs
+          ob_outputDirectory: '$(Build.SourcesDirectory)\drop'
+        steps:
+        - pwsh: ./build.ps1
+          displayName: Build_Step
