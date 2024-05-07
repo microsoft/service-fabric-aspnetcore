@@ -13,6 +13,7 @@ extends:
   parameters:
     featureFlags:
       WindowsHostVersion: 1ESWindows2022
+      skipPoliciesValidation: true
     stages:
     - stage: build
       jobs:
