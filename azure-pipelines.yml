@@ -8,6 +8,6 @@ jobs:
       displayName: Build
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)\drop'
+        targetPath: '$(Build.SourcesDirectory)\drop'
         artifact: 'Drop'
         publishLocation: 'pipeline'
