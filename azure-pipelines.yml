@@ -1,3 +1,6 @@
+variables:
+  WindowsContainerImage: 'onebranch.azurecr.io/windows/ltsc2022/vse2022:latest'
+
 resources:
   repositories:
     - repository: templates
