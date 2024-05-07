@@ -1,0 +1,5 @@
+pool:
+  vmImage: windows-latest
+
+steps:
+- pwsh: ./build.ps1
