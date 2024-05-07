@@ -3,3 +3,4 @@ pool:
 
 steps:
 - pwsh: ./build.ps1
+  name: Build
