@@ -6,15 +6,17 @@ resources:
       ref: refs/heads/main
 
 extends:
-  template: v2/OneBranch.Official.CrossPlat.yml@templates # https://aka.ms/obpipelines/templates
+  template: v2/OneBranch.Official.CrossPlat.yml@templates 
   parameters:
+    featureFlags:
+      WindowsHostVersion: 1ESWindows2022
     stages:
-    - stage: main_stage
+    - stage: build
       jobs:
-      - job: Build_Job
+      - job: main
         pool:
           type: windows
-        variables: # More settings at https://aka.ms/obpipelines/yaml/jobs
+        variables: 
           ob_outputDirectory: '$(Build.SourcesDirectory)\drop'
         steps:
         - pwsh: ./build.ps1
