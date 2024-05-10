@@ -16,11 +16,11 @@ extends:
     stages:
     - stage: build
       jobs:
-      - job: main
+      - job: build
         pool:
           type: windows
         variables: 
           ob_outputDirectory: '$(Build.SourcesDirectory)\drop'
         steps:
         - pwsh: ./build.ps1
-          displayName: Build_Step
+        - pwsh: dotnet test code.sln --configuration release --nologo --settings test\unittests\default.runsettings --results-directory $(ob_outputDirectory) --logger trx
