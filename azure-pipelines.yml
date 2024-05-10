@@ -14,13 +14,15 @@ extends:
     featureFlags:
       WindowsHostVersion: 1ESWindows2022
     stages:
-    - stage: build
+    - stage: main
       jobs:
-      - job: build
+      - job: Validate
         pool:
           type: windows
         variables: 
           ob_outputDirectory: '$(Build.SourcesDirectory)\drop'
         steps:
         - pwsh: ./build.ps1
+          displayName: Build
         - pwsh: dotnet test code.sln --configuration release --nologo --settings test\unittests\default.runsettings --results-directory $(ob_outputDirectory) --logger trx
+          displayName: Test
