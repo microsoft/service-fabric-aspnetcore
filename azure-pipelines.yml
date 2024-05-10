@@ -1,7 +1,7 @@
 parameters:
   - name: oneBranchTemplate
     type: string
-    default: v2/OneBranch.NonOfficial.CrossPlat.yml
+    default: v2/OneBranch.Official.CrossPlat.yml
 
 variables:
   WindowsContainerImage: 'onebranch.azurecr.io/windows/ltsc2022/vse2022:latest'
