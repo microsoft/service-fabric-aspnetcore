@@ -34,6 +34,6 @@ extends:
         - task: onebranch.pipeline.signing@1
           inputs:
             command: sign
-            cp_code: CP-233863-SN
+            signing_profile: external_distribution
             files_to_sign: '**/*.dll'
             search_root: $(ob_outputDirectory)
