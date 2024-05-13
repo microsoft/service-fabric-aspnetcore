@@ -6,5 +6,5 @@
         "servicefabrictsa@microsoft.com"
     ],
     "template": "TFSMSAzure",
-    "codebaseName": "WindowsFabric2"
+    "codebaseName": "service-fabric-aspnetcore"
 }
