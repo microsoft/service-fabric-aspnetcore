@@ -41,7 +41,7 @@ extends:
         - pwsh: ./build.ps1 -Target GeneratePackages
           displayName: Package
         - task: onebranch.pipeline.signing@1
-          displayName: Sign assemblies
+          displayName: Sign packages
           inputs:
             command: sign
             signing_profile: external_distribution
