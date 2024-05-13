@@ -2,9 +2,6 @@
     "instanceUrl": "https://msazure.visualstudio.com",
     "projectName": "One",
     "areaPath": "One\\Service Fabric\\Programming Model",
-    "notificationAliases": [
-        "servicefabrictsa@microsoft.com"
-    ],
-    "template": "TFSMSAzure",
+    "notificationAliases": [ "sfprogmodel@microsoft.com" ],
     "codebaseName": "service-fabric-aspnetcore"
 }
