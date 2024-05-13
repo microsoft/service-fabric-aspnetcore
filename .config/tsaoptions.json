@@ -1,0 +1,10 @@
+{
+    "instanceUrl": "https://msazure.visualstudio.com",
+    "projectName": "One",
+    "areaPath": "One\\Service Fabric\\Programming Model",
+    "notificationAliases": [
+        "servicefabrictsa@microsoft.com"
+    ],
+    "template": "TFSMSAzure",
+    "codebaseName": "WindowsFabric2"
+}
