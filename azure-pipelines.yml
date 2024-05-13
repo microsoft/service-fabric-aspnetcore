@@ -27,13 +27,23 @@ extends:
         variables: 
           ob_outputDirectory: '$(Build.SourcesDirectory)\drop'
         steps:
-        - pwsh: ./build.ps1
+        - pwsh: ./build.ps1 -Target BuildCode
           displayName: Build
         - pwsh: dotnet test code.sln --configuration release --nologo --settings test\unittests\default.runsettings --results-directory $(ob_outputDirectory) --logger trx
           displayName: Test
         - task: onebranch.pipeline.signing@1
+          displayName: Sign assemblies
           inputs:
             command: sign
             signing_profile: external_distribution
             files_to_sign: '**/*.dll'
+            search_root: $(ob_outputDirectory)
+        - pwsh: ./build.ps1 -Target GeneratePackages
+          displayName: Package
+        - task: onebranch.pipeline.signing@1
+          displayName: Sign assemblies
+          inputs:
+            command: sign
+            signing_profile: external_distribution
+            files_to_sign: '**/*.nupkg'
             search_root: $(ob_outputDirectory)
