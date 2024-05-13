@@ -31,3 +31,9 @@ extends:
           displayName: Build
         - pwsh: dotnet test code.sln --configuration release --nologo --settings test\unittests\default.runsettings --results-directory $(ob_outputDirectory) --logger trx
           displayName: Test
+        - task: onebranch.pipeline.signing@1
+          inputs:
+            command: sign
+            cp_code: CP-233863-SN
+            files_to_sign: '**/*.dll'
+            search_root: $(ob_outputDirectory)
