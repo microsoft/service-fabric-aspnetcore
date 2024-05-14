@@ -5,6 +5,7 @@ parameters:
 
 variables:
   WindowsContainerImage: 'onebranch.azurecr.io/windows/ltsc2022/vse2022:latest'
+  oneBranchTemplate: v2/OneBranch.Official.CrossPlat.yml
 
 resources:
   repositories:
@@ -14,7 +15,7 @@ resources:
       ref: refs/heads/main
 
 extends:
-  template: ${{ parameters.oneBranchTemplate }}@templates
+  template: ${{ variables.oneBranchTemplate }}@templates
   parameters:
     featureFlags:
       WindowsHostVersion: 1ESWindows2022
