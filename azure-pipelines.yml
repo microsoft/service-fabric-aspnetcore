@@ -18,6 +18,9 @@ extends:
   parameters:
     featureFlags:
       WindowsHostVersion: 1ESWindows2022
+    globalSdl:
+      asyncSdl:
+        enabled: false
     stages:
     - stage: main
       jobs:
