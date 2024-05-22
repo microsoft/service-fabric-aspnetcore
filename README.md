@@ -1,4 +1,6 @@
-# Azure/service-fabric-aspnetcore
+# Service Fabric ASP.NET Core Packages
+
+[![Build Status](https://dev.azure.com/msazure/One/_apis/build/status/OneBranch/WindowsFabric/service-fabric-aspnetcore?branchName=develop)](https://dev.azure.com/msazure/One/_build/latest?definitionId=365964&branchName=develop)
 
 This repo contains ASP.NET Core integration for Service Fabric Reliable Services.
 
