@@ -69,9 +69,10 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
         /// when constructing url before returning to Naming Service.
         /// </summary>
         /// <param name="hostType">The type of host used to create the listener.</param>
+        /// <returns>A <see cref="Task"/> tracking asynchronous test completion.</returns>
         [Theory]
         [MemberData(nameof(HostTypes))]
-        public void VerifyReturnCode410(string hostType)
+        public async Task VerifyReturnCode410(string hostType)
         {
             var nextCalled = false;
 
@@ -86,7 +87,7 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
 
             // send a request in which Path is different than urlSuffix
             this.httpContext.Request.Path = this.listener.UrlSuffix + "xyz";
-            middleware.Invoke(this.httpContext).GetAwaiter().GetResult();
+            await middleware.Invoke(this.httpContext);
 
             this.httpContext.Response.StatusCode.Should().Be(StatusCodes.Status410Gone, "status code should be 410 when path base is different from url suffix.");
             nextCalled.Should().BeFalse("next RequestDelegate is not called by middleware.");
