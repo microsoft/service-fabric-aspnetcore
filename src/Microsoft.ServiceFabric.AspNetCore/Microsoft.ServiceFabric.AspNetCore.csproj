@@ -16,6 +16,9 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="4.5.1"/>
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="SR.Designer.cs">
