@@ -15,10 +15,10 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <!-- Direct dependencies -->
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <!-- Overriding versions of transitive dependencies -->
     <PackageReference Include="System.Text.Encodings.Web" Version="4.5.1"/>
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="SR.Designer.cs">
