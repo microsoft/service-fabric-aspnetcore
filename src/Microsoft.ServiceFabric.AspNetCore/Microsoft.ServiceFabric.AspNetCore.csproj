@@ -18,7 +18,11 @@
     <!-- Direct dependencies -->
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
     <!-- Overriding versions of transitive dependencies -->
-    <PackageReference Include="System.Text.Encodings.Web" Version="4.5.1"/>
+    <!-- 
+      Some versions of transitive dependencies have to be overwritten, since the default versions
+      defined by the direct dependencies are marked as vulnerable packages on nuget.org.
+    -->
+    <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0"/>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="SR.Designer.cs">

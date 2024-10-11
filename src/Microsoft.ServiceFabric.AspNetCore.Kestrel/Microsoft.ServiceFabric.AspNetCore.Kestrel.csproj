@@ -18,9 +18,13 @@
     <!-- Direct dependencies -->
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.0" />
     <!-- Overriding versions of transitive dependencies -->
+    <!-- 
+      Some versions of transitive dependencies have to be overwritten, since the default versions
+      defined by the direct dependencies are marked as vulnerable packages on nuget.org.
+    -->
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.1.25"/>
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" Version="2.1.40" />
-    <PackageReference Include="System.IO.Pipelines" Version="4.5.1" />
+    <PackageReference Include="System.IO.Pipelines" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.ServiceFabric.AspNetCore\Microsoft.ServiceFabric.AspNetCore.csproj" />
