@@ -5,7 +5,7 @@
     <StylecopSuppressionsFile>$(MSBuildThisFileDirectory)stylecop\StylecopSuppressions.cs</StylecopSuppressionsFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
+    <PackageReference Include="StyleCop.Analyzers"/>
   </ItemGroup>
   <ItemGroup>
     <None Remove="$(StylecopSettingsFile)" />
