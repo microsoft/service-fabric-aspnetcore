@@ -9,13 +9,13 @@
     <TargetFrameworks>net462;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="$(NugetPkg_Version_Microsoft_ServiceFabric_Services)" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration"/>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="SR.Designer.cs">
