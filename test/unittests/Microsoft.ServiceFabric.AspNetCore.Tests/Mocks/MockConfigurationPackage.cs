@@ -17,17 +17,20 @@ namespace Microsoft.ServiceFabric.AspNetCore.Tests
     {
         internal static ConfigurationPackage CreateDefaultPackage(IConfiguration config, string packageName)
         {
-            var package = TestHelper.CreateInstanced<ConfigurationPackage>();
-            var settings = TestHelper.CreateInstanced<ConfigurationSettings>();
-            var desc = TestHelper.CreateInstanced<ConfigurationPackageDescription>();
             var basePath = Environment.CurrentDirectory;
-            desc.Set("Name", packageName);
-            package.Set("Settings", settings);
-            package.Set("Path", $"{basePath}\\{packageName}\\PackageRoot\\Config\\");
-            package.Set("Description", desc);
 
+            var settings = TestHelper.CreateInstanced<ConfigurationSettings>();
             var section = TestHelper.CreateInstanced<System.Fabric.Description.ConfigurationSection>();
             settings.Set(nameof(ConfigurationSettings.Sections), MockConfigurationSections.CreateDefault(config));
+
+            var desc = TestHelper.CreateInstanced<ConfigurationPackageDescription>();
+            desc.Set("Name", packageName);
+            desc.Set("Version", "1.0");
+            desc.Set("Path", $"{basePath}\\{packageName}\\PackageRoot\\Config\\");
+            desc.Set("Settings", settings);
+
+            var package = TestHelper.CreateInstanced<ConfigurationPackage>();
+            package.Set("Description", desc);
 
             return package;
         }
