@@ -22,13 +22,16 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
         private readonly Func<string, AspNetCoreCommunicationListener, IHost> build;
         private readonly ServiceContext serviceContext;
         private readonly AspNetCoreCommunicationListener listener;
+        private readonly Action reportHostStopped;
         private IHost host;
+        private volatile int stopAsyncCalled = 0;
 
-        public GenericHostCommunicationListener(Func<string, AspNetCoreCommunicationListener, IHost> build, AspNetCoreCommunicationListener listener)
+        public GenericHostCommunicationListener(Func<string, AspNetCoreCommunicationListener, IHost> build, AspNetCoreCommunicationListener listener, Action reportHostStopped)
         {
             this.serviceContext = listener.ServiceContext;
             this.build = build;
             this.listener = listener;
+            this.reportHostStopped = reportHostStopped;
         }
 
         public void Abort()
@@ -41,6 +44,8 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 
         public async Task CloseAsync(CancellationToken cancellationToken)
         {
+            Interlocked.Exchange(ref this.stopAsyncCalled, 1);
+
             if (this.host != null)
             {
                 await this.host.StopAsync(cancellationToken);
@@ -55,6 +60,17 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
             {
                 throw new InvalidOperationException(SR.HostNullExceptionMessage);
             }
+
+#if NET8_0_OR_GREATER
+            // Registering the stopping and stopped callbacks to ensure graceful shutdown of the host.
+            // Providing a reportHostStopped Action indicates that the service has opted in to the behavior.
+            if (this.reportHostStopped != null)
+            {
+                IHostApplicationLifetime applicationLifetime = this.host.Services.GetRequiredService<IHostApplicationLifetime>();
+                applicationLifetime.ApplicationStopping.Register(() => this.OnHostStopping());
+                applicationLifetime.ApplicationStopping.Register(() => this.OnHostStopped());
+            }
+#endif
 
             await this.host.StartAsync(cancellationToken);
 
@@ -89,5 +105,27 @@ namespace Microsoft.ServiceFabric.Services.Communication.AspNetCore
 
             return url;
         }
+
+#if NET8_0_OR_GREATER
+        private void OnHostStopping()
+        {
+            // If StopAsync was not called on the listener, then this indicates that the host is stopping for another reason.
+            // Call StopAsync on the host to ensure graceful shutdown.
+            if (Interlocked.CompareExchange(ref this.stopAsyncCalled, 0, 0) == 0 &&
+                this.reportHostStopped != null)
+            {
+                Task.Run(async () => await this.host.StopAsync(CancellationToken.None));
+            }
+        }
+
+        private void OnHostStopped()
+        {
+            // Invoke the reportHostStopped action if it is provided
+            if (Interlocked.CompareExchange(ref this.stopAsyncCalled, 0, 0) == 0)
+            {
+                this.reportHostStopped?.Invoke();
+            }
+        }
+#endif
     }
 }
